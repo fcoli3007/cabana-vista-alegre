@@ -53,7 +53,7 @@
   --barra:0px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:140px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:120px}
 body{font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:16px;background:var(--noche);color:var(--crema);line-height:1.6;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
@@ -94,7 +94,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacin
 /* ===== header ===== */
 header{position:fixed;inset:0 0 auto;z-index:50;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
 header.solido{background:rgba(18,10,8,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--linea-o)}
-.nav{display:flex;align-items:center;gap:30px;height:84px}
+.nav{display:flex;align-items:center;gap:30px;height:84px;transition:height .3s var(--ease)}
+header.solido .nav{height:64px}
+header.solido .marca img{width:40px}
+.marca img{transition:width .3s var(--ease)}
 .marca{display:flex;align-items:center;gap:14px;text-decoration:none;margin-right:auto}
 .marca img{width:52px;height:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.45))}
 .marca span{font-family:var(--serif);font-size:27px;line-height:1}
@@ -120,7 +123,7 @@ header.solido{background:rgba(18,10,8,.94);backdrop-filter:blur(12px);-webkit-ba
 
 /* ===== portada ===== */
 .portada{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
-.portada>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 60%;transform:scale(1.04);animation:respira 16s ease-in-out infinite alternate}
+.portada>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 82%;transform:scale(1.04);animation:respira 16s ease-in-out infinite alternate}
 @keyframes respira{to{transform:scale(1.1)}}
 .portada::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,7,5,.9) 0%,rgba(12,7,5,.62) 38%,rgba(12,7,5,.1) 70%),linear-gradient(0deg,rgba(12,7,5,.85) 0%,rgba(12,7,5,0) 40%)}
 .portada .wrap{position:relative;z-index:1;padding:150px 0 64px}
@@ -146,12 +149,18 @@ header.solido{background:rgba(18,10,8,.94);backdrop-filter:blur(12px);-webkit-ba
 .ins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .ins{text-decoration:none;display:flex;flex-direction:column}
 .ins figure{aspect-ratio:4/5;overflow:hidden;background:var(--hueso)}
-.ins img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.ins img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);filter:saturate(1.04) contrast(1.04)}
+.ins img[src="plato-pulpo.jpg"]{filter:brightness(.84) sepia(.16) contrast(1.1) saturate(1.05)}
+.ins img[src="mesa-larga.jpg"]{transform:scale(1.35);transform-origin:55% 60%}
+@media (hover:hover){.ins:hover img[src="mesa-larga.jpg"]{transform:scale(1.4)}}
 @media (hover:hover){.ins:hover img{transform:scale(1.05)}}
 .ins h3{font-size:30px;margin-top:18px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
 .ins h3 b{font-family:"Hanken Grotesk",sans-serif;font-size:16px;font-weight:600;white-space:nowrap}
 .ins small{font-size:13px;color:var(--suave);font-weight:600;letter-spacing:.06em}
 .ins p{font-size:15px;color:var(--suave);margin-top:6px}
+.ins .ver{margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--vino)}
+.plato.brilla{animation:brilla 1.8s ease}
+@keyframes brilla{0%,40%{background:rgba(184,149,95,.22)}100%{background:transparent}}
 
 /* ===== historia ===== */
 .historia{background:var(--madera);padding:120px 0}
@@ -174,21 +183,21 @@ header.solido{background:rgba(18,10,8,.94);backdrop-filter:blur(12px);-webkit-ba
 .buscar{position:relative;width:min(360px,100%)}
 .buscar input{width:100%;border:1px solid var(--linea);background:#fff;border-radius:2px;padding:14px 18px 14px 46px;font-size:16px}
 .buscar svg{position:absolute;left:16px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--suave)}
-.tabs{position:sticky;top:84px;z-index:20;background:rgba(250,247,242,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.tabs{position:sticky;top:64px;z-index:20;background:rgba(250,247,242,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
 .tabs-in{position:relative}
 .tabs-in::before,.tabs-in::after{content:"";position:absolute;top:0;bottom:0;width:56px;pointer-events:none;z-index:1;opacity:0;transition:opacity .25s}
 .tabs-in::before{left:0;background:linear-gradient(90deg,var(--papel),rgba(250,247,242,0))}
 .tabs-in::after{right:0;background:linear-gradient(270deg,var(--papel),rgba(250,247,242,0))}
 .tabs-in.izq::before,.tabs-in.der::after{opacity:1}
-#tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:12px 0}
+#tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0}
 #tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;border:0;background:none;border-radius:999px;padding:10px 18px;font-size:15px;font-weight:600;color:var(--suave);text-decoration:none;transition:background .25s,color .25s}
+.tab{flex:none;border:0;background:none;border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;color:var(--suave);text-decoration:none;transition:background .25s,color .25s}
 .tab:hover{color:var(--tinta)}
 .tab.activa{background:var(--tinta);color:var(--papel)}
 .cat{display:grid;grid-template-columns:.75fr 1.25fr;gap:64px;padding:60px 0 24px;border-bottom:1px solid var(--linea)}
 .cat:last-of-type{border-bottom:0}
 .cat>*{min-width:0}
-.cat-foto{position:sticky;top:170px;align-self:start;aspect-ratio:4/5;overflow:hidden;background:var(--hueso)}
+.cat-foto{position:sticky;top:140px;align-self:start;aspect-ratio:4/5;overflow:hidden;background:var(--hueso)}
 .cat-foto img{width:100%;height:100%;object-fit:cover}
 .cat.sinfoto{grid-template-columns:1fr}
 .cat.sinfoto .lista{columns:2;column-gap:64px}
@@ -233,6 +242,7 @@ header.solido{background:rgba(18,10,8,.94);backdrop-filter:blur(12px);-webkit-ba
 .momentos h3{font-size:28px}
 .momentos p{font-size:15px;opacity:.78;margin-top:8px}
 .momentos a{display:inline-flex;margin-top:14px}
+.momentos .dato{display:block;margin-top:10px;font-size:13.5px;color:var(--oro2);opacity:.9}
 
 /* ===== reserva ===== */
 .reserva{background:var(--madera);padding:120px 0}
@@ -320,13 +330,14 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
 }
 @media (max-width:900px){
   :root{--barra:68px}
-  html{scroll-padding-top:128px}
+  html{scroll-padding-top:112px}
   .nav{height:72px;gap:12px}
+  header.solido .nav{height:60px}
   .marca img{width:44px}
   .marca span{font-size:22px}
   .marca small{font-size:10px}
   .nav .btn{display:none}
-  .tabs{top:72px}
+  .tabs{top:60px}
   .portada .wrap{padding:120px 0 40px}
   .portada::after{background:linear-gradient(0deg,rgba(12,7,5,.95) 0%,rgba(12,7,5,.6) 50%,rgba(12,7,5,.2) 100%)}
   .his-grid,.res-grid,.vis-grid{grid-template-columns:1fr;gap:40px}
@@ -401,7 +412,7 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
 
 <nav class="menu-movil" id="menu-movil" aria-label="Menú">
   <a href="#carta" data-i="navCarta">Carta</a>
-  <a href="#insignias" data-i="navIns">Cortes insignia</a>
+  <a href="#insignias" data-i="navIns">Los elegidos</a>
   <a href="#historia" data-i="navHis">Historia</a>
   <a href="#ambientes" data-i="navAmb">Ambientes</a>
   <a href="#visita" data-i="navUbi">Ubicación</a>
@@ -432,8 +443,8 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
   <section class="insignias claro" id="insignias">
     <div class="wrap">
       <div class="cab rev">
-        <div><span class="kicker" data-i="insKicker">La parrilla</span><h2 data-i="insH2">Cortes insignia</h2></div>
-        <p data-i="insP">Lo que más se pide en la casa. Toca uno para verlo en la carta.</p>
+        <div><span class="kicker" data-i="insKicker">La selección</span><h2 data-i="insH2">Los elegidos de la casa</h2></div>
+        <p data-i="insP">Una selección de nuestra parrilla y las especialidades para compartir.</p>
       </div>
       <div class="ins-grid rev" id="ins-grid"></div>
     </div>
@@ -493,10 +504,10 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
         <figure class="ancho"><img src="mesa-larga.jpg" alt="Mesa larga servida para un grupo" loading="lazy" decoding="async"><figcaption><b data-i="amb4">Mesas para compartir</b><span data-i="amb4s">Festival de carnes para 3 y Vista Alegre para dos</span></figcaption></figure>
       </div>
       <div class="momentos rev">
-        <div><h3 data-i="m1">Celebraciones</h3><p data-i="m1p">Servicio de torta por S/ 50. Cuéntanos la ocasión al reservar.</p></div>
+        <div><h3 data-i="m1">Celebraciones</h3><p data-i="m1p">Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.</p><small class="dato" data-i="m1d">Servicio de torta: S/ 50</small><a class="enlace" style="color:var(--oro2)" data-wa="Hola Cabaña Vista Alegre, quiero consultar por una celebración." target="_blank" rel="noopener"><em style="font-style:normal" data-i="m1a">Consultar celebración</em> <span>→</span></a></div>
         <div><h3 data-i="m2">Grupos y empresas</h3><p data-i="m2p">Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.</p><a class="enlace" style="color:var(--oro2)" data-wa="Hola Cabaña Vista Alegre, quiero coordinar una mesa para un grupo." target="_blank" rel="noopener"><em style="font-style:normal" data-i="m2a">Coordinar</em> <span>→</span></a></div>
-        <div><h3 data-i="m3">Trae tu vino</h3><p data-i="m3p">Corcho libre en vinos presentados al ingresar, según condiciones. Descorche desde S/ 40.</p></div>
-        <div><h3 data-i="m4">Menú kids</h3><p data-i="m4p">Bife, lomo, milanesa o pollo a la parrilla, desde S/ 35.</p></div>
+        <div><h3 data-i="m3">Trae tu vino</h3><p data-i="m3p">Puedes traer tu botella favorita para acompañar tu parrilla.</p><small class="dato" data-i="m3d">Descorche: S/ 40 por botella de 750 ml. Pregunta por la promoción de corcho libre.</small></div>
+        <div><h3 data-i="m4">Menú kids</h3><p data-i="m4p">Los más pequeños también tienen su parrilla: bife, lomo, milanesa o pollo.</p><small class="dato" data-i="m4d">Desde S/ 35</small></div>
       </div>
     </div>
   </section>
@@ -509,7 +520,6 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
         <h2 data-i="resH2">Reserva tu mesa</h2>
         <p data-i="resP">Elige la fecha, el horario y el ambiente de tu preferencia. Te confirmaremos la disponibilidad.</p>
         <ul class="res-lista">
-          <li data-i="res1">Solo mostramos horarios en los que estamos abiertos.</li>
           <li data-i="res2">Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.</li>
           <li data-i="res3">Para grupos de más de 10 personas, te atendemos de forma personalizada.</li>
         </ul>
@@ -621,10 +631,10 @@ $("anios").textContent = lima().getFullYear() - 2006;
 
 /* ===== Textos en español e inglés ===== */
 const TXT = {
-  es: { introFrase: "El fuego tiene historia", saltar: "Saltar", logoSub: "Parrilla · Chacarilla · Desde 2006", navCarta: "Carta", navIns: "Cortes insignia", navHis: "Historia", navAmb: "Ambientes", navUbi: "Ubicación", reservar: "Reservar",
+  es: { introFrase: "El fuego tiene historia", saltar: "Saltar", logoSub: "Parrilla · Chacarilla · Desde 2006", navCarta: "Carta", navIns: "Los elegidos", navHis: "Historia", navAmb: "Ambientes", navUbi: "Ubicación", reservar: "Reservar",
     kHero: "Desde 2006 · Chacarilla, Lima", h1: "El fuego tiene <em>historia.</em>", lead: "Veinte años de cortes Angus, Wagyu y Tomahawk a la parrilla, en una casa de madera y ladrillo en Chacarilla.",
     reservarMesa: "Reservar una mesa", explorar: "Explorar la carta", google: "825 opiniones en Google", anios: "años en Chacarilla",
-    insKicker: "La parrilla", insH2: "Cortes insignia", insP: "Lo que más se pide en la casa. Toca uno para verlo en la carta.",
+    insKicker: "La selección", insH2: "Los elegidos de la casa", insP: "Una selección de nuestra parrilla y las especialidades para compartir.", verCarta: "Ver en la carta",
     hisKicker: "Nuestra historia", hisH2: "Una casa alrededor <em>del fuego</em>", hisP: "Para una buena parrilla, lo que importa es el corte. Desde 2006, la familia Fermín selecciona carnes Angus argentinas y americanas y las asa a fuego lento, con el toque justo de sal.",
     h2006: "Abre Cabaña Vista Alegre en Chacarilla, Surco.", h2024: "La casa se renueva: madera, blanco y ladrillo. La fachada y la terraza se iluminan de noche, y llega el Wagyu a la carta.", h2026: "Veinte años reuniendo a los amantes de la buena carne alrededor de la mesa.",
     cita: "Siempre buscamos la excelencia, porque sabemos que nuestros clientes valoran cada aspecto de la experiencia.", citaAutor: "Vladimir Fermín, director · revista Cosas, 2024",
@@ -633,8 +643,8 @@ const TXT = {
     guia: "Guía de términos de cocción",
     ambKicker: "Ambientes", ambH2: "Para cada ocasión", ambP: "Madera, ladrillo y luz cálida. De noche, la fachada y la terraza se encienden juntas.",
     amb1: "El salón", amb1s: "Almuerzos de trabajo y cenas en familia", amb2: "La terraza", amb2s: "Al aire libre, de día y de noche", amb3: "La casa", amb4: "Mesas para compartir", amb4s: "Festival de carnes para 3 y Vista Alegre para dos",
-    m1: "Celebraciones", m1p: "Servicio de torta por S/ 50. Cuéntanos la ocasión al reservar.", m2: "Grupos y empresas", m2p: "Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.", m2a: "Coordinar",
-    m3: "Trae tu vino", m3p: "Corcho libre en vinos presentados al ingresar, según condiciones. Descorche desde S/ 40.", m4: "Menú kids", m4p: "Bife, lomo, milanesa o pollo a la parrilla, desde S/ 35.",
+    m1: "Celebraciones", m1p: "Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.", m1d: "Servicio de torta: S/ 50", m1a: "Consultar celebración", m2: "Grupos y empresas", m2p: "Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.", m2a: "Coordinar",
+    m3: "Trae tu vino", m3p: "Puedes traer tu botella favorita para acompañar tu parrilla.", m3d: "Descorche: S/ 40 por botella de 750 ml. Pregunta por la promoción de corcho libre.", m4: "Menú kids", m4p: "Los más pequeños también tienen su parrilla: bife, lomo, milanesa o pollo.", m4d: "Desde S/ 35",
     resKicker: "Reservas", resH2: "Reserva tu mesa", resP: "Elige la fecha, el horario y el ambiente de tu preferencia. Te confirmaremos la disponibilidad.",
     res1: "Solo mostramos horarios en los que estamos abiertos.", res2: "Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.", res3: "Para grupos de más de 10 personas, te atendemos de forma personalizada.",
     lPersonas: "Personas", lDia: "Día", lHora: "Horario", lZona: "Ambiente", z0: "Sin preferencia", z1: "Salón", z2: "Terraza", lNombre: "Nombre", lCel: "Celular", lOcasion: "Ocasión",
@@ -649,10 +659,10 @@ const TXT = {
     okTit: n => "Gracias, " + n, okTxt: (p, f, h, z, c) => `Recibimos tu solicitud de mesa para ${p} el ${f} a las ${h}${z ? ", en " + z.toLowerCase() : ""}. Te confirmaremos la disponibilidad al ${c}.`,
     terminos: [["Punto azul", "Sellado por fuera, casi crudo por dentro."], ["Punto rojo", "Centro rojo y tibio."], ["Término medio", "Centro rosado y jugoso. El que recomienda la casa."], ["Tres cuartos", "Apenas rosado al centro."], ["Bien cocido", "Cocido parejo, sin rosado."]],
     tags: {}, locale: "es-PE" },
-  en: { introFrase: "Fire has a story", saltar: "Skip", logoSub: "Steakhouse · Chacarilla · Since 2006", navCarta: "Menu", navIns: "Signature cuts", navHis: "Our story", navAmb: "The place", navUbi: "Location", reservar: "Book",
+  en: { introFrase: "Fire has a story", saltar: "Skip", logoSub: "Steakhouse · Chacarilla · Since 2006", navCarta: "Menu", navIns: "House favorites", navHis: "Our story", navAmb: "The place", navUbi: "Location", reservar: "Book",
     kHero: "Since 2006 · Chacarilla, Lima", h1: "Fire has a <em>story.</em>", lead: "Twenty years of Angus, Wagyu and Tomahawk from the grill, in a house of wood and brick in Chacarilla.",
     reservarMesa: "Book a table", explorar: "Explore the menu", google: "825 reviews on Google", anios: "years in Chacarilla",
-    insKicker: "The grill", insH2: "Signature cuts", insP: "The house favorites. Tap one to see it on the menu.",
+    insKicker: "The selection", insH2: "House favorites", insP: "A selection from our grill and our dishes to share.", verCarta: "See on the menu",
     hisKicker: "Our story", hisH2: "A house around <em>the fire</em>", hisP: "A great grill starts with the cut. Since 2006, the Fermín family has selected Argentine and American Angus beef and slow-grilled it with just the right touch of salt.",
     h2006: "Cabaña Vista Alegre opens in Chacarilla, Surco.", h2024: "The house is renewed: wood, white and brick. The façade and terrace light up at night, and Wagyu joins the menu.", h2026: "Twenty years bringing meat lovers together around the table.",
     cita: "We always strive for excellence, because we know our guests value every part of the experience.", citaAutor: "Vladimir Fermín, director · Cosas magazine, 2024",
@@ -661,8 +671,8 @@ const TXT = {
     guia: "Doneness guide",
     ambKicker: "The place", ambH2: "For every occasion", ambP: "Wood, brick and warm light. At night, the façade and the terrace light up together.",
     amb1: "The dining room", amb1s: "Business lunches and family dinners", amb2: "The terrace", amb2s: "Open air, day and night", amb3: "The house", amb4: "Tables to share", amb4s: "Meat festival for 3 and Vista Alegre for two",
-    m1: "Celebrations", m1p: "Cake service for S/ 50. Tell us the occasion when you book.", m2: "Groups and companies", m2p: "For large groups and business meetings, we arrange your table personally.", m2a: "Get in touch",
-    m3: "Bring your wine", m3p: "Free corkage for wines declared on arrival, conditions apply. Corkage from S/ 40.", m4: "Kids menu", m4p: "Steak, tenderloin, breaded or grilled chicken, from S/ 35.",
+    m1: "Celebrations", m1p: "Birthdays, anniversaries and gatherings that deserve a great table. Tell us what you are planning.", m1d: "Cake service: S/ 50", m1a: "Plan a celebration", m2: "Groups and companies", m2p: "For large groups and business meetings, we arrange your table personally.", m2a: "Get in touch",
+    m3: "Bring your wine", m3p: "Bring your favorite bottle to go with your steak.", m3d: "Corkage: S/ 40 per 750 ml bottle. Ask about our free-corkage promotion.", m4: "Kids menu", m4p: "The little ones get their own grill: steak, tenderloin, breaded or grilled chicken.", m4d: "From S/ 35",
     resKicker: "Bookings", resH2: "Book your table", resP: "Choose the date, time and area you prefer. We'll confirm availability.",
     res1: "We only show times when we're open.", res2: "Tell us if you're celebrating: we'll set your table for the occasion.", res3: "For groups of more than 10, we'll assist you personally.",
     lPersonas: "Guests", lDia: "Day", lHora: "Time", lZona: "Area", z0: "No preference", z1: "Dining room", z2: "Terrace", lNombre: "Name", lCel: "Mobile", lOcasion: "Occasion",
@@ -751,11 +761,12 @@ function pintarEstado() {
 /* ===== Cortes insignia ===== */
 function pintarInsignias() {
   $("ins-grid").innerHTML = (window.INSIGNIA || []).map(p => `
-    <a class="ins" href="#c-${p.sec}" data-ir="c-${p.sec}">
+    <a class="ins" href="#c-${p.sec}" data-ir="c-${p.sec}" data-plato="${p.plato || p.nombre}">
       <figure><img src="${p.foto}" alt="${p.nombre}" loading="lazy" decoding="async"></figure>
       <h3>${p.nombre}<b>S/ ${p.precio}</b></h3>
       ${p.gr ? `<small>${p.gr}</small>` : ""}
       <p>${L === "en" ? p.en : p.txt}</p>
+      <span class="ver">${t("verCarta")} →</span>
     </a>`).join("");
 }
 
@@ -813,17 +824,24 @@ barraTabs.addEventListener("scroll", sombrasTabs, { passive: true });
 addEventListener("resize", sombrasTabs);
 const spy = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting && !yendo) marcar(en.target.id); }), { rootMargin: "-45% 0px -50% 0px" });
 // ir exacto a una sección de la carta, descontando el header y la barra fija
-function irA(id) {
+function irA(id, destino) {
   const sec = $(id); if (!sec) return;
   const alto = header.offsetHeight + document.querySelector(".tabs").offsetHeight;
   marcar(id); yendo = true; clearTimeout(yendoT);
-  scrollTo({ top: sec.getBoundingClientRect().top + scrollY - alto + 2, behavior: quieto ? "auto" : "smooth" });
+  scrollTo({ top: (destino || sec).getBoundingClientRect().top + scrollY - alto - (destino ? 24 : -2), behavior: quieto ? "auto" : "smooth" });
   const fin = () => { yendo = false; removeEventListener("scrollend", fin); };
   addEventListener("scrollend", fin); yendoT = setTimeout(fin, 1200);
   history.replaceState(null, "", "#" + id);
 }
 barraTabs.addEventListener("click", e => { const tb = e.target.closest(".tab"); if (!tb) return; e.preventDefault(); irA(tb.getAttribute("href").slice(1)); });
-$("ins-grid").addEventListener("click", e => { const a = e.target.closest("[data-ir]"); if (!a) return; e.preventDefault(); irA(a.dataset.ir); });
+$("ins-grid").addEventListener("click", e => {
+  const a = e.target.closest("[data-ir]"); if (!a) return; e.preventDefault();
+  // busca el plato exacto dentro de la sección y lo resalta un momento
+  const sec = $(a.dataset.ir), n = norm(a.dataset.plato);
+  const p = sec && [...sec.querySelectorAll(".plato")].find(x => norm(x.querySelector("h4").firstChild.textContent).startsWith(n));
+  irA(a.dataset.ir, p);
+  if (p) { p.classList.remove("brilla"); void p.offsetWidth; p.classList.add("brilla"); }
+});
 // buscador
 function buscar() {
   const q = norm($("buscar").value.trim());

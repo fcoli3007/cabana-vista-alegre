@@ -223,7 +223,7 @@ window.CARTA = [
 /* Platos insignia que se muestran antes de la carta (foto, nombre, gramaje, precio, sección, texto, texto en inglés) */
 window.INSIGNIA = [
   { foto: "plato-entrana.jpg", nombre: "Entraña fina", gr: "400 g", precio: 189, sec: "cortes", txt: "Corte americano a la parrilla, servido en tabla.", en: "American cut from the grill, served on a board." },
-  { foto: "picana-pesto.jpg", nombre: "Picaña al pesto", gr: "600 g", precio: 225, sec: "compartir", txt: "Picaña americana con spaghetti al pesto, para compartir.", en: "American picanha with pesto spaghetti, to share." },
+  { foto: "picana-pesto.jpg", nombre: "Picaña al pesto", plato: "Picaña americana con pasta", gr: "600 g", precio: 225, sec: "compartir", txt: "Picaña americana con spaghetti al pesto, para compartir.", en: "American picanha with pesto spaghetti, to share." },
   { foto: "plato-pulpo.jpg", nombre: "Pulpo a la parrilla", gr: "", precio: 69, sec: "entradas", txt: "Con salsa al olivo y papitas al perejil.", en: "With olive sauce and parsley potatoes." },
   { foto: "mesa-larga.jpg", nombre: "Vista Alegre para dos", gr: "", precio: 229, sec: "compartir", txt: "Bife, lomos, anticuchos, chorizos y morcilla.", en: "Steak, tenderloins, anticuchos, chorizos and blood sausage." }
 ];
