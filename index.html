@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cabaña Vista Alegre · Parrilla y carnes premium en Chacarilla, Surco</title>
+<meta name="description" content="Parrilla en Chacarilla, Surco, desde 2006. Cortes Angus argentinos y americanos, Wagyu, Tomahawk y platos para compartir. Mira la carta con precios y reserva tu mesa en un minuto.">
+<link rel="canonical" href="https://cabana-vista-alegre-demo.netlify.app/">
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Cabaña Vista Alegre · Parrilla en Chacarilla, Surco">
+<meta property="og:description" content="Cortes premium a la parrilla desde 2006. Carta con precios y reservas en línea.">
+<meta property="og:image" content="https://cabana-vista-alegre-demo.netlify.app/og.jpg">
+<meta property="og:locale" content="es_PE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#150C09">
+<link rel="icon" href="logo.png">
+<link rel="preload" as="image" href="fachada.jpg">
+<link rel="preload" as="image" href="salon.jpg">
+<link rel="preload" as="image" href="mesa.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Cabaña Vista Alegre",
+  "image": "https://cabana-vista-alegre-demo.netlify.app/og.jpg",
+  "url": "https://cabana-vista-alegre-demo.netlify.app/",
+  "telephone": "+51 944 467 705",
+  "email": "reservas@restaurante-vistaalegre.com",
+  "servesCuisine": ["Parrilla", "Carnes", "Steakhouse"],
+  "priceRange": "S/ 40 – S/ 300",
+  "foundingDate": "2006",
+  "acceptsReservations": "True",
+  "hasMenu": "https://cabana-vista-alegre-demo.netlify.app/#carta",
+  "address": { "@type": "PostalAddress", "streetAddress": "Calle Punta Pejerrey 190", "addressLocality": "Santiago de Surco", "addressRegion": "Lima", "addressCountry": "PE" },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "12:00", "closes": "23:59" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "23:00" }
+  ],
+  "sameAs": ["https://www.instagram.com/cabanavistaalegre/", "https://www.facebook.com/restaurantecabanavistaalegre", "https://www.tiktok.com/@cabanavistaalegre"]
+}
+</script>
+<style>
+:root{
+  --noche:#150C09; --madera:#24140E; --madera2:#3A2116; --crema:#F4EBDD; --papel:#FBF6EE;
+  --rojo:#A11F23; --rojo2:#BE2E30; --oro:#D2A96A; --oro2:#E9C88E;
+  --tinta:#2A1B14; --suave:#7A6658; --linea:rgba(42,27,20,.13); --linea-o:rgba(244,235,221,.16);
+  --serif:"Playfair Display",Georgia,serif;
+  --suave-ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:128px}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--noche);color:var(--crema);line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.wrap{width:min(1200px,100% - 32px);margin-inline:auto}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.05;letter-spacing:-.01em}
+em{font-style:italic}
+.kicker{display:block;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--oro)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;padding:15px 26px;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background .25s,color .25s,transform .16s var(--suave-ease),box-shadow .25s}
+.btn:active{transform:scale(.97)}
+.btn-rojo{background:var(--rojo);color:#fff;box-shadow:0 14px 30px -16px rgba(161,31,35,.9)}
+.btn-linea{box-shadow:inset 0 0 0 1px rgba(244,235,221,.5);background:transparent;color:var(--crema)}
+@media (hover:hover) and (pointer:fine){
+  .btn-rojo:hover{background:var(--rojo2)}
+  .btn-linea:hover{background:var(--crema);color:var(--noche)}
+}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+
+/* ===== intro automática (pantalla de carga) ===== */
+.intro{position:fixed;inset:0;z-index:100;background:#0c0705;overflow:hidden;transition:opacity .7s ease,visibility .7s}
+.intro.fuera{opacity:0;visibility:hidden}
+.intro .capa{position:absolute;inset:0;will-change:transform,opacity}
+.intro .capa img{width:100%;height:100%;object-fit:cover}
+#i-fachada img{object-position:62% 55%}
+#i-salon,#i-mesa{opacity:0}
+.intro::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(12,7,5,0) 40%,rgba(12,7,5,.65) 100%);pointer-events:none}
+.intro-logo{position:absolute;z-index:2;left:50%;top:50%;width:min(190px,44vw);transform:translate(-50%,-50%) scale(.9);opacity:0;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+.intro-frase{position:absolute;z-index:2;left:0;right:0;bottom:15vh;text-align:center;font-family:var(--serif);font-size:clamp(22px,3vw,36px);font-style:italic;opacity:0;text-shadow:0 2px 20px rgba(0,0,0,.7);padding:0 20px}
+.intro-barra{position:absolute;z-index:2;left:50%;bottom:8vh;width:min(220px,50vw);height:2px;transform:translateX(-50%);background:rgba(244,235,221,.2);border-radius:2px;overflow:hidden}
+.intro-barra i{display:block;height:100%;width:100%;background:var(--oro);transform-origin:left;transform:scaleX(0)}
+.saltar{position:absolute;z-index:3;right:20px;top:20px;border:0;background:rgba(12,7,5,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--crema)}
+.saltar:hover{background:rgba(12,7,5,.7)}
+
+/* ===== header ===== */
+header{position:sticky;top:0;z-index:50;background:rgba(21,12,9,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--linea-o)}
+.nav{display:flex;align-items:center;gap:28px;height:72px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.logo img{width:40px;height:auto}
+.logo span{font-family:var(--serif);font-size:19px;line-height:1.05}
+.logo small{display:block;font-family:Manrope,sans-serif;font-size:9px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--oro);margin-top:4px}
+.nav ul{display:flex;gap:26px;list-style:none}
+.nav ul a{text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.8;transition:opacity .2s}
+.nav ul a:hover{opacity:1}
+.nav .btn{padding:11px 18px;font-size:11px}
+.idioma{border:1px solid var(--linea-o);background:transparent;border-radius:999px;width:42px;height:38px;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--crema);opacity:.85}
+.idioma:hover{opacity:1;border-color:var(--oro)}
+.google{text-decoration:none}
+.google .est{font-family:Manrope,sans-serif;font-size:13px;letter-spacing:1px;color:var(--oro);margin-left:4px;vertical-align:middle}
+.google span:last-child{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(244,235,221,.35)}
+.cat.sinfoto{grid-template-columns:1fr}
+.res-grid>*,.cat>*,.vis-grid>*,.portada>*{min-width:0}
+.cat.sinfoto .lista{columns:2;column-gap:56px}
+.cat.sinfoto .lista>*{break-inside:avoid}
+.intro.rapida{transition:none}
+
+/* ===== portada ===== */
+.portada{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100svh - 72px)}
+.portada-txt{display:flex;flex-direction:column;justify-content:center;padding:64px max(16px,calc((100vw - 1200px)/2)) 64px max(16px,calc((100vw - 1200px)/2))}
+.portada-txt .in{max-width:520px;padding-right:32px}
+.estado{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--crema);background:rgba(244,235,221,.07);border:1px solid var(--linea-o);border-radius:999px;padding:7px 14px 7px 11px}
+.estado i{width:8px;height:8px;border-radius:50%;background:#3CC46F;box-shadow:0 0 0 4px rgba(60,196,111,.18)}
+.estado.cerrado i{background:#C9A26A;box-shadow:0 0 0 4px rgba(201,162,106,.18)}
+.portada h1{font-size:clamp(48px,6.4vw,92px);margin:22px 0 18px}
+.portada h1 em{color:var(--oro)}
+.portada p.lead{font-size:clamp(16px,1.4vw,18px);opacity:.82;max-width:440px}
+.acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.datos{display:flex;flex-wrap:wrap;gap:34px;margin-top:42px;padding-top:24px;border-top:1px solid var(--linea-o)}
+.datos b{display:block;font-family:var(--serif);font-size:30px;font-weight:500;line-height:1.1;color:var(--oro2);font-variant-numeric:lining-nums}
+.datos span{font-size:12.5px;opacity:.7}
+.portada-foto{position:relative;overflow:hidden;background:var(--madera)}
+.portada-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:respira 14s ease-in-out infinite alternate}
+@keyframes respira{to{transform:scale(1.1)}}
+.portada-foto figcaption{position:absolute;left:20px;bottom:18px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+
+/* ===== carta ===== */
+.carta{background:var(--papel);color:var(--tinta);padding:90px 0 100px}
+.carta-cab{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
+.carta-cab h2{font-size:clamp(42px,5.4vw,76px);margin-top:12px}
+.carta-cab h2 em{color:var(--rojo)}
+.carta-cab p{color:var(--suave);max-width:440px;margin-top:10px}
+.buscar{position:relative;width:min(340px,100%)}
+.buscar input{width:100%;border:1px solid var(--linea);background:#fff;border-radius:999px;padding:13px 18px 13px 44px;font-size:15px}
+.buscar svg{position:absolute;left:16px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--suave)}
+.tabs{position:sticky;top:72px;z-index:20;background:rgba(251,246,238,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);margin-top:34px;border-bottom:1px solid var(--linea)}
+.tabs .wrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:12px 0}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1px solid transparent;background:none;border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:700;color:var(--suave);text-decoration:none;transition:background .25s,color .25s,border-color .25s}
+.tab:hover{color:var(--tinta)}
+.tab.activa{background:var(--tinta);color:var(--papel)}
+.cat{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;padding:56px 0 20px;border-bottom:1px solid var(--linea)}
+.cat:last-of-type{border-bottom:0}
+.cat-foto{position:sticky;top:150px;align-self:start;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--madera2)}
+.cat-foto img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--suave-ease)}
+.cat-foto:hover img{transform:scale(1.04)}
+.cat-foto figcaption{position:absolute;left:14px;bottom:14px;background:rgba(251,246,238,.94);border-radius:999px;padding:6px 13px;font-size:12px;font-weight:700}
+.cat-foto.sin{aspect-ratio:auto;background:none;position:static}
+.cat h3.tit{font-size:clamp(30px,3.2vw,44px)}
+.cat .nota{font-size:14px;color:var(--suave);margin:6px 0 18px}
+.grupo-t{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rojo);margin:26px 0 4px}
+.plato{display:grid;grid-template-columns:1fr auto;gap:2px 20px;padding:15px 0;border-bottom:1px dashed var(--linea)}
+.plato h4{font-size:16px;font-weight:700;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.plato h4 small{font-weight:500;font-size:13px;color:var(--suave)}
+.plato h4 .tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--rojo);border-radius:999px;padding:2px 8px}
+.plato p{grid-column:1;font-size:14px;color:var(--suave)}
+.plato b{grid-row:1;grid-column:2;font-family:var(--serif);font-size:20px;font-weight:500;white-space:nowrap;font-variant-numeric:lining-nums}
+.plato b small{font-family:Manrope,sans-serif;font-size:11px;color:var(--suave);font-weight:600;margin-right:3px}
+.plato.oculto{display:none}
+.sin-res{display:none;padding:40px 0;text-align:center;color:var(--suave)}
+.terminos{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
+.terminos button{border:1px solid var(--linea);background:#fff;border-radius:999px;padding:7px 13px;font-size:12.5px;font-weight:600;color:var(--suave);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s,background .2s}
+.terminos button i{width:11px;height:11px;border-radius:50%;background:var(--c)}
+.terminos button[aria-pressed="true"]{border-color:var(--rojo);color:var(--tinta);background:#FBEDEA}
+.termino-txt{font-size:13px;color:var(--suave);min-height:1.6em}
+.carta-pie{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:30px;font-size:12.5px;color:var(--suave)}
+
+/* ===== ambientes ===== */
+.ambientes{padding:100px 0;background:var(--noche)}
+.amb-cab{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px}
+.amb-cab h2{font-size:clamp(38px,4.8vw,66px);margin-top:12px}
+.amb-cab h2 em{color:var(--oro)}
+.amb-cab p{max-width:420px;opacity:.78}
+.amb-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:280px 280px;gap:16px}
+.amb-grid figure{position:relative;border-radius:18px;overflow:hidden;background:var(--madera)}
+.amb-grid figure:first-child{grid-row:span 2}
+.amb-grid figure.ancho{grid-column:span 2}
+.amb-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--suave-ease)}
+.amb-grid figure:hover img{transform:scale(1.05)}
+.amb-grid figcaption{position:absolute;left:14px;bottom:14px;right:14px;font-size:13px;text-shadow:0 1px 12px rgba(0,0,0,.8)}
+.amb-grid figcaption b{display:block;font-family:var(--serif);font-size:22px;font-weight:500}
+.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.extras div{border:1px solid var(--linea-o);border-radius:16px;padding:20px 22px}
+.extras b{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--oro2)}
+.extras p{font-size:14px;opacity:.75;margin-top:4px}
+
+/* ===== reserva ===== */
+.reserva{background:var(--madera);padding:100px 0}
+.res-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.res-grid h2{font-size:clamp(38px,4.8vw,64px);margin:12px 0 14px}
+.res-grid h2 em{color:var(--oro)}
+.res-grid .txt p{opacity:.8;max-width:380px}
+.res-lista{list-style:none;margin-top:26px;display:grid;gap:12px;font-size:14.5px;opacity:.85}
+.res-lista li{display:flex;gap:10px}
+.res-lista li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--oro);margin-top:9px}
+.res-card{background:var(--papel);color:var(--tinta);border-radius:22px;padding:30px;box-shadow:0 40px 70px -40px rgba(0,0,0,.7)}
+.paso{margin-bottom:22px}
+.paso>.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--suave);margin-bottom:10px}
+.contador-p{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--linea);border-radius:999px;padding:4px;background:#fff}
+.contador-p button{width:38px;height:38px;border-radius:50%;border:0;background:var(--papel);font-size:20px;line-height:1;color:var(--tinta)}
+.contador-p button:disabled{opacity:.35;cursor:not-allowed}
+.contador-p output{min-width:96px;text-align:center;font-weight:700}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chips input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.chips label{flex:none;cursor:pointer;border:1px solid var(--linea);background:#fff;border-radius:14px;padding:9px 14px;text-align:center;font-size:13.5px;font-weight:600;transition:border-color .2s,background .2s,color .2s}
+.chips label small{display:block;font-size:11px;font-weight:600;color:var(--suave);text-transform:capitalize}
+.chips input:checked+label{border-color:var(--rojo);background:var(--rojo);color:#fff}
+.chips input:checked+label small{color:rgba(255,255,255,.8)}
+.chips input:focus-visible+label{outline:2px solid var(--oro);outline-offset:2px}
+.chips input:disabled+label{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.horas{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;overflow:visible}
+.horas label{padding:9px 6px}
+.fila2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.campo{display:grid;gap:6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--suave)}
+.campo input,.campo select,.campo textarea{font-size:16px;letter-spacing:0;text-transform:none;font-weight:500;color:var(--tinta);padding:12px 14px;border:1px solid var(--linea);border-radius:12px;background:#fff;width:100%}
+.campo textarea{min-height:70px;resize:vertical}
+.campo.full{grid-column:1/-1}
+.error{color:#B42323;font-size:14px;font-weight:600;min-height:1.4em;margin:6px 0}
+.res-card .btn{width:100%}
+.resumen{font-size:14px;color:var(--suave);margin:4px 0 14px}
+.resumen b{color:var(--tinta)}
+.ok{display:none;text-align:center;padding:30px 10px}
+.ok .check{width:68px;height:68px;margin:0 auto 18px;border-radius:50%;background:#E6F3EA;color:#1F8A4C;display:grid;place-items:center;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+.ok .check svg{width:34px;height:34px}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.ok h3{font-size:34px}
+.ok p{color:var(--suave);margin:10px auto 22px;max-width:360px}
+.ok .btn-linea{color:var(--tinta);box-shadow:inset 0 0 0 1px var(--linea)}
+.res-card.enviada form{display:none}
+.res-card.enviada .ok{display:block}
+
+/* ===== visita ===== */
+.visita{padding:100px 0 40px}
+.vis-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch}
+.vis-grid h2{font-size:clamp(38px,4.8vw,64px);margin:12px 0 22px}
+.vis-grid h2 em{color:var(--oro)}
+.vis-grid dl{display:grid;grid-template-columns:auto 1fr;gap:14px 24px;font-size:15.5px}
+.vis-grid dt{color:var(--oro);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding-top:4px}
+.vis-grid dd a{text-underline-offset:3px}
+.mapa{border-radius:20px;overflow:hidden;min-height:360px;background:var(--madera);border:1px solid var(--linea-o)}
+.mapa iframe{width:100%;height:100%;min-height:360px;border:0;filter:grayscale(.3) contrast(1.05)}
+footer{padding:40px 0 28px;border-top:1px solid var(--linea-o);margin-top:60px}
+.pie{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;font-size:13px}
+.pie .logo span{font-size:17px}
+.redes{display:flex;gap:18px}
+.redes a{text-decoration:none;opacity:.8}
+.redes a:hover{opacity:1}
+.base{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;padding-top:22px;font-size:12px;opacity:.7}
+.credit{margin-left:auto;text-align:right;font-size:11.5px}
+.credit a{text-decoration:underline;text-underline-offset:3px}
+.float-wa{position:fixed;right:18px;bottom:18px;z-index:60;width:56px;height:56px;border-radius:50%;background:#1F9D55;color:#fff;display:grid;place-items:center;box-shadow:0 14px 30px -12px rgba(0,0,0,.55)}
+.float-wa svg{width:28px;height:28px}
+
+/* aparición */
+.rev{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s var(--suave-ease)}
+.rev.in{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .nav ul{display:none}
+  .portada{grid-template-columns:1fr;min-height:0}
+  .portada-foto{order:-1;height:30svh;min-height:190px}
+  .portada-txt{padding:24px 16px 48px}
+  .portada h1{margin:14px 0 12px}
+  .acciones{margin-top:20px}
+  .datos{margin-top:28px}
+  .cat.sinfoto .lista{columns:1}
+  .portada-txt .in{padding-right:0}
+  .cat{grid-template-columns:1fr;gap:22px;padding-top:44px}
+  .cat-foto{position:relative;top:0;aspect-ratio:16/9}
+  .amb-grid{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px 220px}
+  .amb-grid figure:first-child{grid-row:auto;grid-column:span 2}
+  .amb-grid figure.ancho{grid-column:span 2}
+  .extras{grid-template-columns:1fr}
+  .res-grid,.vis-grid{grid-template-columns:1fr;gap:36px}
+}
+@media (max-width:560px){
+  html{scroll-padding-top:120px}
+  .logo span{font-size:16px}
+  .logo small{display:none}
+  .portada h1{font-size:42px}
+  .portada p.lead{font-size:15.5px}
+  .idioma{width:38px;height:34px}
+  .nav{gap:14px}
+  .datos{gap:22px}
+  .datos b{font-size:24px}
+  .acciones .btn{flex:1}
+  .res-card{padding:22px 18px}
+  .fila2{grid-template-columns:1fr}
+  .amb-grid{grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:220px}
+  .amb-grid figure:first-child,.amb-grid figure.ancho{grid-column:auto}
+  .credit{width:100%;margin-left:0}
+  footer{padding-bottom:90px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rev{opacity:1;transform:none;transition:none}
+  .portada-foto img{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Intro automática: de la calle a la mesa en 3 segundos -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="capa" id="i-fachada"><img src="fachada.jpg" alt=""></div>
+  <div class="capa" id="i-salon"><img src="salon.jpg" alt=""></div>
+  <div class="capa" id="i-mesa"><img src="mesa.jpg" alt=""></div>
+  <img class="intro-logo" id="i-logo" src="logo.png" alt="">
+  <div class="intro-frase" data-i="introFrase">Pasión por las carnes, desde 2006</div>
+  <div class="intro-barra"><i id="i-barra"></i></div>
+  <button class="saltar" type="button" id="saltar" data-i="saltar">Saltar</button>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio" aria-label="Cabaña Vista Alegre"><img src="logo.png" alt="" width="40" height="49"><span>Cabaña Vista Alegre<small data-i="logoSub">Parrilla · Surco · desde 2006</small></span></a>
+    <ul>
+      <li><a href="#carta" data-i="navCarta">Carta</a></li>
+      <li><a href="#ambientes" data-i="navAmb">Ambientes</a></li>
+      <li><a href="#visita" data-i="navUbi">Ubicación</a></li>
+    </ul>
+    <button class="idioma" type="button" id="idioma" aria-label="English version">EN</button>
+    <a class="btn btn-rojo" href="#reserva" data-i="reservar">Reservar</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <!-- Portada -->
+  <section class="portada">
+    <div class="portada-txt">
+      <div class="in">
+        <span class="estado" id="estado"><i></i><span></span></span>
+        <h1 data-i="h1">Pasión por las <em>carnes</em></h1>
+        <p class="lead" data-i="lead">Cortes Angus argentinos y americanos, Wagyu y Tomahawk, asados a fuego lento en Chacarilla, Surco.</p>
+        <div class="acciones">
+          <a class="btn btn-rojo" href="#carta" data-i="verCarta">Ver la carta</a>
+          <a class="btn btn-linea" href="#reserva" data-i="reservarMesa">Reservar mesa</a>
+        </div>
+        <div class="datos">
+          <a class="google" href="https://maps.google.com/?cid=10259161678027900793" target="_blank" rel="noopener"><b>4.5 <span class="est" aria-hidden="true">★★★★★</span></b><span data-i="google">825 opiniones en Google</span></a>
+          <div><b id="anios">20</b><span data-i="anios">años en la parrilla</span></div>
+          <div><b>Wagyu</b><span data-i="wagyu">y Tomahawk</span></div>
+        </div>
+      </div>
+    </div>
+    <figure class="portada-foto">
+      <img src="plato-portada.jpg" alt="Corte a la parrilla con romero servido en plato negro" fetchpriority="high">
+      <figcaption data-i="fotoPie">Nuestros cortes premium</figcaption>
+    </figure>
+  </section>
+
+  <!-- Carta -->
+  <section class="carta" id="carta" aria-labelledby="t-carta">
+    <div class="wrap">
+      <div class="carta-cab">
+        <div>
+          <span class="kicker" style="color:var(--rojo)" data-i="cartaKicker">Carta · edición abril 2026</span>
+          <h2 id="t-carta" data-i="cartaH2">Nuestra <em>carta</em></h2>
+          <p data-i="cartaP">Toda la carta con precios, sin descargar nada. Busca un plato o salta a una sección.</p>
+        </div>
+        <label class="buscar"><span style="position:absolute;left:-9999px" data-i="buscarLbl">Buscar en la carta</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></g></svg>
+          <input type="search" id="buscar" placeholder="Busca: lomo, pulpo, wagyu…" data-iph="buscarPh" autocomplete="off">
+        </label>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="Carta"><div class="wrap" id="tabs"></div></nav>
+    <div class="wrap" id="secciones"></div>
+    <div class="wrap"><p class="sin-res" id="sin-res" data-i="sinRes">No encontramos ese plato. Prueba con otra palabra.</p>
+      <div class="carta-pie"><span data-i="pie1">Precios en soles. Incluyen impuestos de ley. Imágenes referenciales.</span><span data-i="pie2">¿Traes tu vino? Mira el descorche en Licores.</span></div>
+    </div>
+  </section>
+
+  <!-- Ambientes -->
+  <section class="ambientes" id="ambientes">
+    <div class="wrap">
+      <div class="amb-cab rev">
+        <div><span class="kicker" data-i="ambKicker">Ambientes</span><h2 data-i="ambH2">Salón, terraza y <em>buena mesa</em></h2></div>
+        <p data-i="ambP">Madera, ladrillo y luz cálida. De noche, la fachada y la terraza se encienden juntas.</p>
+      </div>
+      <div class="amb-grid rev">
+        <figure><img src="fachada.jpg" alt="Fachada de Cabaña Vista Alegre iluminada de noche" loading="lazy" decoding="async"><figcaption><b data-i="amb1">La casa</b>Calle Punta Pejerrey 190</figcaption></figure>
+        <figure><img src="salon.jpg" alt="Salón con mesas de madera y luz cálida" loading="lazy" decoding="async"><figcaption><b data-i="amb2">Salón</b><span data-i="amb2s">Almuerzos y cenas</span></figcaption></figure>
+        <figure><img src="terraza.jpg" alt="Terraza iluminada con guirnaldas de noche" loading="lazy" decoding="async"><figcaption><b data-i="amb3">Terraza</b><span data-i="amb3s">Al aire libre</span></figcaption></figure>
+        <figure class="ancho"><img src="mesa-larga.jpg" alt="Mesa larga servida para un grupo" loading="lazy" decoding="async"><figcaption><b data-i="amb4">Grupos y celebraciones</b><span data-i="amb4s">Festival de carnes para 3 y Vista Alegre para dos</span></figcaption></figure>
+      </div>
+      <div class="extras rev">
+        <div><b data-i="ex1">¿Cumpleaños?</b><p data-i="ex1p">Servicio de torta por S/ 50. Avísanos al reservar.</p></div>
+        <div><b data-i="ex2">Trae tu vino</b><p data-i="ex2p">Descorche de vino S/ 40 por botella de 750 ml.</p></div>
+        <div><b data-i="ex3">Menú kids</b><p data-i="ex3p">Bife, lomo, milanesa o pollo a la parrilla, desde S/ 35.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reserva -->
+  <section class="reserva" id="reserva">
+    <div class="wrap res-grid">
+      <div class="txt rev">
+        <span class="kicker" data-i="resKicker">Reservas</span>
+        <h2 data-i="resH2">Tu mesa en <em>un minuto</em></h2>
+        <p data-i="resP">Elige día, hora y cuántos son. Te confirmamos al toque.</p>
+        <ul class="res-lista">
+          <li data-i="res1">Solo te mostramos horarios en los que estamos abiertos.</li>
+          <li data-i="res2">Elige salón o terraza, y avísanos si es una celebración.</li>
+          <li data-i="res3">Grupos de más de 10: escríbenos y armamos tu mesa.</li>
+        </ul>
+      </div>
+      <div class="res-card rev" id="res-card">
+        <!-- Demo: al venderla, este formulario se conecta con el sistema de reservas que use el restaurante -->
+        <form id="form" novalidate>
+          <div class="paso">
+            <span class="lbl" data-i="lPersonas">Personas</span>
+            <div class="contador-p"><button type="button" id="menos" aria-label="−">−</button><output id="personas" aria-live="polite"></output><button type="button" id="mas" aria-label="+">+</button></div>
+          </div>
+          <div class="paso">
+            <span class="lbl" id="l-dia" data-i="lDia">Día</span>
+            <div class="chips" id="dias" role="radiogroup" aria-labelledby="l-dia"></div>
+          </div>
+          <div class="paso">
+            <span class="lbl" id="l-hora" data-i="lHora">Hora</span>
+            <div class="chips horas" id="horas" role="radiogroup" aria-labelledby="l-hora"></div>
+          </div>
+          <div class="paso">
+            <span class="lbl" id="l-zona" data-i="lZona">Zona</span>
+            <div class="chips" role="radiogroup" aria-labelledby="l-zona">
+              <input type="radio" name="zona" id="z0" value="0" checked><label for="z0" data-i="z0">Sin preferencia</label>
+              <input type="radio" name="zona" id="z1" value="1"><label for="z1" data-i="z1">Salón</label>
+              <input type="radio" name="zona" id="z2" value="2"><label for="z2" data-i="z2">Terraza</label>
+            </div>
+          </div>
+          <div class="fila2 paso">
+            <label class="campo"><span data-i="lNombre">Nombre</span><input id="nombre" autocomplete="name" placeholder="Ej. Lucía Torres" data-iph="phNombre" maxlength="60"></label>
+            <label class="campo"><span data-i="lCel">Celular</span><input id="cel" type="tel" inputmode="tel" autocomplete="tel" placeholder="9XX XXX XXX" maxlength="15"></label>
+            <label class="campo"><span data-i="lOcasion">Ocasión</span><select id="ocasion"><option value="0" data-i="oc0">Ninguna</option><option value="1" data-i="oc1">Cumpleaños</option><option value="2" data-i="oc2">Aniversario</option><option value="3" data-i="oc3">Reunión de trabajo</option><option value="4" data-i="oc4">Otra</option></select></label>
+            <label class="campo"><span data-i="lCorreo">Correo (opcional)</span><input id="correo" type="email" autocomplete="email" placeholder="tu@correo.com" data-iph="phCorreo"></label>
+            <label class="campo full"><span data-i="lComent">Comentario (opcional)</span><textarea id="comentario" maxlength="200" placeholder="Ej. silla para bebé, vamos con torta…" data-iph="phComent"></textarea></label>
+          </div>
+          <p class="resumen" id="resumen" aria-live="polite"></p>
+          <p class="error" id="error" role="alert"></p>
+          <button class="btn btn-rojo" type="submit" data-i="reservarMesa">Reservar mesa</button>
+        </form>
+        <div class="ok" id="ok" role="status" tabindex="-1">
+          <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 id="ok-tit"></h3>
+          <p id="ok-txt"></p>
+          <button class="btn btn-linea" type="button" id="otra" data-i="otra">Hacer otra reserva</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visita -->
+  <section class="visita" id="visita">
+    <div class="wrap vis-grid">
+      <div class="rev">
+        <span class="kicker" data-i="visKicker">Ubicación</span>
+        <h2 data-i="visH2">Te esperamos en <em>Chacarilla</em></h2>
+        <dl>
+          <dt data-i="dDir">Dirección</dt><dd>Calle Punta Pejerrey 190, Santiago de Surco<br><span style="opacity:.7" data-i="ref">Altura de la cuadra 1 de Caminos del Inca, a espaldas del grifo Primax</span></dd>
+          <dt data-i="dHor">Horario</dt><dd data-i="horario">Lunes a sábado: 12:00 p. m. – 12:00 a. m.<br>Domingo: 12:00 p. m. – 11:00 p. m.</dd>
+          <dt data-i="dRes">Reservas</dt><dd><a href="tel:+51944467705">944 467 705</a><br><a href="mailto:reservas@restaurante-vistaalegre.com">reservas@restaurante-vistaalegre.com</a></dd>
+          <dt>Google</dt><dd><a href="https://maps.google.com/?cid=10259161678027900793" target="_blank" rel="noopener" data-i="googleVer">4.5 ★ · 825 opiniones · ver en Google Maps</a></dd>
+        </dl>
+        <div class="acciones">
+          <a class="btn btn-rojo" href="https://www.google.com/maps/dir/?api=1&destination=Caba%C3%B1a%20Vista%20Alegre%2C%20Calle%20Punta%20Pejerrey%20190%2C%20Santiago%20de%20Surco" target="_blank" rel="noopener" data-i="llegar">Cómo llegar</a>
+          <a class="btn btn-linea" href="https://waze.com/ul?ll=-12.1133506,-76.9931569&navigate=yes" target="_blank" rel="noopener" data-i="waze">Abrir en Waze</a>
+        </div>
+      </div>
+      <div class="mapa rev">
+        <iframe title="Mapa de Cabaña Vista Alegre" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Caba%C3%B1a%20Vista%20Alegre%2C%20Calle%20Punta%20Pejerrey%20190%2C%20Santiago%20de%20Surco%2C%20Lima&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="pie">
+      <a class="logo" href="#inicio"><img src="logo.png" alt="" width="40" height="49"><span>Cabaña Vista Alegre</span></a>
+      <div class="redes"><a href="https://www.instagram.com/cabanavistaalegre/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/restaurantecabanavistaalegre" target="_blank" rel="noopener">Facebook</a><a href="https://www.tiktok.com/@cabanavistaalegre" target="_blank" rel="noopener">TikTok</a></div>
+    </div>
+    <div class="base">
+      <span>© <span id="anio">2026</span> Restaurante Cabaña Vista Alegre</span>
+      <span class="credit" id="credit"></span>
+    </div>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/51944467705" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></a>
+
+<script src="carta.js"></script>
+<script>
+const AG = { marca: "TF Studio", wa: "51982508530" };
+const $ = id => document.getElementById(id);
+const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+$("credit").innerHTML = 'Página hecha por <a href="https://wa.me/' + AG.wa + '" target="_blank" rel="noopener">' + AG.marca + '</a>';
+
+// hora de Lima, aunque la persona esté en otro país
+const lima = () => new Date(new Date().toLocaleString("en-US", { timeZone: "America/Lima" }));
+$("anio").textContent = lima().getFullYear();
+$("anios").textContent = lima().getFullYear() - 2006;
+
+/* ===== Textos en español e inglés ===== */
+const TXT = {
+  es: { introFrase: "Pasión por las carnes, desde 2006", saltar: "Saltar", logoSub: "Parrilla · Surco · desde 2006", navCarta: "Carta", navAmb: "Ambientes", navUbi: "Ubicación", reservar: "Reservar",
+    h1: "Pasión por las <em>carnes</em>", lead: "Cortes Angus argentinos y americanos, Wagyu y Tomahawk, asados a fuego lento en Chacarilla, Surco.", verCarta: "Ver la carta", reservarMesa: "Reservar mesa",
+    google: "825 opiniones en Google", anios: "años en la parrilla", wagyu: "y Tomahawk", fotoPie: "Nuestros cortes premium",
+    cartaKicker: "Carta · edición abril 2026", cartaH2: "Nuestra <em>carta</em>", cartaP: "Toda la carta con precios, sin descargar nada. Busca un plato o salta a una sección.", buscarLbl: "Buscar en la carta", buscarPh: "Busca: lomo, pulpo, wagyu…",
+    sinRes: "No encontramos ese plato. Prueba con otra palabra.", pie1: "Precios en soles. Incluyen impuestos de ley. Imágenes referenciales.", pie2: "¿Traes tu vino? Mira el descorche en Licores.",
+    ambKicker: "Ambientes", ambH2: "Salón, terraza y <em>buena mesa</em>", ambP: "Madera, ladrillo y luz cálida. De noche, la fachada y la terraza se encienden juntas.",
+    amb1: "La casa", amb2: "Salón", amb2s: "Almuerzos y cenas", amb3: "Terraza", amb3s: "Al aire libre", amb4: "Grupos y celebraciones", amb4s: "Festival de carnes para 3 y Vista Alegre para dos",
+    ex1: "¿Cumpleaños?", ex1p: "Servicio de torta por S/ 50. Avísanos al reservar.", ex2: "Trae tu vino", ex2p: "Descorche de vino S/ 40 por botella de 750 ml.", ex3: "Menú kids", ex3p: "Bife, lomo, milanesa o pollo a la parrilla, desde S/ 35.",
+    resKicker: "Reservas", resH2: "Tu mesa en <em>un minuto</em>", resP: "Elige día, hora y cuántos son. Te confirmamos al toque.",
+    res1: "Solo te mostramos horarios en los que estamos abiertos.", res2: "Elige salón o terraza, y avísanos si es una celebración.", res3: "Grupos de más de 10: escríbenos y armamos tu mesa.",
+    lPersonas: "Personas", lDia: "Día", lHora: "Hora", lZona: "Zona", z0: "Sin preferencia", z1: "Salón", z2: "Terraza", lNombre: "Nombre", lCel: "Celular", lOcasion: "Ocasión",
+    oc0: "Ninguna", oc1: "Cumpleaños", oc2: "Aniversario", oc3: "Reunión de trabajo", oc4: "Otra", lCorreo: "Correo (opcional)", lComent: "Comentario (opcional)",
+    phNombre: "Ej. Lucía Torres", phCorreo: "tu@correo.com", phComent: "Ej. silla para bebé, vamos con torta…", otra: "Hacer otra reserva",
+    visKicker: "Ubicación", visH2: "Te esperamos en <em>Chacarilla</em>", dDir: "Dirección", ref: "Altura de la cuadra 1 de Caminos del Inca, a espaldas del grifo Primax", dHor: "Horario",
+    horario: "Lunes a sábado: 12:00 p. m. – 12:00 a. m.<br>Domingo: 12:00 p. m. – 11:00 p. m.", dRes: "Reservas", googleVer: "4.5 ★ · 825 opiniones · ver en Google Maps", llegar: "Cómo llegar", waze: "Abrir en Waze",
+    // textos que arma el código
+    abierto: h => "Abierto ahora · hasta las " + h, abrimos: "Hoy abrimos a las 12:00 p. m.", cerrado: "Cerrado ahora · abrimos mañana a las 12:00 p. m.",
+    persona: n => n === 1 ? "1 persona" : n >= 10 ? "10+ personas" : n + " personas", hoy: "Hoy", manana: "Mañana", sinHoras: "Ya no quedan horarios hoy. Elige otro día.",
+    resumen: (p, f, h) => `Mesa para <b>${p}</b> el <b>${f}</b>${h ? ` a las <b>${h}</b>` : " · elige la hora"}.`,
+    eHora: "Elige una hora.", eNombre: "Escribe tu nombre.", eCel: "Escribe un celular de 9 dígitos.",
+    okTit: n => "¡Listo, " + n + "!", okTxt: (p, f, h, z, c) => `Recibimos tu reserva para ${p} el ${f} a las ${h}${z ? ", en " + z.toLowerCase() : ""}. Te confirmamos al ${c}.`,
+    terminos: [["Punto azul", "Sellado por fuera, casi crudo por dentro."], ["Punto rojo", "Centro rojo y tibio."], ["Término medio", "Centro rosado y jugoso. El que recomendamos."], ["Tres cuartos", "Apenas rosado al centro."], ["Bien cocido", "Cocido parejo, sin rosado."]],
+    tags: {}, locale: "es-PE" },
+  en: { introFrase: "Passion for meat, since 2006", saltar: "Skip", logoSub: "Steakhouse · Surco · since 2006", navCarta: "Menu", navAmb: "The place", navUbi: "Location", reservar: "Book",
+    h1: "Passion for <em>meat</em>", lead: "Argentine and American Angus cuts, Wagyu and Tomahawk, slow-grilled in Chacarilla, Surco.", verCarta: "See the menu", reservarMesa: "Book a table",
+    google: "825 reviews on Google", anios: "years on the grill", wagyu: "and Tomahawk", fotoPie: "Our premium cuts",
+    cartaKicker: "Menu · April 2026 edition", cartaH2: "Our <em>menu</em>", cartaP: "The full menu with prices, nothing to download. Search a dish or jump to a section.", buscarLbl: "Search the menu", buscarPh: "Search: lomo, pulpo, wagyu…",
+    sinRes: "We couldn't find that dish. Try another word.", pie1: "Prices in soles, taxes included. Pictures are for reference.", pie2: "Bringing your own wine? See corkage under Spirits.",
+    ambKicker: "The place", ambH2: "Dining room, terrace and <em>good food</em>", ambP: "Wood, brick and warm light. At night, the façade and the terrace light up together.",
+    amb1: "The house", amb2: "Dining room", amb2s: "Lunch and dinner", amb3: "Terrace", amb3s: "Open air", amb4: "Groups and celebrations", amb4s: "Meat festival for 3 and Vista Alegre for two",
+    ex1: "Birthday?", ex1p: "Cake service for S/ 50. Let us know when you book.", ex2: "Bring your wine", ex2p: "Corkage S/ 40 per 750 ml bottle.", ex3: "Kids menu", ex3p: "Steak, tenderloin, breaded or grilled chicken, from S/ 35.",
+    resKicker: "Bookings", resH2: "Your table in <em>one minute</em>", resP: "Pick a day, a time and how many you are. We'll confirm right away.",
+    res1: "We only show times when we're open.", res2: "Choose dining room or terrace, and tell us if you're celebrating.", res3: "Groups of more than 10: message us and we'll set up your table.",
+    lPersonas: "Guests", lDia: "Day", lHora: "Time", lZona: "Area", z0: "No preference", z1: "Dining room", z2: "Terrace", lNombre: "Name", lCel: "Mobile", lOcasion: "Occasion",
+    oc0: "None", oc1: "Birthday", oc2: "Anniversary", oc3: "Business meeting", oc4: "Other", lCorreo: "Email (optional)", lComent: "Comments (optional)",
+    phNombre: "E.g. Lucía Torres", phCorreo: "you@email.com", phComent: "E.g. high chair, we're bringing a cake…", otra: "Make another booking",
+    visKicker: "Location", visH2: "See you in <em>Chacarilla</em>", dDir: "Address", ref: "Near block 1 of Caminos del Inca, behind the Primax gas station", dHor: "Hours",
+    horario: "Monday to Saturday: 12:00 p.m. – 12:00 a.m.<br>Sunday: 12:00 p.m. – 11:00 p.m.", dRes: "Bookings", googleVer: "4.5 ★ · 825 reviews · see on Google Maps", llegar: "Directions", waze: "Open in Waze",
+    abierto: h => "Open now · until " + h, abrimos: "We open today at 12:00 p.m.", cerrado: "Closed now · we open tomorrow at 12:00 p.m.",
+    persona: n => n === 1 ? "1 guest" : n >= 10 ? "10+ guests" : n + " guests", hoy: "Today", manana: "Tomorrow", sinHoras: "No times left today. Pick another day.",
+    resumen: (p, f, h) => `Table for <b>${p}</b> on <b>${f}</b>${h ? ` at <b>${h}</b>` : " · pick a time"}.`,
+    eHora: "Pick a time.", eNombre: "Enter your name.", eCel: "Enter a 9-digit mobile number.",
+    okTit: n => "All set, " + n + "!", okTxt: (p, f, h, z, c) => `We got your booking for ${p} on ${f} at ${h}${z ? ", " + z.toLowerCase() : ""}. We'll confirm at ${c}.`,
+    terminos: [["Blue", "Seared outside, almost raw inside."], ["Rare", "Red, warm center."], ["Medium", "Pink and juicy center. Our recommendation."], ["Medium well", "Slightly pink center."], ["Well done", "Cooked through, no pink."]],
+    tags: { "Favorito": "Favorite", "Para 2": "For 2", "Para 3": "For 3", "De la casa": "House special" }, locale: "en-US" }
+};
+let L = "es";
+try { if (localStorage.getItem("cva-idioma") === "en") L = "en"; } catch (e) {}
+const t = k => TXT[L][k];
+
+/* ===== Intro automática: fachada → puerta → salón → mesa → logo (3 s) ===== */
+(() => {
+  const intro = $("intro"), cF = $("i-fachada"), cS = $("i-salon"), cM = $("i-mesa"), logo = $("i-logo"), frase = intro.querySelector(".intro-frase"), barra = $("i-barra");
+  let visto = false; try { visto = sessionStorage.getItem("cva-intro") === "1"; } catch (e) {}
+  const cerrar = () => { if (intro.classList.contains("fuera")) return; intro.classList.add("fuera"); document.documentElement.style.overflow = ""; try { sessionStorage.setItem("cva-intro", "1"); } catch (e) {} setTimeout(() => intro.remove(), 800); };
+  if (visto || quieto) { intro.remove(); return; }
+  document.documentElement.style.overflow = "hidden";
+  $("saltar").onclick = cerrar;
+  addEventListener("keydown", e => { if (e.key === "Escape") cerrar(); });
+  // si la persona intenta bajar o toca la pantalla, la intro se salta
+  ["wheel", "touchmove", "pointerdown"].forEach(ev => addEventListener(ev, cerrar, { once: true, passive: true }));
+  // la puerta está en el 62% / 63% de la foto: se calcula dónde cae en pantalla con object-fit: cover
+  const W = 1536, H = 1024, cw = innerWidth, ch = innerHeight, s = Math.max(cw / W, ch / H);
+  cF.style.transformOrigin = (((cw - W * s) * .62 + W * s * .62) / cw * 100).toFixed(1) + "% " + (((ch - H * s) * .55 + H * s * .63) / ch * 100).toFixed(1) + "%";
+  const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const tramo = (x, a, b) => cl((x - a) / (b - a));
+  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  const DUR = 3000; // duración total de la intro en milisegundos
+  let t0 = null;
+  const paso = now => {
+    if (!intro.isConnected || intro.classList.contains("fuera")) return;
+    if (t0 === null) t0 = now;
+    const x = now - t0;
+    cF.style.transform = `scale(${1.02 + ease(tramo(x, 150, 1100)) * 2.4})`;
+    cF.style.opacity = 1 - tramo(x, 850, 1100);
+    cS.style.opacity = tramo(x, 850, 1100) * (1 - tramo(x, 1750, 2000));
+    cS.style.transform = `scale(${1.15 - .1 * tramo(x, 850, 1500) + ease(tramo(x, 1500, 2000)) * .9})`;
+    cM.style.opacity = tramo(x, 1750, 2000);
+    cM.style.transform = `scale(${1.12 - .12 * ease(tramo(x, 1750, DUR))})`;
+    const l = ease(tramo(x, 2050, 2400));
+    logo.style.opacity = l; logo.style.transform = `translate(-50%,-50%) scale(${.9 + .1 * l})`;
+    frase.style.opacity = tramo(x, 2200, 2550); frase.style.transform = `translateY(${(1 - tramo(x, 2200, 2600)) * 14}px)`;
+    barra.style.transform = `scaleX(${tramo(x, 0, DUR)})`;
+    if (x >= DUR) cerrar(); else requestAnimationFrame(paso);
+  };
+  // la intro arranca solo cuando las 3 fotos ya cargaron.
+  // Si con mala señal no cargan en 1.2 s, se salta la intro y se entra directo a la página (nunca se ve un fondo negro).
+  const imgs = [...intro.querySelectorAll(".capa img")];
+  const listas = imgs.map(im => im.complete && im.naturalWidth ? Promise.resolve() : new Promise(r => { im.onload = r; im.onerror = r; }))
+    .map((p, i) => p.then(() => imgs[i].decode ? imgs[i].decode().catch(() => {}) : null));
+  let empezo = false;
+  Promise.all(listas).then(() => { if (empezo || intro.classList.contains("fuera")) return; empezo = true; requestAnimationFrame(paso); setTimeout(cerrar, DUR + 1500); });
+  setTimeout(() => { if (!empezo) { empezo = true; intro.classList.add("rapida"); cerrar(); } }, 1200);
+})();
+
+/* ===== Abierto / cerrado según el horario (hora de Lima) ===== */
+// lun-sáb 12:00 a 24:00 · dom 12:00 a 23:00
+const HORARIO = { 0: [12, 23], 1: [12, 24], 2: [12, 24], 3: [12, 24], 4: [12, 24], 5: [12, 24], 6: [12, 24] };
+const hTxt = m => { const h = Math.floor(m / 60) % 24, mm = m % 60, ap = L === "es" ? (h < 12 ? " a. m." : " p. m.") : (h < 12 ? " a.m." : " p.m."); return ((h + 11) % 12 + 1) + ":" + String(mm).padStart(2, "0") + ap; };
+function pintarEstado() {
+  const n = lima(), [a, c] = HORARIO[n.getDay()], ahora = n.getHours() + n.getMinutes() / 60, e = $("estado");
+  const abierto = ahora >= a && ahora < c;
+  e.classList.toggle("cerrado", !abierto);
+  e.lastElementChild.textContent = abierto ? t("abierto")(hTxt(c * 60)) : ahora < a ? t("abrimos") : t("cerrado");
+}
+
+/* ===== Carta (los datos están en carta.js) ===== */
+const CARTA = window.CARTA || [];
+const COLORES = ["#7A1E2A", "#A3303A", "#C4605A", "#A9785E", "#7A5A45"];
+const sol = n => `<small>S/</small>${n}`;
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+let termino = 2;
+function pintarCarta() {
+  const tit = c => L === "en" && c.en ? c.en : c.nombre;
+  $("tabs").innerHTML = CARTA.map((c, i) => `<a class="tab${i === 0 ? " activa" : ""}" href="#c-${c.id}">${tit(c)}</a>`).join("");
+  $("secciones").innerHTML = CARTA.map(c => {
+    const nota = L === "en" ? c.notaEn : c.nota;
+    return `
+  <section class="cat${c.foto ? "" : " sinfoto"}" id="c-${c.id}" aria-labelledby="h-${c.id}">
+    ${c.foto ? `<figure class="cat-foto"><img src="${c.foto}" alt="${c.pie}" loading="lazy" decoding="async"><figcaption>${c.pie}</figcaption></figure>` : ""}
+    <div>
+      <h3 class="tit" id="h-${c.id}">${tit(c)}</h3>
+      ${nota ? `<p class="nota">${nota}</p>` : `<div style="height:10px"></div>`}
+      ${c.terminos ? `<div class="terminos" role="group">${t("terminos").map((x, i) => `<button type="button" style="--c:${COLORES[i]}" aria-pressed="${i === termino}" data-i="${i}"><i></i>${x[0]}</button>`).join("")}</div><p class="termino-txt" aria-live="polite">${t("terminos")[termino][1]}</p>` : ""}
+      <div class="lista">
+      ${c.items.map(p => p.length === 1 ? `<p class="grupo-t">${p[0].replace("— ", "")}</p>` : (() => {
+        const desc = L === "en" && p[5] ? p[5] : p[2], tag = p[4] ? (L === "en" && t("tags")[p[4]] || p[4]) : "";
+        return `<div class="plato" data-txt="${norm(p[0] + " " + p[2] + " " + (p[5] || "") + " " + c.nombre + " " + (c.en || ""))}"><h4>${p[0]}${p[1] ? `<small>${p[1]}</small>` : ""}${tag ? `<span class="tag">${tag}</span>` : ""}</h4><b>${sol(p[3])}</b>${desc ? `<p>${desc}</p>` : ""}</div>`;
+      })()).join("")}
+      </div>
+    </div>
+  </section>`; }).join("");
+  document.querySelectorAll(".terminos").forEach(g => g.onclick = e => {
+    const b = e.target.closest("button"); if (!b) return;
+    termino = +b.dataset.i;
+    g.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    g.nextElementSibling.textContent = t("terminos")[termino][1];
+  });
+  document.querySelectorAll(".cat").forEach(s => spy.observe(s));
+  if ($("buscar").value) buscar();
+}
+// pestaña activa según la sección visible.
+// Ojo: la barra de pestañas se mueve con scrollTo en su propio contenedor (nunca scrollIntoView),
+// porque scrollIntoView también mueve la página y cortaba el desplazamiento.
+const barraTabs = $("tabs");
+let yendo = false, yendoT = 0;
+function marcar(id) {
+  barraTabs.querySelectorAll(".tab").forEach(tb => {
+    const on = tb.getAttribute("href") === "#" + id;
+    tb.classList.toggle("activa", on);
+    if (on) {
+      const br = barraTabs.getBoundingClientRect(), tr = tb.getBoundingClientRect();
+      barraTabs.scrollTo({ left: barraTabs.scrollLeft + (tr.left - br.left) - (br.width - tr.width) / 2, behavior: quieto ? "auto" : "smooth" });
+    }
+  });
+}
+const spy = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting && !yendo) marcar(en.target.id); }), { rootMargin: "-45% 0px -50% 0px" });
+// clic en una pestaña: baja exacto a la sección, descontando el header y la barra fija
+barraTabs.addEventListener("click", e => {
+  const tb = e.target.closest(".tab"); if (!tb) return;
+  e.preventDefault();
+  const id = tb.getAttribute("href").slice(1), sec = $(id);
+  const alto = document.querySelector("header").offsetHeight + document.querySelector(".tabs").offsetHeight;
+  marcar(id); yendo = true; clearTimeout(yendoT);
+  scrollTo({ top: sec.getBoundingClientRect().top + scrollY - alto + 2, behavior: quieto ? "auto" : "smooth" });
+  const fin = () => { yendo = false; removeEventListener("scrollend", fin); };
+  addEventListener("scrollend", fin); yendoT = setTimeout(fin, 1200);
+  history.replaceState(null, "", "#" + id);
+});
+// buscador
+function buscar() {
+  const q = norm($("buscar").value.trim());
+  let total = 0;
+  document.querySelectorAll(".cat").forEach(sec => {
+    let n = 0;
+    sec.querySelectorAll(".plato").forEach(p => { const v = !q || p.dataset.txt.includes(q); p.classList.toggle("oculto", !v); if (v) n++; });
+    sec.querySelectorAll(".grupo-t,.terminos,.termino-txt").forEach(x => x.style.display = q ? "none" : "");
+    sec.style.display = n ? "" : "none"; total += n;
+  });
+  $("sin-res").style.display = total ? "none" : "block";
+  document.querySelector(".tabs").style.display = q ? "none" : "";
+}
+$("buscar").addEventListener("input", buscar);
+
+/* ===== Reserva ===== */
+// Demo: al venderla se conecta con el sistema de reservas que use el restaurante.
+let personas = 2, hora = null;
+const pad = n => String(n).padStart(2, "0");
+const iso = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+const pTxt = () => { $("personas").textContent = t("persona")(personas); $("menos").disabled = personas <= 1; $("mas").disabled = personas >= 10; resumen(); };
+$("menos").onclick = () => { personas--; pTxt(); };
+$("mas").onclick = () => { personas++; pTxt(); };
+function pintarDias() {
+  const sel = (document.querySelector("input[name=dia]:checked") || {}).value;
+  const dias = []; for (let i = 0; i < 14; i++) { const d = lima(); d.setDate(d.getDate() + i); dias.push(d); }
+  $("dias").innerHTML = dias.map((d, i) => `<input type="radio" name="dia" id="d${i}" value="${iso(d)}"${(sel ? iso(d) === sel : i === 0) ? " checked" : ""}><label for="d${i}"><small>${i === 0 ? t("hoy") : i === 1 ? t("manana") : d.toLocaleDateString(t("locale"), { weekday: "short" }).replace(".", "")}</small>${d.getDate()} ${d.toLocaleDateString(t("locale"), { month: "short" }).replace(".", "")}</label>`).join("");
+}
+function pintarHoras() {
+  const v = document.querySelector("input[name=dia]:checked").value, [y, m, dd] = v.split("-").map(Number), d = new Date(y, m - 1, dd);
+  const [a, c] = HORARIO[d.getDay()], ahora = lima(), esHoy = iso(ahora) === v;
+  const lim = esHoy ? ahora.getHours() * 60 + ahora.getMinutes() + 30 : 0, op = [];
+  for (let x = a * 60; x <= c * 60 - 90; x += 30) op.push({ x, ok: x >= lim });
+  if (!op.some(o => o.ok)) { $("horas").innerHTML = `<p style="font-size:14px;color:var(--suave)">${t("sinHoras")}</p>`; hora = null; resumen(); return; }
+  if (hora !== null && !op.find(o => o.x === hora && o.ok)) hora = null;
+  $("horas").innerHTML = op.map(o => `<input type="radio" name="hora" id="h${o.x}" value="${o.x}"${o.ok ? "" : " disabled"}${o.x === hora ? " checked" : ""}><label for="h${o.x}">${hTxt(o.x).replace(/ ?[ap]\.? ?m\.$/, s => /a/.test(s) ? " am" : " pm")}</label>`).join("");
+  resumen();
+}
+$("dias").addEventListener("change", pintarHoras);
+$("horas").addEventListener("change", e => { hora = +e.target.value; resumen(); });
+// evita el punto doble cuando la hora ya termina en "m." (ej. "8:30 p. m..")
+const punto = s => s.replace(/\.(<\/b>)?\./g, ".$1");
+const fechaTxt = v => new Date(v + "T12:00").toLocaleDateString(t("locale"), { weekday: "long", day: "numeric", month: "long" });
+function resumen() {
+  const dv = document.querySelector("input[name=dia]:checked"); if (!dv) return;
+  $("resumen").innerHTML = punto(t("resumen")(t("persona")(personas), fechaTxt(dv.value), hora !== null ? hTxt(hora) : ""));
+}
+$("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const err = $("error"); err.textContent = "";
+  if (hora === null) { err.textContent = t("eHora"); ($("horas").querySelector("input:not(:disabled)") || $("horas")).focus(); return; }
+  if (!$("nombre").value.trim()) { err.textContent = t("eNombre"); $("nombre").focus(); return; }
+  if ($("cel").value.replace(/\D/g, "").length < 9) { err.textContent = t("eCel"); $("cel").focus(); return; }
+  const z = document.querySelector("input[name=zona]:checked").value;
+  $("ok-tit").textContent = t("okTit")($("nombre").value.trim().split(" ")[0]);
+  $("ok-txt").textContent = punto(t("okTxt")(t("persona")(personas), fechaTxt(document.querySelector("input[name=dia]:checked").value), hTxt(hora), z === "0" ? "" : t("z" + z), $("cel").value.trim()));
+  $("res-card").classList.add("enviada"); $("ok").focus();
+});
+$("otra").onclick = () => { $("res-card").classList.remove("enviada"); $("form").reset(); personas = 2; hora = null; pintarDias(); pTxt(); pintarHoras(); };
+
+/* ===== Cambiar idioma ===== */
+function aplicarIdioma() {
+  document.documentElement.lang = L;
+  document.querySelectorAll("[data-i]").forEach(el => { const v = TXT[L][el.dataset.i]; if (typeof v === "string") el.innerHTML = v; });
+  document.querySelectorAll("[data-iph]").forEach(el => { el.placeholder = TXT[L][el.dataset.iph]; });
+  $("idioma").textContent = L === "es" ? "EN" : "ES";
+  $("idioma").setAttribute("aria-label", L === "es" ? "English version" : "Versión en español");
+  pintarEstado(); pintarCarta(); pintarDias(); pTxt(); pintarHoras();
+  if ($("res-card").classList.contains("enviada")) $("otra").click();
+}
+$("idioma").onclick = () => { L = L === "es" ? "en" : "es"; try { localStorage.setItem("cva-idioma", L); } catch (e) {} aplicarIdioma(); };
+aplicarIdioma();
+
+/* ===== aparición ===== */
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: .15 });
+document.querySelectorAll(".rev").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
