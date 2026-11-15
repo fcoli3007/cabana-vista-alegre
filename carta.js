@@ -221,9 +221,10 @@ window.CARTA = [
 ];
 
 /* Platos insignia que se muestran antes de la carta (foto, nombre, gramaje, precio, sección, texto, texto en inglés) */
+// Los tres cortes más pedidos según el propio restaurante (revista Cosas, noviembre 2026) y una entrada.
 window.INSIGNIA = [
-  { foto: "plato-entrana.jpg", nombre: "Entraña fina", gr: "400 g", precio: 189, sec: "cortes", txt: "Corte americano a la parrilla, servido en tabla.", en: "American cut from the grill, served on a board." },
-  { foto: "picana-pesto.jpg", nombre: "Picaña al pesto", plato: "Picaña americana con pasta", gr: "600 g", precio: 225, sec: "compartir", txt: "Picaña americana con spaghetti al pesto, para compartir.", en: "American picanha with pesto spaghetti, to share." },
-  { foto: "plato-pulpo.jpg", nombre: "Pulpo a la parrilla", gr: "", precio: 69, sec: "entradas", txt: "Con salsa al olivo y papitas al perejil.", en: "With olive sauce and parsley potatoes." },
-  { foto: "mesa-larga.jpg", nombre: "Vista Alegre para dos", gr: "", precio: 229, sec: "compartir", txt: "Bife, lomos, anticuchos, chorizos y morcilla.", en: "Steak, tenderloins, anticuchos, chorizos and blood sausage." }
+  { foto: "plato-entrana.jpg", nombre: "Entraña fina americana", plato: "Entraña fina", gr: "400 g", precio: 189, sec: "cortes", txt: "Jugosa y con carácter, servida en tabla.", en: "Juicy and full of character, served on a board." },
+  { foto: "picana-pesto.jpg", nombre: "Picaña americana", plato: "Picaña americana con pasta", gr: "600 g", precio: 225, sec: "compartir", txt: "Con spaghetti al pesto, para compartir.", en: "With pesto spaghetti, to share." },
+  { foto: "plato-bife.jpg", nombre: "Bife de chorizo argentino", plato: "Bife de chorizo", gr: "450 g", precio: 165, sec: "cortes", txt: "El clásico de la parrilla argentina.", en: "The classic of the Argentine grill." },
+  { foto: "plato-pulpo.jpg", nombre: "Pulpo a la parrilla", gr: "", precio: 69, sec: "entradas", txt: "Para empezar: salsa al olivo y papitas al perejil.", en: "To start: olive sauce and parsley potatoes." }
 ];

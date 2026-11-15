@@ -96,11 +96,11 @@ header{position:fixed;inset:0 0 auto;z-index:50;transition:background .35s,borde
 header.solido{background:rgba(18,10,8,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--linea-o)}
 .nav{display:flex;align-items:center;gap:30px;height:84px;transition:height .3s var(--ease)}
 header.solido .nav{height:64px}
-header.solido .marca img{width:40px}
+header.solido .marca img{width:46px}
 .marca img{transition:width .3s var(--ease)}
 .marca{display:flex;align-items:center;gap:14px;text-decoration:none;margin-right:auto}
-.marca img{width:52px;height:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.45))}
-.marca span{font-family:var(--serif);font-size:27px;line-height:1}
+.marca img{width:60px;height:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.45))}
+.marca span{font-family:var(--serif);font-size:29px;line-height:1}
 .marca small{display:block;font-family:"Hanken Grotesk",sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);margin-top:5px}
 .nav ul{display:flex;gap:30px;list-style:none}
 .nav ul a{text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
@@ -150,14 +150,13 @@ header.solido .marca img{width:40px}
 .ins{text-decoration:none;display:flex;flex-direction:column}
 .ins figure{aspect-ratio:4/5;overflow:hidden;background:var(--hueso)}
 .ins img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);filter:saturate(1.04) contrast(1.04)}
-.ins img[src="plato-pulpo.jpg"]{filter:brightness(.84) sepia(.16) contrast(1.1) saturate(1.05)}
-.ins img[src="mesa-larga.jpg"]{transform:scale(1.35);transform-origin:55% 60%}
-@media (hover:hover){.ins:hover img[src="mesa-larga.jpg"]{transform:scale(1.4)}}
+.ins img[src="plato-entrana.jpg"]{filter:saturate(.92) contrast(1.02) brightness(.97)}
 @media (hover:hover){.ins:hover img{transform:scale(1.05)}}
-.ins h3{font-size:30px;margin-top:18px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.ins h3 b{font-family:"Hanken Grotesk",sans-serif;font-size:16px;font-weight:600;white-space:nowrap}
+.ins h3{font-size:31px;margin-top:18px;line-height:1.05}
+.ins .meta{display:flex;gap:12px;align-items:baseline;margin-top:8px;font-size:15px;color:var(--suave)}
+.ins .meta b{color:var(--tinta);font-weight:600}
 .ins small{font-size:13px;color:var(--suave);font-weight:600;letter-spacing:.06em}
-.ins p{font-size:15px;color:var(--suave);margin-top:6px}
+.ins p{font-size:16px;color:var(--suave);margin-top:6px}
 .ins .ver{margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--vino)}
 .plato.brilla{animation:brilla 1.8s ease}
 @keyframes brilla{0%,40%{background:rgba(184,149,95,.22)}100%{background:transparent}}
@@ -167,6 +166,8 @@ header.solido .marca img{width:40px}
 .his-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
 .his-foto{position:relative;aspect-ratio:4/5;overflow:hidden}
 .his-foto img{width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+.his-grid{align-items:start}
+.his-foto{position:sticky;top:100px}
 .historia h2{font-size:clamp(44px,5.4vw,78px);margin:14px 0 22px}
 .historia h2 em{color:var(--oro2)}
 .historia p{font-size:17px;opacity:.85;max-width:520px}
@@ -443,8 +444,8 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
   <section class="insignias claro" id="insignias">
     <div class="wrap">
       <div class="cab rev">
-        <div><span class="kicker" data-i="insKicker">La selección</span><h2 data-i="insH2">Los elegidos de la casa</h2></div>
-        <p data-i="insP">Una selección de nuestra parrilla y las especialidades para compartir.</p>
+        <div><span class="kicker" data-i="insKicker">Los más pedidos</span><h2 data-i="insH2">Los elegidos de la casa</h2></div>
+        <p data-i="insP">Los tres cortes que más piden nuestros comensales, y una entrada para empezar.</p>
       </div>
       <div class="ins-grid rev" id="ins-grid"></div>
     </div>
@@ -456,14 +457,15 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
       <figure class="his-foto rev"><img src="fachada.jpg" alt="Fachada de Cabaña Vista Alegre de noche" loading="lazy" decoding="async"></figure>
       <div class="rev">
         <span class="kicker" data-i="hisKicker">Nuestra historia</span>
-        <h2 data-i="hisH2">Una casa alrededor <em>del fuego</em></h2>
-        <p data-i="hisP">Para una buena parrilla, lo que importa es el corte. Desde 2006, la familia Fermín selecciona carnes Angus argentinas y americanas y las asa a fuego lento, con el toque justo de sal.</p>
+        <h2 data-i="hisH2">Una casa con nombre <em>de parque</em></h2>
+        <p data-i="hisP">Demóstenes Fermín llegó a Lima desde Cajatambo a los 14 años, con el sueño de tener su propio restaurante. Un viaje a Argentina le mostró la parrilla que quería hacer. Tras seis meses buscando, encontró una casa frente a un parque en Chacarilla. Su dueño, Enrique Ramírez, solo le pidió una cosa: que el restaurante se llamara Vista Alegre, por la vista que había disfrutado toda su vida.</p>
         <ol class="linea-t">
           <li><b>2006</b><span data-i="h2006">Abre Cabaña Vista Alegre en Chacarilla, Surco.</span></li>
-          <li><b>2024</b><span data-i="h2024">La casa se renueva: madera, blanco y ladrillo. La fachada y la terraza se iluminan de noche, y llega el Wagyu a la carta.</span></li>
-          <li><b id="hoyAnio">2026</b><span data-i="h2026">Veinte años reuniendo a los amantes de la buena carne alrededor de la mesa.</span></li>
+          <li><b>2024</b><span data-i="h2024">Nueva fachada: la casa y la terraza se iluminan de noche, y llega el Wagyu a la carta.</span></li>
+          <li><b>2025</b><span data-i="h2025">El salón estrena ladrillo rococho, la barra crece y llega una carta de vinos argentinos, chilenos e italianos.</span></li>
+          <li><b id="hoyAnio">2026</b><span data-i="h2026">Veinte años, con una nueva generación: Gabriela y Vladimir Fermín acompañan a su padre en la gestión.</span></li>
         </ol>
-        <blockquote class="cita"><q data-i="cita">Siempre buscamos la excelencia, porque sabemos que nuestros clientes valoran cada aspecto de la experiencia.</q><cite data-i="citaAutor">Vladimir Fermín, director · revista Cosas, 2024</cite></blockquote>
+        <blockquote class="cita"><q data-i="cita">Es el resultado de la constancia y el esfuerzo diario.</q><cite data-i="citaAutor">Demóstenes Fermín, fundador, sobre sus 20 años · revista Cosas, 2026</cite></blockquote>
       </div>
     </div>
   </section>
@@ -486,7 +488,7 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
     <nav class="tabs" aria-label="Secciones de la carta"><div class="wrap tabs-in" id="tabs-in"><div id="tabs"></div></div></nav>
     <div class="wrap" id="secciones"></div>
     <div class="wrap"><p class="sin-res" id="sin-res" data-i="sinRes">No encontramos ese plato. Prueba con otra palabra.</p>
-      <div class="carta-pie"><span data-i="pie1">Carta vigente. Precios en soles, incluyen impuestos. Imágenes referenciales.</span><span data-i="pie2">¿Traes tu vino? Mira el descorche en la sección Bar.</span></div>
+      <div class="carta-pie"><span data-i="pie1">Carta vigente. Precios en soles, incluyen impuestos. Imágenes referenciales.</span><span data-i="pie2">Carta de vinos argentinos, chilenos e italianos disponible en el restaurante.</span></div>
     </div>
   </section>
 
@@ -498,8 +500,8 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
         <p data-i="ambP">Madera, ladrillo y luz cálida. De noche, la fachada y la terraza se encienden juntas.</p>
       </div>
       <div class="amb-grid rev">
-        <figure><img src="salon.jpg" alt="Salón con mesas de madera y luz cálida" loading="lazy" decoding="async"><figcaption><b data-i="amb1">El salón</b><span data-i="amb1s">Almuerzos de trabajo y cenas en familia</span></figcaption></figure>
-        <figure><img src="terraza.jpg" alt="Terraza iluminada de noche" loading="lazy" decoding="async"><figcaption><b data-i="amb2">La terraza</b><span data-i="amb2s">Al aire libre, de día y de noche</span></figcaption></figure>
+        <figure><img src="salon.jpg" alt="Salón con mesas de madera y luz cálida" loading="lazy" decoding="async"><figcaption><b data-i="amb1">El salón</b><span data-i="amb1s">Ladrillo rococho y madera: cenas en familia y almuerzos de trabajo</span></figcaption></figure>
+        <figure><img src="terraza.jpg" alt="Terraza iluminada de noche" loading="lazy" decoding="async"><figcaption><b data-i="amb2">La terraza</b><span data-i="amb2s">Para almuerzos largos y cenas relajadas</span></figcaption></figure>
         <figure><img src="fachada.jpg" alt="Fachada iluminada de Cabaña Vista Alegre" loading="lazy" decoding="async"><figcaption><b data-i="amb3">La casa</b><span>Calle Punta Pejerrey 190</span></figcaption></figure>
         <figure class="ancho"><img src="mesa-larga.jpg" alt="Mesa larga servida para un grupo" loading="lazy" decoding="async"><figcaption><b data-i="amb4">Mesas para compartir</b><span data-i="amb4s">Festival de carnes para 3 y Vista Alegre para dos</span></figcaption></figure>
       </div>
@@ -634,15 +636,15 @@ const TXT = {
   es: { introFrase: "El fuego tiene historia", saltar: "Saltar", logoSub: "Parrilla · Chacarilla · Desde 2006", navCarta: "Carta", navIns: "Los elegidos", navHis: "Historia", navAmb: "Ambientes", navUbi: "Ubicación", reservar: "Reservar",
     kHero: "Desde 2006 · Chacarilla, Lima", h1: "El fuego tiene <em>historia.</em>", lead: "Desde 2006, una casa dedicada a la buena carne en Chacarilla. Hoy, nuestra carta reúne cortes Angus, Wagyu y Tomahawk.",
     reservarMesa: "Reservar una mesa", explorar: "Explorar la carta", google: "825 opiniones en Google", anios: "años en Chacarilla",
-    insKicker: "La selección", insH2: "Los elegidos de la casa", insP: "Una selección de nuestra parrilla y las especialidades para compartir.", verCarta: "Ver en la carta",
-    hisKicker: "Nuestra historia", hisH2: "Una casa alrededor <em>del fuego</em>", hisP: "Para una buena parrilla, lo que importa es el corte. Desde 2006, la familia Fermín selecciona carnes Angus argentinas y americanas y las asa a fuego lento, con el toque justo de sal.",
-    h2006: "Abre Cabaña Vista Alegre en Chacarilla, Surco.", h2024: "La casa se renueva: madera, blanco y ladrillo. La fachada y la terraza se iluminan de noche, y llega el Wagyu a la carta.", h2026: "Veinte años reuniendo a los amantes de la buena carne alrededor de la mesa.",
-    cita: "Siempre buscamos la excelencia, porque sabemos que nuestros clientes valoran cada aspecto de la experiencia.", citaAutor: "Vladimir Fermín, director · revista Cosas, 2024",
+    insKicker: "Los más pedidos", insH2: "Los elegidos de la casa", insP: "Los tres cortes que más piden nuestros comensales, y una entrada para empezar.", verCarta: "Ver en la carta",
+    hisKicker: "Nuestra historia", hisH2: "Una casa con nombre <em>de parque</em>", hisP: "Demóstenes Fermín llegó a Lima desde Cajatambo a los 14 años, con el sueño de tener su propio restaurante. Un viaje a Argentina le mostró la parrilla que quería hacer. Tras seis meses buscando, encontró una casa frente a un parque en Chacarilla. Su dueño, Enrique Ramírez, solo le pidió una cosa: que el restaurante se llamara Vista Alegre, por la vista que había disfrutado toda su vida.",
+    h2006: "Abre Cabaña Vista Alegre en Chacarilla, Surco.", h2024: "Nueva fachada: la casa y la terraza se iluminan de noche, y llega el Wagyu a la carta.", h2025: "El salón estrena ladrillo rococho, la barra crece y llega una carta de vinos argentinos, chilenos e italianos.", h2026: "Veinte años, con una nueva generación: Gabriela y Vladimir Fermín acompañan a su padre en la gestión.",
+    cita: "Es el resultado de la constancia y el esfuerzo diario.", citaAutor: "Demóstenes Fermín, fundador, sobre sus 20 años · revista Cosas, 2026",
     cartaKicker: "La carta", cartaH2: "Nuestra carta", cartaP: "Cortes seleccionados, especialidades para compartir y cócteles de autor.", buscarLbl: "Buscar en la carta", buscarPh: "Busca un plato: lomo, pulpo, wagyu…",
-    sinRes: "No encontramos ese plato. Prueba con otra palabra.", pie1: "Carta vigente. Precios en soles, incluyen impuestos. Imágenes referenciales.", pie2: "¿Traes tu vino? Mira el descorche en la sección Bar.",
+    sinRes: "No encontramos ese plato. Prueba con otra palabra.", pie1: "Carta vigente. Precios en soles, incluyen impuestos. Imágenes referenciales.", pie2: "Carta de vinos argentinos, chilenos e italianos disponible en el restaurante.",
     guia: "Guía de términos de cocción",
     ambKicker: "Ambientes", ambH2: "Para cada ocasión", ambP: "Madera, ladrillo y luz cálida. De noche, la fachada y la terraza se encienden juntas.",
-    amb1: "El salón", amb1s: "Almuerzos de trabajo y cenas en familia", amb2: "La terraza", amb2s: "Al aire libre, de día y de noche", amb3: "La casa", amb4: "Mesas para compartir", amb4s: "Festival de carnes para 3 y Vista Alegre para dos",
+    amb1: "El salón", amb1s: "Ladrillo rococho y madera: cenas en familia y almuerzos de trabajo", amb2: "La terraza", amb2s: "Para almuerzos largos y cenas relajadas", amb3: "La casa", amb4: "Mesas para compartir", amb4s: "Festival de carnes para 3 y Vista Alegre para dos",
     m1: "Celebraciones", m1p: "Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.", m1d: "Servicio de torta: S/ 50", m1a: "Consultar celebración", m2: "Grupos y empresas", m2p: "Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.", m2a: "Coordinar",
     m3: "Trae tu vino", m3p: "Puedes traer tu botella favorita para acompañar tu parrilla.", m3d: "Descorche: S/ 40 por botella de 750 ml. Pregunta por la promoción de corcho libre.", m3a: "Ver condiciones", m4: "Menú kids", m4p: "Los más pequeños también tienen su parrilla: bife, lomo, milanesa o pollo.", m4d: "Desde S/ 35",
     resKicker: "Reservas", resH2: "Reserva tu mesa", resP: "Elige la fecha, el horario y el ambiente de tu preferencia. Te confirmaremos la disponibilidad.",
@@ -662,15 +664,15 @@ const TXT = {
   en: { introFrase: "Fire has a story", saltar: "Skip", logoSub: "Steakhouse · Chacarilla · Since 2006", navCarta: "Menu", navIns: "House favorites", navHis: "Our story", navAmb: "The place", navUbi: "Location", reservar: "Book",
     kHero: "Since 2006 · Chacarilla, Lima", h1: "Fire has a <em>story.</em>", lead: "Since 2006, a house devoted to great meat in Chacarilla. Today our menu brings together Angus, Wagyu and Tomahawk cuts.",
     reservarMesa: "Book a table", explorar: "Explore the menu", google: "825 reviews on Google", anios: "years in Chacarilla",
-    insKicker: "The selection", insH2: "House favorites", insP: "A selection from our grill and our dishes to share.", verCarta: "See on the menu",
-    hisKicker: "Our story", hisH2: "A house around <em>the fire</em>", hisP: "A great grill starts with the cut. Since 2006, the Fermín family has selected Argentine and American Angus beef and slow-grilled it with just the right touch of salt.",
-    h2006: "Cabaña Vista Alegre opens in Chacarilla, Surco.", h2024: "The house is renewed: wood, white and brick. The façade and terrace light up at night, and Wagyu joins the menu.", h2026: "Twenty years bringing meat lovers together around the table.",
-    cita: "We always strive for excellence, because we know our guests value every part of the experience.", citaAutor: "Vladimir Fermín, director · Cosas magazine, 2024",
+    insKicker: "Most ordered", insH2: "House favorites", insP: "The three cuts our guests order most, and a starter to begin.", verCarta: "See on the menu",
+    hisKicker: "Our story", hisH2: "A house named <em>after a park</em>", hisP: "Demóstenes Fermín came to Lima from Cajatambo at 14, dreaming of his own restaurant. A trip to Argentina showed him the grill he wanted to build. After six months of searching, he found a house facing a park in Chacarilla. Its owner, Enrique Ramírez, asked for just one thing: that the restaurant be called Vista Alegre, after the view he had enjoyed all his life.",
+    h2006: "Cabaña Vista Alegre opens in Chacarilla, Surco.", h2024: "A new façade: the house and terrace light up at night, and Wagyu joins the menu.", h2025: "The dining room gets exposed brick, the bar grows and a list of Argentine, Chilean and Italian wines arrives.", h2026: "Twenty years, with a new generation: Gabriela and Vladimir Fermín join their father in running the house.",
+    cita: "It is the result of consistency and daily effort.", citaAutor: "Demóstenes Fermín, founder, on 20 years · Cosas magazine, 2026",
     cartaKicker: "The menu", cartaH2: "Our menu", cartaP: "Selected cuts, dishes to share and signature cocktails.", buscarLbl: "Search the menu", buscarPh: "Search a dish: lomo, pulpo, wagyu…",
-    sinRes: "We couldn't find that dish. Try another word.", pie1: "Current menu. Prices in soles, taxes included. Pictures are for reference.", pie2: "Bringing your own wine? See corkage under Bar.",
+    sinRes: "We couldn't find that dish. Try another word.", pie1: "Current menu. Prices in soles, taxes included. Pictures are for reference.", pie2: "Argentine, Chilean and Italian wine list available at the restaurant.",
     guia: "Doneness guide",
     ambKicker: "The place", ambH2: "For every occasion", ambP: "Wood, brick and warm light. At night, the façade and the terrace light up together.",
-    amb1: "The dining room", amb1s: "Business lunches and family dinners", amb2: "The terrace", amb2s: "Open air, day and night", amb3: "The house", amb4: "Tables to share", amb4s: "Meat festival for 3 and Vista Alegre for two",
+    amb1: "The dining room", amb1s: "Exposed brick and wood: family dinners and business lunches", amb2: "The terrace", amb2s: "For long lunches and relaxed dinners", amb3: "The house", amb4: "Tables to share", amb4s: "Meat festival for 3 and Vista Alegre for two",
     m1: "Celebrations", m1p: "Birthdays, anniversaries and gatherings that deserve a great table. Tell us what you are planning.", m1d: "Cake service: S/ 50", m1a: "Plan a celebration", m2: "Groups and companies", m2p: "For large groups and business meetings, we arrange your table personally.", m2a: "Get in touch",
     m3: "Bring your wine", m3p: "Bring your favorite bottle to go with your steak.", m3d: "Corkage: S/ 40 per 750 ml bottle. Ask about our free-corkage promotion.", m3a: "See conditions", m4: "Kids menu", m4p: "The little ones get their own grill: steak, tenderloin, breaded or grilled chicken.", m4d: "From S/ 35",
     resKicker: "Bookings", resH2: "Book your table", resP: "Choose the date, time and area you prefer. We'll confirm availability.",
@@ -763,8 +765,8 @@ function pintarInsignias() {
   $("ins-grid").innerHTML = (window.INSIGNIA || []).map(p => `
     <a class="ins" href="#c-${p.sec}" data-ir="c-${p.sec}" data-plato="${p.plato || p.nombre}">
       <figure><img src="${p.foto}" alt="${p.nombre}" loading="lazy" decoding="async"></figure>
-      <h3>${p.nombre}<b>S/ ${p.precio}</b></h3>
-      ${p.gr ? `<small>${p.gr}</small>` : ""}
+      <h3>${p.nombre}</h3>
+      <div class="meta"><b>S/ ${p.precio}</b>${p.gr ? `<span>${p.gr}</span>` : ""}</div>
       <p>${L === "en" ? p.en : p.txt}</p>
       <span class="ver">${t("verCarta")} →</span>
     </a>`).join("");
