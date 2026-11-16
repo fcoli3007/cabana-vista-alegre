@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Simulador de reservas · Cabaña Vista Alegre</title>
+<style>
+:root{--tinta:#1b1410;--brasa:#c4512b;--crema:#f6efe6;--gris:#8a7f76;--linea:#e6ddd2}
+*{box-sizing:border-box}
+body{margin:0;background:#0f0c0a;color:#f3ece4;font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+header{padding:18px 20px 6px;text-align:center}
+header h1{margin:0;font-size:clamp(20px,3vw,28px);letter-spacing:-.01em}
+header p{margin:4px 0 0;color:#b7aca2}
+.wrap{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;max-width:1080px;width:100%;margin:0 auto;padding:18px 16px 28px;align-items:start}
+/* teléfono */
+.tel{justify-self:center;width:100%;max-width:390px;background:#000;border-radius:38px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 2px #2a2420}
+.pantalla{background:#fff;border-radius:28px;overflow:hidden;height:720px;max-height:calc(100vh - 160px);min-height:560px;display:flex;flex-direction:column;color:var(--tinta)}
+.barra-url{display:flex;align-items:center;gap:8px;background:#f1efed;padding:10px 12px;font-size:12.5px;color:#444;border-bottom:1px solid #e3e0dc}
+.barra-url .candado{width:14px;height:14px;flex-shrink:0;color:#2f8a4e}
+.barra-url .url{flex:1;background:#fff;border-radius:999px;padding:6px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .3s}
+.barra-url .url.cambia{background:#fff4d6}
+.vista{flex:1;position:relative;overflow:hidden}
+.paso{position:absolute;inset:0;overflow:auto;opacity:0;pointer-events:none;transition:opacity .35s}
+.paso.ver{opacity:1;pointer-events:auto}
+iframe{border:0;width:100%;height:100%;display:block}
+.btn-flot{position:absolute;left:14px;right:14px;bottom:14px;background:var(--brasa);color:#fff;border:0;border-radius:14px;padding:15px;font:600 16px inherit;cursor:pointer;box-shadow:0 10px 30px rgba(196,81,43,.45);animation:latido 2.2s ease-in-out infinite}
+@keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+/* formulario de reserva (Wix) */
+.res{padding:22px 18px 30px;background:var(--crema);min-height:100%}
+.res .logo{display:block;height:54px;margin:0 auto 8px}
+.res h2{text-align:center;margin:0 0 2px;font-size:20px}
+.res .sub{text-align:center;color:var(--gris);font-size:13px;margin:0 0 18px}
+.campo{margin-bottom:12px}
+.campo label{display:block;font-size:12.5px;font-weight:600;margin-bottom:5px}
+.campo input,.campo select{width:100%;padding:11px 12px;border:1px solid var(--linea);border-radius:10px;background:#fff;font:inherit;color:var(--tinta)}
+.horas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.horas button{padding:9px 0;border:1px solid var(--linea);border-radius:9px;background:#fff;font:600 13px inherit;cursor:pointer;color:var(--tinta)}
+.horas button.sel{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.horas button:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.enviar{width:100%;margin-top:8px;padding:14px;border:0;border-radius:12px;background:var(--brasa);color:#fff;font:600 16px inherit;cursor:pointer}
+.enviar:disabled{opacity:.5;cursor:not-allowed}
+.motor{text-align:center;font-size:11.5px;color:var(--gris);margin-top:14px}
+/* confirmación */
+.ok{padding:40px 22px;text-align:center;background:var(--crema);min-height:100%}
+.ok .check{width:72px;height:72px;border-radius:50%;background:#2f8a4e;color:#fff;display:grid;place-items:center;margin:0 auto 16px;font-size:38px;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+.ok h2{margin:0 0 6px}
+.ok .det{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:14px;margin:18px 0;text-align:left;font-size:14px}
+.ok .det div{display:flex;justify-content:space-between;padding:4px 0}
+.ok .det span{color:var(--gris)}
+.ok a{color:var(--brasa);font-weight:600}
+/* explicación */
+.lado{background:#1a1512;border:1px solid #2e2621;border-radius:20px;padding:20px;position:sticky;top:16px}
+.lado h2{margin:0 0 12px;font-size:17px}
+.pasos{list-style:none;margin:0;padding:0}
+.pasos li{display:flex;gap:12px;padding:12px;border-radius:12px;margin-bottom:6px;opacity:.45;transition:all .3s}
+.pasos li.activo{opacity:1;background:#2a211c}
+.pasos li.hecho{opacity:.8}
+.pasos .n{width:28px;height:28px;border-radius:50%;background:#3a302a;display:grid;place-items:center;font-weight:700;flex-shrink:0;font-size:13px}
+.pasos li.activo .n{background:var(--brasa)}
+.pasos li.hecho .n{background:#2f8a4e}
+.pasos b{display:block;font-size:14.5px}
+.pasos small{color:#b7aca2;font-size:13px;display:block;margin-top:2px}
+.ctrl{display:flex;gap:8px;margin-top:14px}
+.ctrl button{flex:1;padding:12px;border-radius:12px;border:1px solid #3a302a;background:transparent;color:#f3ece4;font:600 14px inherit;cursor:pointer}
+.ctrl button.prim{background:#f3ece4;color:#1a1512;border-color:#f3ece4}
+.nota{margin-top:14px;font-size:12.5px;color:#9d9188;border-top:1px solid #2e2621;padding-top:12px}
+.nota b{color:#e8ddd2}
+footer{text-align:center;font-size:11.5px;color:#6f655d;padding:0 16px 18px}
+footer a{color:#9d9188}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}.lado{position:static}.pantalla{height:640px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header>
+  <h1>Así reservaría un cliente</h1>
+  <p>Toda la página es la nueva. De Wix solo queda el formulario de reservas.</p>
+</header>
+
+<div class="wrap">
+  <div class="tel" aria-label="Simulación en un celular">
+    <div class="pantalla">
+      <div class="barra-url"><svg class="candado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span class="url" id="url">restaurante-vistaalegre.com</span></div>
+      <div class="vista">
+        <!-- paso 1: nuestra página -->
+        <div class="paso ver" id="p1">
+          <iframe src="./" title="Página nueva de Cabaña Vista Alegre" loading="eager"></iframe>
+          <button class="btn-flot" type="button" id="b-reservar">Reservar mesa</button>
+        </div>
+        <!-- paso 2: formulario de reservas (Wix) -->
+        <div class="paso" id="p2">
+          <div class="res">
+            <img class="logo" src="logo.png" alt="Cabaña Vista Alegre">
+            <h2>Reserva tu mesa</h2>
+            <p class="sub">Elige día, hora y cuántos son</p>
+            <div class="campo"><label for="f-dia">Día</label><input type="date" id="f-dia"></div>
+            <div class="campo"><label for="f-per">Personas</label><select id="f-per"></select></div>
+            <div class="campo"><label>Hora</label><div class="horas" id="horas"></div></div>
+            <div class="campo"><label for="f-nom">Nombre</label><input id="f-nom" placeholder="Ej. Lucía Torres" autocomplete="off"></div>
+            <div class="campo"><label for="f-tel">Celular</label><input id="f-tel" inputmode="tel" placeholder="Ej. 987 654 321" autocomplete="off"></div>
+            <button class="enviar" type="button" id="b-enviar" disabled>Confirmar reserva</button>
+            <p class="motor">Reservas gestionadas con el sistema de Wix del restaurante</p>
+          </div>
+        </div>
+        <!-- paso 3: confirmación -->
+        <div class="paso" id="p3">
+          <div class="ok">
+            <div class="check">✓</div>
+            <h2>¡Reserva confirmada!</h2>
+            <p style="color:var(--gris);margin:0">Te enviamos la confirmación por correo.</p>
+            <div class="det" id="det"></div>
+            <a href="#" id="b-volver">← Volver a la página</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="lado">
+    <h2>Cómo funciona</h2>
+    <ol class="pasos" id="pasos">
+      <li class="activo"><span class="n">1</span><div><b>El cliente entra a la página nueva</b><small>restaurante-vistaalegre.com: la carta, las fotos y la historia. Puede navegarla dentro del celular.</small></div></li>
+      <li><span class="n">2</span><div><b>Toca "Reservar mesa"</b><small>Se abre reservas.restaurante-vistaalegre.com, que sigue siendo su Wix. Misma marca y mismo dominio.</small></div></li>
+      <li><span class="n">3</span><div><b>Elige día, hora y personas</b><small>Los horarios y la disponibilidad salen de Wix, como hoy.</small></div></li>
+      <li><span class="n">4</span><div><b>La reserva llega a Wix</b><small>Al restaurante le llega como siempre: correo, app de Wix y panel. Su equipo no cambia nada.</small></div></li>
+    </ol>
+    <div class="ctrl">
+      <button type="button" id="b-reiniciar">Reiniciar</button>
+      <button type="button" class="prim" id="b-sig">Siguiente →</button>
+    </div>
+    <p class="nota"><b>Simulación:</b> el formulario es de muestra y no guarda nada. Al publicar, el botón "Reservar mesa" abrirá su página real de reservas de Wix.</p>
+  </aside>
+</div>
+<footer>Simulador preparado por <a href="https://wa.me/51982508530" target="_blank" rel="noopener">TC Studio</a></footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const URLS = ["restaurante-vistaalegre.com", "reservas.restaurante-vistaalegre.com", "reservas.restaurante-vistaalegre.com/confirmada"];
+let paso = 1, hora = "";
+function ir(n) {
+  paso = n;
+  [1, 2, 3].forEach(i => $("p" + i).classList.toggle("ver", i === n));
+  const u = $("url"); u.textContent = URLS[n - 1]; u.classList.add("cambia"); setTimeout(() => u.classList.remove("cambia"), 700);
+  const activo = n === 1 ? 0 : n === 2 ? (hora ? 2 : 1) : 3;
+  [...$("pasos").children].forEach((li, i) => { li.classList.toggle("activo", i === activo); li.classList.toggle("hecho", i < activo); });
+  $("b-sig").textContent = n === 3 ? "Ver de nuevo" : "Siguiente →";
+}
+/* formulario */
+const hoy = new Date(); hoy.setDate(hoy.getDate() + 1);
+$("f-dia").value = hoy.toISOString().slice(0, 10); $("f-dia").min = new Date().toISOString().slice(0, 10);
+$("f-per").innerHTML = [1,2,3,4,5,6,7,8].map(n => `<option${n === 2 ? " selected" : ""}>${n} ${n === 1 ? "persona" : "personas"}</option>`).join("") + "<option>Más de 8 (grupo)</option>";
+const HORAS = ["12:30","13:00","13:30","14:00","14:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00"], LLENAS = ["13:30","20:30"];
+$("horas").innerHTML = HORAS.map(h => `<button type="button" data-h="${h}"${LLENAS.includes(h) ? " disabled title=\"Sin mesas\"" : ""}>${h}</button>`).join("");
+const listo = () => { $("b-enviar").disabled = !(hora && $("f-nom").value.trim() && $("f-tel").value.replace(/\D/g, "").length >= 9); };
+$("horas").onclick = e => { const b = e.target.closest("button[data-h]"); if (!b || b.disabled) return; hora = b.dataset.h; [...$("horas").children].forEach(x => x.classList.toggle("sel", x === b)); ir(2); listo(); };
+["f-nom", "f-tel"].forEach(id => $(id).addEventListener("input", listo));
+const fechaTxt = f => new Date(f + "T12:00").toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" });
+$("b-enviar").onclick = () => {
+  $("det").innerHTML = [["Nombre", $("f-nom").value.trim()], ["Día", fechaTxt($("f-dia").value)], ["Hora", hora], ["Mesa para", $("f-per").value]].map(([a, b]) => `<div><span>${a}</span><b>${b.replace(/</g, "&lt;")}</b></div>`).join("");
+  ir(3);
+};
+$("b-reservar").onclick = () => ir(2);
+$("b-volver").onclick = e => { e.preventDefault(); ir(1); };
+function reiniciar() { hora = ""; ["f-nom", "f-tel"].forEach(id => $(id).value = ""); [...$("horas").children].forEach(x => x.classList.remove("sel")); listo(); ir(1); }
+$("b-reiniciar").onclick = reiniciar;
+/* "Siguiente": avanza solo, llenando datos de ejemplo */
+$("b-sig").onclick = () => {
+  if (paso === 1) return ir(2);
+  if (paso === 2) {
+    if (!hora) { const b = [...$("horas").children].find(x => x.dataset.h === "20:00"); b.click(); return; }
+    if (!$("f-nom").value) $("f-nom").value = "Lucía Torres";
+    if (!$("f-tel").value) $("f-tel").value = "987 654 321";
+    listo(); return $("b-enviar").click();
+  }
+  reiniciar();
+};
+</script>
+</body></html>
