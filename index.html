@@ -346,6 +346,10 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
 .redes a{text-decoration:none;opacity:.8}
 .redes a:hover{opacity:1}
 .base{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;padding-top:22px;font-size:12.5px;opacity:.65}
+.legales{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape el crédito */
+.legales a{text-underline-offset:3px}
+.acepto a{color:var(--tinta);text-underline-offset:3px}
 .credit{margin-left:auto;text-align:right;font-size:11.5px}
 .credit a{text-decoration:underline;text-underline-offset:3px}
 
@@ -392,6 +396,7 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
   .barra-movil .ic{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--linea-o);color:var(--oro2);text-decoration:none}
   .barra-movil .ic svg{width:22px;height:22px}
   footer{padding-bottom:calc(30px + var(--barra))}
+  footer .base{padding-right:0}
 }
 @media (max-width:560px){
   .wrap{width:min(1200px,100% - 32px)}
@@ -653,6 +658,7 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
     </div>
     <div class="base">
       <span>© <span id="anio">2026</span> Restaurante Cabaña Vista Alegre</span>
+      <nav class="legales" aria-label="Legal"><a href="terminos.html" data-i="lTerm">Términos y condiciones</a><a href="privacidad.html" data-i="lPriv">Política de privacidad</a><a href="reclamaciones.html" data-i="lRecl">Libro de reclamaciones</a></nav>
       <span class="credit" id="credit"></span>
     </div>
   </div>
@@ -702,7 +708,7 @@ const TXT = {
     lPersonas: "Personas", lDia: "Día", lHora: "Horario preferido", sujeto: "sujeto a confirmación", lZona: "Ambiente preferido", z0: "Sin preferencia", z1: "Salón", z2: "Terraza", lNombre: "Nombre", lCel: "Celular", lOcasion: "Ocasión",
     extraTit: "Agregar detalles", extraSub: "ambiente, ocasión, correo, comentarios · opcional",
     oc0: "Ninguna", oc1: "Cumpleaños", oc2: "Aniversario", oc3: "Reunión de trabajo", oc4: "Otra", lCorreo: "Correo", lComent: "Comentarios",
-    phNombre: "Ej. Lucía Torres", phCorreo: "tu@correo.com", phComent: "Ej. silla para bebé, traemos torta…", acepto: "Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta solicitud de reserva.", solicitar: "Solicitar reserva",
+    phNombre: "Ej. Lucía Torres", phCorreo: "tu@correo.com", phComent: "Ej. silla para bebé, traemos torta…", acepto: 'Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta solicitud de reserva, según su <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.', lTerm: "Términos y condiciones", lPriv: "Política de privacidad", lRecl: "Libro de reclamaciones", solicitar: "Solicitar reserva",
     notaEnvio: "Se abrirá WhatsApp con tu solicitud lista. Solo tienes que enviarla.", okWa: "Abrir WhatsApp de nuevo", otra: "Editar o hacer otra solicitud",
     visKicker: "Ubicación", visH2: "Te esperamos en Chacarilla", dDir: "Dirección", ref: "Altura de la cuadra 1 de Caminos del Inca, a espaldas del grifo Primax", dHor: "Horario",
     horario: "Lunes a sábado: 12:00 p. m. – 12:00 a. m.<br>Domingo: 12:00 p. m. – 11:00 p. m.", dRes: "Reservas", googleVer: "4.5 de 5 · 825 opiniones · ver en Google Maps", llegar: "Cómo llegar", waze: "Abrir en Waze",
@@ -736,7 +742,7 @@ const TXT = {
     lPersonas: "Guests", lDia: "Day", lHora: "Preferred time", sujeto: "subject to confirmation", lZona: "Preferred area", z0: "No preference", z1: "Dining room", z2: "Terrace", lNombre: "Name", lCel: "Mobile", lOcasion: "Occasion",
     extraTit: "Add details", extraSub: "area, occasion, email, comments · optional",
     oc0: "None", oc1: "Birthday", oc2: "Anniversary", oc3: "Business meeting", oc4: "Other", lCorreo: "Email", lComent: "Comments",
-    phNombre: "E.g. Lucía Torres", phCorreo: "you@email.com", phComent: "E.g. high chair, we're bringing a cake…", acepto: "I agree that Cabaña Vista Alegre uses my data only to manage this booking request.", solicitar: "Request booking",
+    phNombre: "E.g. Lucía Torres", phCorreo: "you@email.com", phComent: "E.g. high chair, we're bringing a cake…", acepto: 'I agree that Cabaña Vista Alegre uses my data only to manage this booking request, under its <a href="privacidad.html" target="_blank" rel="noopener">privacy policy</a> (in Spanish).', lTerm: "Terms and conditions", lPriv: "Privacy policy", lRecl: "Complaints book", solicitar: "Request booking",
     notaEnvio: "WhatsApp will open with your request ready. Just send it.", okWa: "Open WhatsApp again", otra: "Edit or make another request",
     visKicker: "Location", visH2: "See you in Chacarilla", dDir: "Address", ref: "Near block 1 of Caminos del Inca, behind the Primax gas station", dHor: "Hours",
     horario: "Monday to Saturday: 12:00 p.m. – 12:00 a.m.<br>Sunday: 12:00 p.m. – 11:00 p.m.", dRes: "Bookings", googleVer: "4.5 out of 5 · 825 reviews · see on Google Maps", llegar: "Directions", waze: "Open in Waze",
@@ -1070,5 +1076,7 @@ aplicarIdioma();
 const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: .12 });
 document.querySelectorAll(".rev").forEach(el => io.observe(el));
 </script>
+<!-- Estadísticas de la demo para el panel de TC Studio (sin cookies). Quitar al publicar la web final del cliente. -->
+<script src="https://tcstudioweb.com/s.js" defer></script>
 </body>
 </html>

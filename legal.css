@@ -1,0 +1,61 @@
+/* Estilos de las páginas legales (términos, privacidad, reclamaciones). Mismos colores que index.html. */
+:root{
+  --noche:#120A08; --madera:#1E120D; --madera2:#2B1A13; --crema:#F3ECE2;
+  --vino:#7A1C22; --vino2:#912730; --oro:#B8955F; --oro2:#D5B886;
+  --suave:rgba(243,236,226,.7); --linea-o:rgba(243,236,226,.14);
+  --serif:"Instrument Serif",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:16px;background:var(--noche);color:var(--crema);line-height:1.65}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--oro2);outline-offset:3px}
+.wrap{width:min(760px,100% - 40px);margin-inline:auto}
+.saltar{position:absolute;left:-9999px}.saltar:focus{left:16px;top:16px;background:var(--crema);color:var(--noche);padding:8px 14px;z-index:9}
+
+header{border-bottom:1px solid var(--linea-o)}
+.cab{display:flex;align-items:center;gap:16px;min-height:76px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.marca img{width:40px;height:auto}
+.marca span{font-family:var(--serif);font-size:24px;line-height:1}
+.volver{font-size:14px;font-weight:600;text-decoration:none;color:var(--oro2);white-space:nowrap}
+.volver:hover{text-decoration:underline}
+
+main{padding:56px 0 24px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,7vw,60px);line-height:1;letter-spacing:-.01em;margin-bottom:14px}
+.borrador{font-size:14px;background:var(--madera2);border-left:2px solid var(--oro);padding:10px 14px;margin:18px 0 8px}
+.intro{color:var(--suave);margin-bottom:8px}
+h2{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.1;margin:38px 0 10px;color:var(--oro2)}
+p+p{margin-top:10px}
+main ul{padding-left:20px;margin-top:8px}main li+li{margin-top:6px}
+.dato{color:var(--suave);font-size:15px}
+
+/* libro de reclamaciones */
+form{margin-top:34px}
+fieldset{border:1px solid var(--linea-o);padding:22px 20px 24px;margin-top:18px}
+legend{font-family:var(--serif);font-size:24px;padding:0 8px;color:var(--oro2)}
+.campo{display:block;margin-top:14px;font-size:14px;font-weight:600}
+.campo small{font-weight:400;color:var(--suave)}
+.campo input,.campo textarea,.campo select{display:block;width:100%;margin-top:6px;font:inherit;font-weight:400;font-size:16px;color:var(--crema);background:var(--madera);border:1px solid var(--linea-o);border-radius:2px;padding:12px 14px;min-height:48px}
+.campo textarea{min-height:120px;resize:vertical}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.opciones{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:10px;font-size:15px}
+.opciones label{display:flex;gap:8px;align-items:center;cursor:pointer;min-height:44px}
+.opciones input,.acepto input{accent-color:var(--vino2);width:20px;height:20px;flex:none}
+.acepto{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--suave);margin-top:20px;cursor:pointer}
+.error{display:block;color:#F2A7A0;font-size:13px;font-weight:500;min-height:1em;margin-top:4px}
+.enviar{margin-top:22px;display:inline-flex;align-items:center;gap:10px;font:inherit;font-weight:700;font-size:15px;letter-spacing:.04em;color:var(--crema);background:var(--vino);border:0;border-radius:2px;padding:15px 26px;min-height:52px;cursor:pointer}
+.enviar:hover{background:var(--vino2)}
+
+footer{border-top:1px solid var(--linea-o);margin-top:70px;padding:28px 0 34px}
+.base{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font-size:12.5px;opacity:.7}
+.legales{display:flex;flex-wrap:wrap;gap:8px 18px}
+.legales a[aria-current]{text-decoration:none;opacity:.6}
+.credit{margin-left:auto;font-size:11.5px}
+
+@media (max-width:640px){
+  .dos{grid-template-columns:1fr}
+  .credit{width:100%;margin-left:0}
+  .volver span{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}

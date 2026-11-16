@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Libro de reclamaciones · Cabaña Vista Alegre</title>
+<meta name="description" content="Libro de reclamaciones virtual de Cabaña Vista Alegre, conforme al Código de Protección y Defensa del Consumidor del Perú.">
+<meta name="theme-color" content="#120A08">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header>
+  <div class="wrap cab">
+    <a class="marca" href="index.html"><img src="logo.png" alt="" width="40" height="49"><span>Cabaña Vista Alegre</span></a>
+    <a class="volver" href="index.html">← Volver<span> a la página</span></a>
+  </div>
+</header>
+
+<main id="contenido">
+  <div class="wrap">
+    <h1>Libro de reclamaciones</h1>
+    <p class="borrador">Borrador para revisión de Cabaña Vista Alegre: falta la razón social y el RUC.</p>
+    <p class="intro">Conforme al Código de Protección y Defensa del Consumidor (Ley N.° 29571), Cabaña Vista Alegre cuenta con un libro de reclamaciones virtual. Al enviar este formulario se abre WhatsApp con tu hoja de reclamación ya escrita: envíala y guarda esa conversación como tu copia. Te responderemos en un plazo máximo de 15 días hábiles.</p>
+    <p class="dato"><strong>Proveedor:</strong> Restaurante Cabaña Vista Alegre · Razón social y RUC por confirmar · Calle Punta Pejerrey 190, Santiago de Surco, Lima.</p>
+
+    <form id="reclamo" novalidate>
+      <fieldset>
+        <legend>1. Tus datos</legend>
+        <label class="campo">Nombre y apellidos<input id="nombre" autocomplete="name" maxlength="80" required><span class="error" id="e-nombre" aria-live="polite"></span></label>
+        <div class="dos">
+          <label class="campo">Tipo de documento<select id="tipodoc"><option>DNI</option><option>Carné de extranjería</option><option>Pasaporte</option></select></label>
+          <label class="campo">Número de documento<input id="doc" inputmode="text" maxlength="20" required><span class="error" id="e-doc" aria-live="polite"></span></label>
+        </div>
+        <label class="campo">Domicilio<input id="dir" autocomplete="street-address" maxlength="120" required><span class="error" id="e-dir" aria-live="polite"></span></label>
+        <div class="dos">
+          <label class="campo">Celular<input id="cel" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" required><span class="error" id="e-cel" aria-live="polite"></span></label>
+          <label class="campo">Correo <small>(opcional)</small><input id="correo" type="email" inputmode="email" autocomplete="email" maxlength="80"><span class="error" id="e-correo" aria-live="polite"></span></label>
+        </div>
+        <label class="campo">Si eres menor de edad: nombre de tu padre, madre o apoderado <small>(opcional)</small><input id="apoderado" maxlength="80"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Lo que contrataste</legend>
+        <div class="opciones" role="radiogroup" aria-label="Tipo de bien">
+          <label><input type="radio" name="bien" value="Servicio" checked>Servicio (atención, reserva, consumo en el local)</label>
+          <label><input type="radio" name="bien" value="Producto">Producto</label>
+        </div>
+        <div class="dos">
+          <label class="campo">Fecha de la visita o compra<input id="fecha" type="date"></label>
+          <label class="campo">Monto reclamado (S/) <small>(opcional)</small><input id="monto" inputmode="decimal" maxlength="12"></label>
+        </div>
+        <label class="campo">Descripción<input id="desc" maxlength="120" placeholder="Ej. cena del sábado, mesa para 4"></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Tu reclamo o queja</legend>
+        <div class="opciones" role="radiogroup" aria-label="Tipo">
+          <label><input type="radio" name="tipo" value="Reclamo" checked><span><strong>Reclamo:</strong> disconformidad con el producto o servicio</span></label>
+          <label><input type="radio" name="tipo" value="Queja"><span><strong>Queja:</strong> malestar con la atención</span></label>
+        </div>
+        <label class="campo">Cuéntanos qué pasó<textarea id="detalle" maxlength="1500" required></textarea><span class="error" id="e-detalle" aria-live="polite"></span></label>
+        <label class="campo">¿Qué solicitas?<textarea id="pedido" maxlength="800" required></textarea><span class="error" id="e-pedido" aria-live="polite"></span></label>
+        <label class="acepto"><input type="checkbox" id="acepto"><span>Acepto que Cabaña Vista Alegre use mis datos para atender este reclamo, según su <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
+        <span class="error" id="e-acepto" aria-live="polite"></span>
+      </fieldset>
+
+      <button class="enviar" type="submit"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>Enviar por WhatsApp</button>
+    </form>
+
+    <p class="dato" style="margin-top:30px">La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para interponer una denuncia ante el INDECOPI.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap base">
+    <span>© 2026 Restaurante Cabaña Vista Alegre</span>
+    <nav class="legales" aria-label="Legal"><a href="terminos.html">Términos y condiciones</a><a href="privacidad.html">Política de privacidad</a><a href="reclamaciones.html" aria-current="page">Libro de reclamaciones</a></nav>
+    <span class="credit">Página hecha por <a href="https://wa.me/51991549700" target="_blank" rel="noopener">TC Studio</a></span>
+  </div>
+</footer>
+
+<script>
+const NEGOCIO_WA = "51944467705"; // mismo WhatsApp que las reservas
+const $ = id => document.getElementById(id);
+const lima = () => new Date(new Date().toLocaleString("en-US", { timeZone: "America/Lima" }));
+$("fecha").max = lima().toISOString().slice(0, 10);
+
+const reglas = [
+  ["nombre", v => v.length >= 3 || "Escribe tu nombre y apellidos."],
+  ["doc", v => /^[A-Za-z0-9-]{6,20}$/.test(v) || "Escribe un número de documento válido."],
+  ["dir", v => v.length >= 5 || "Escribe tu domicilio."],
+  ["cel", v => v.replace(/\D/g, "").length >= 9 || "Escribe un celular de 9 dígitos."],
+  ["correo", v => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || "Revisa el correo."],
+  ["detalle", v => v.length >= 10 || "Cuéntanos qué pasó."],
+  ["pedido", v => v.length >= 3 || "Cuéntanos qué solicitas."],
+];
+
+$("reclamo").addEventListener("submit", e => {
+  e.preventDefault();
+  let primero = null;
+  for (const [id, ok] of reglas) {
+    const r = ok($(id).value.trim());
+    $("e-" + id).textContent = r === true ? "" : r;
+    $(id).setAttribute("aria-invalid", r === true ? "false" : "true");
+    if (r !== true && !primero) primero = $(id);
+  }
+  $("e-acepto").textContent = $("acepto").checked ? "" : "Necesitamos tu permiso para registrar el reclamo.";
+  if (!primero && !$("acepto").checked) primero = $("acepto");
+  if (primero) { primero.focus(); return; }
+
+  const ahora = lima(), dos = n => String(n).padStart(2, "0");
+  const hoja = "CVA-" + ahora.getFullYear() + dos(ahora.getMonth() + 1) + dos(ahora.getDate()) + "-" + dos(ahora.getHours()) + dos(ahora.getMinutes()) + dos(ahora.getSeconds());
+  const v = id => $(id).value.trim();
+  const sel = n => document.querySelector("input[name=" + n + "]:checked").value;
+  const l = [
+    "*LIBRO DE RECLAMACIONES - Cabaña Vista Alegre*",
+    "Hoja N.° " + hoja + " · " + ahora.toLocaleDateString("es-PE") + " " + dos(ahora.getHours()) + ":" + dos(ahora.getMinutes()),
+    "",
+    "*1. Consumidor*",
+    "Nombre: " + v("nombre"),
+    v("tipodoc") + ": " + v("doc"),
+    "Domicilio: " + v("dir"),
+    "Celular: " + v("cel"),
+  ];
+  if (v("correo")) l.push("Correo: " + v("correo"));
+  if (v("apoderado")) l.push("Padre, madre o apoderado: " + v("apoderado"));
+  l.push("", "*2. Bien contratado*", "Tipo: " + sel("bien"));
+  if (v("fecha")) l.push("Fecha: " + v("fecha").split("-").reverse().join("/"));
+  if (v("monto")) l.push("Monto: S/ " + v("monto"));
+  if (v("desc")) l.push("Descripción: " + v("desc"));
+  l.push("", "*3. " + sel("tipo") + "*", v("detalle"), "", "*Pedido del consumidor*", v("pedido"),
+    "", "Acepto el uso de mis datos para atender este reclamo, según la política de privacidad.");
+  window.open("https://wa.me/" + NEGOCIO_WA + "?text=" + encodeURIComponent(l.join("\n")), "_blank", "noopener");
+});
+</script>
+</body>
+</html>
