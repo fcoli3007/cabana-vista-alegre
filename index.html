@@ -74,6 +74,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacin
   .enlace:hover span{transform:translateX(4px)}
 }
 :focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+.claro :focus-visible,.res-card :focus-visible{outline-color:var(--vino)}
+/* área táctil cómoda (44 px) sin cambiar el aspecto de los enlaces de texto */
+.enlace,.redes a,.vis-grid dd a,.credit a{position:relative}
+.enlace::before,.redes a::before,.vis-grid dd a::before{content:"";position:absolute;inset:-12px -6px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ===== intro automática (pantalla de carga) ===== */
@@ -105,7 +109,7 @@ header.solido .marca img{width:46px}
 .nav ul{display:flex;gap:30px;list-style:none}
 .nav ul a{text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
 .nav ul a:hover{opacity:1}
-.idioma{border:1px solid var(--linea-o);background:transparent;border-radius:999px;min-width:44px;height:40px;padding:0 10px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--crema)}
+.idioma{border:1px solid var(--linea-o);background:transparent;border-radius:999px;min-width:44px;height:44px;flex:none;padding:0 10px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--crema)}
 .idioma:hover{border-color:var(--oro)}
 .nav .btn{padding:13px 22px}
 .hamb{display:none;width:44px;height:44px;border:1px solid var(--linea-o);background:transparent;border-radius:999px;place-items:center}
@@ -158,8 +162,8 @@ header.solido .marca img{width:46px}
 .ins small{font-size:13px;color:var(--suave);font-weight:600;letter-spacing:.06em}
 .ins p{font-size:16px;color:var(--suave);margin-top:6px}
 .ins .ver{margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--vino)}
-.plato.brilla{animation:brilla 1.8s ease}
-@keyframes brilla{0%,40%{background:rgba(184,149,95,.22)}100%{background:transparent}}
+.plato.brilla{animation:brilla 2.2s ease}
+@keyframes brilla{0%,45%{background:rgba(184,149,95,.24);box-shadow:0 0 0 10px rgba(184,149,95,.24)}100%{background:transparent;box-shadow:0 0 0 10px rgba(184,149,95,0)}}
 
 /* ===== historia ===== */
 .historia{background:var(--madera);padding:120px 0}
@@ -192,9 +196,15 @@ header.solido .marca img{width:46px}
 .tabs-in.izq::before,.tabs-in.der::after{opacity:1}
 #tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0}
 #tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;border:0;background:none;border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;color:var(--suave);text-decoration:none;transition:background .25s,color .25s}
+.tab{flex:none;display:inline-flex;align-items:center;min-height:44px;border:0;background:none;border-radius:999px;padding:0 16px;font-size:15px;font-weight:600;color:var(--suave);text-decoration:none;white-space:nowrap;scroll-snap-align:center;transition:background .25s,color .25s}
 .tab:hover{color:var(--tinta)}
 .tab.activa{background:var(--tinta);color:var(--papel)}
+.tab:focus-visible{outline-offset:-2px}
+#tabs{scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+.plato .gr{display:none;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--vino)}
+.buscando .plato .gr{display:inline}
+.buscando .cat-foto,.buscando .cat .nota{display:none}
+.buscando .cat{padding-top:28px;grid-template-columns:1fr}
 .cat{display:grid;grid-template-columns:.75fr 1.25fr;gap:64px;padding:60px 0 24px;border-bottom:1px solid var(--linea)}
 .cat:last-of-type{border-bottom:0}
 .cat>*{min-width:0}
@@ -246,7 +256,7 @@ header.solido .marca img{width:46px}
 .momentos .dato{display:block;margin-top:10px;font-size:13.5px;color:var(--oro2);opacity:.9}
 
 /* ===== reserva ===== */
-.reserva{background:var(--madera);padding:120px 0}
+.reserva{background:var(--madera);padding:120px 0;border-top:1px solid var(--linea-o)}
 .res-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
 .res-grid>*{min-width:0}
 .res-grid h2{font-size:clamp(44px,5.4vw,76px);margin:14px 0 18px}
@@ -261,15 +271,18 @@ header.solido .marca img{width:46px}
 .paso{margin-bottom:24px}
 .paso>.lbl{display:block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);margin-bottom:10px}
 .contador-p{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--linea);padding:4px;background:#fff}
-.contador-p button{width:42px;height:42px;border:0;background:var(--papel);font-size:20px;line-height:1;color:var(--tinta)}
+.contador-p button{width:44px;height:44px;border:0;background:var(--papel);font-size:20px;line-height:1;color:var(--tinta)}
 .contador-p button:disabled{opacity:.35;cursor:not-allowed}
 .contador-p output{min-width:110px;text-align:center;font-weight:600}
 .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .chips::-webkit-scrollbar{display:none}
 .chips input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
-.chips label{flex:none;cursor:pointer;border:1px solid var(--linea);background:#fff;padding:10px 15px;text-align:center;font-size:15px;font-weight:600;transition:border-color .2s,background .2s,color .2s}
+.chips label{flex:none;cursor:pointer;min-height:44px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--linea);background:#fff;padding:10px 15px;text-align:center;font-size:15px;font-weight:600;transition:border-color .2s,background .2s,color .2s}
 .chips label small{display:block;font-size:12px;font-weight:600;color:var(--suave);text-transform:capitalize}
 .chips input:checked+label{border-color:var(--vino);background:var(--vino);color:#fff}
+.chips label.off{opacity:.45;cursor:not-allowed;text-decoration:line-through}
+.aviso-hoy{font-size:13.5px;color:var(--suave);margin-top:8px}
+.aviso-hoy:empty{display:none}
 .chips input:checked+label small{color:rgba(255,255,255,.8)}
 .chips input:focus-visible+label{outline:2px solid var(--oro);outline-offset:2px}
 .turno{font-size:13px;font-weight:600;color:var(--suave);margin:12px 0 8px}
@@ -281,18 +294,39 @@ header.solido .marca img{width:46px}
 .campo input,.campo select,.campo textarea{font-size:16px;letter-spacing:0;text-transform:none;font-weight:500;color:var(--tinta);padding:13px 14px;border:1px solid var(--linea);border-radius:0;background:#fff;width:100%}
 .campo textarea{min-height:76px;resize:vertical}
 .campo.full{grid-column:1/-1}
-.acepto{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--suave);margin:4px 0 6px;cursor:pointer}
-.acepto input{width:18px;height:18px;margin-top:2px;accent-color:var(--vino);flex:none}
-.error{color:#A32323;font-size:14.5px;font-weight:600;min-height:1.4em;margin:6px 0}
+.acepto{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--suave);margin:4px 0 0;padding:6px 0;cursor:pointer}
+.acepto input{width:22px;height:22px;margin-top:0;accent-color:var(--vino);flex:none}
+.error{color:#A32323;font-size:14.5px;font-weight:600;margin:6px 0}
+.error:empty{display:none}
+.e-campo{display:block;color:#A32323;font-size:13.5px;font-weight:600;letter-spacing:0;text-transform:none}
+.e-campo:empty{display:none}
+.campo input[aria-invalid=true],.campo select[aria-invalid=true]{border-color:#A32323;box-shadow:inset 0 0 0 1px #A32323}
+#horas[aria-invalid=true] .chips label{border-color:rgba(163,35,35,.55)}
+.res-aviso{font-size:14.5px;line-height:1.5;color:var(--tinta);background:var(--hueso);border-left:2px solid var(--oro);padding:10px 14px;margin-bottom:22px}
+.sujeto{font-style:normal;font-weight:600;letter-spacing:.04em;text-transform:none;color:var(--vino);font-size:12.5px}
+.extra{border:1px solid var(--linea);background:#fff}
+.extra summary{list-style:none;cursor:pointer;min-height:48px;padding:12px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px;font-size:15px;font-weight:600;position:relative;padding-right:40px}
+.extra summary::-webkit-details-marker{display:none}
+.extra summary small{font-size:13px;font-weight:500;color:var(--suave)}
+.extra summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:20px;line-height:1;color:var(--vino)}
+.extra[open] summary::after{content:"–"}
+.extra-in{padding:4px 16px 18px;display:grid;gap:18px}
+.sub-paso .lbl{display:block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);margin-bottom:10px}
 .res-card .btn{width:100%}
-.resumen{font-size:15px;color:var(--suave);margin:14px 0 0}
+.res-card .btn[disabled]{opacity:.6;cursor:wait}
+.wa-ic{width:18px;height:18px;flex:none}
+.nota-envio{font-size:13.5px;color:var(--suave);text-align:center;margin-top:10px}
+.resumen{font-size:15px;color:var(--suave);margin:8px 0 14px}
+.resumen:empty{display:none}
 .resumen b{color:var(--tinta)}
 .ok{display:none;text-align:center;padding:30px 10px}
+.ok:focus{outline:none}
 .ok .check{width:68px;height:68px;margin:0 auto 18px;border-radius:50%;background:#E8F2EA;color:#24784A;display:grid;place-items:center}
 .ok .check svg{width:34px;height:34px}
-.ok h3{font-size:40px}
-.ok p{color:var(--suave);margin:10px auto 22px;max-width:380px}
-.ok .btn{width:auto;background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1px var(--linea)}
+.ok h3{font-size:clamp(32px,6vw,40px)}
+.ok p{color:var(--suave);margin:10px auto 22px;max-width:400px}
+.ok .btn{display:flex;width:100%;max-width:340px;margin:0 auto 10px;white-space:normal}
+.ok #otra{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1px var(--linea)}
 .res-card.enviada form{display:none}
 .res-card.enviada .ok{display:block}
 
@@ -401,8 +435,8 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
     <a class="marca" href="#inicio" aria-label="Cabaña Vista Alegre"><img src="logo.png" alt="" width="52" height="64"><span>Cabaña Vista Alegre<small data-i="logoSub">Parrilla · Chacarilla · Desde 2006</small></span></a>
     <ul>
       <li><a href="#carta" data-i="navCarta">Carta</a></li>
-      <li><a href="#historia" data-i="navHis">Historia</a></li>
       <li><a href="#ambientes" data-i="navAmb">Ambientes</a></li>
+      <li><a href="#historia" data-i="navHis">Historia</a></li>
       <li><a href="#visita" data-i="navUbi">Ubicación</a></li>
     </ul>
     <button class="idioma" type="button" id="idioma">EN</button>
@@ -412,10 +446,10 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
 </header>
 
 <nav class="menu-movil" id="menu-movil" aria-label="Menú">
-  <a href="#carta" data-i="navCarta">Carta</a>
   <a href="#insignias" data-i="navIns">Los elegidos</a>
-  <a href="#historia" data-i="navHis">Historia</a>
+  <a href="#carta" data-i="navCarta">Carta</a>
   <a href="#ambientes" data-i="navAmb">Ambientes</a>
+  <a href="#historia" data-i="navHis">Historia</a>
   <a href="#visita" data-i="navUbi">Ubicación</a>
   <a class="btn btn-vino" href="#reserva" data-i="reservarMesa">Reservar una mesa</a>
   <p>Calle Punta Pejerrey 190, Chacarilla · 944 467 705</p>
@@ -448,25 +482,6 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
         <p data-i="insP">Los tres cortes que más piden nuestros comensales, y una entrada para empezar.</p>
       </div>
       <div class="ins-grid rev" id="ins-grid"></div>
-    </div>
-  </section>
-
-  <!-- Historia -->
-  <section class="historia" id="historia">
-    <div class="wrap his-grid">
-      <figure class="his-foto rev"><img src="fachada.jpg" alt="Fachada de Cabaña Vista Alegre de noche" loading="lazy" decoding="async"></figure>
-      <div class="rev">
-        <span class="kicker" data-i="hisKicker">Nuestra historia</span>
-        <h2 data-i="hisH2">Una casa con nombre <em>de parque</em></h2>
-        <p data-i="hisP">Demóstenes Fermín llegó a Lima desde Cajatambo a los 14 años, con el sueño de tener su propio restaurante. Un viaje a Argentina le mostró la parrilla que quería hacer. Tras seis meses buscando, encontró una casa frente a un parque en Chacarilla. Su dueño, Enrique Ramírez, solo le pidió una cosa: que el restaurante se llamara Vista Alegre, por la vista que había disfrutado toda su vida.</p>
-        <ol class="linea-t">
-          <li><b>2006</b><span data-i="h2006">Abre Cabaña Vista Alegre en Chacarilla, Surco.</span></li>
-          <li><b>2024</b><span data-i="h2024">Nueva fachada: la casa y la terraza se iluminan de noche, y llega el Wagyu a la carta.</span></li>
-          <li><b>2025</b><span data-i="h2025">El salón estrena ladrillo rococho, la barra crece y llega una carta de vinos argentinos, chilenos e italianos.</span></li>
-          <li><b id="hoyAnio">2026</b><span data-i="h2026">Veinte años, con una nueva generación: Gabriela y Vladimir Fermín acompañan a su padre en la gestión.</span></li>
-        </ol>
-        <blockquote class="cita"><q data-i="cita">Es el resultado de la constancia y el esfuerzo diario.</q><cite data-i="citaAutor">Demóstenes Fermín, fundador, sobre sus 20 años · revista Cosas, 2026</cite></blockquote>
-      </div>
     </div>
   </section>
 
@@ -514,59 +529,93 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
     </div>
   </section>
 
+  <!-- Historia -->
+  <section class="historia" id="historia">
+    <div class="wrap his-grid">
+      <figure class="his-foto rev"><img src="fachada.jpg" alt="Fachada de Cabaña Vista Alegre de noche" loading="lazy" decoding="async"></figure>
+      <div class="rev">
+        <span class="kicker" data-i="hisKicker">Nuestra historia</span>
+        <h2 data-i="hisH2">Una casa con nombre <em>de parque</em></h2>
+        <p data-i="hisP">Demóstenes Fermín llegó a Lima desde Cajatambo a los 14 años, con el sueño de tener su propio restaurante. Un viaje a Argentina le mostró la parrilla que quería hacer. Tras seis meses buscando, encontró una casa frente a un parque en Chacarilla. Su dueño, Enrique Ramírez, solo le pidió una cosa: que el restaurante se llamara Vista Alegre, por la vista que había disfrutado toda su vida.</p>
+        <ol class="linea-t">
+          <li><b>2006</b><span data-i="h2006">Abre Cabaña Vista Alegre en Chacarilla, Surco.</span></li>
+          <li><b>2024</b><span data-i="h2024">Nueva fachada: la casa y la terraza se iluminan de noche, y llega el Wagyu a la carta.</span></li>
+          <li><b>2025</b><span data-i="h2025">El salón estrena ladrillo rococho, la barra crece y llega una carta de vinos argentinos, chilenos e italianos.</span></li>
+          <li><b id="hoyAnio">2026</b><span data-i="h2026">Veinte años, con una nueva generación: Gabriela y Vladimir Fermín acompañan a su padre en la gestión.</span></li>
+        </ol>
+        <blockquote class="cita"><q data-i="cita">Es el resultado de la constancia y el esfuerzo diario.</q><cite data-i="citaAutor">Demóstenes Fermín, fundador, sobre sus 20 años · revista Cosas, 2026</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
   <!-- Reserva -->
-  <section class="reserva" id="reserva">
+  <section class="reserva" id="reserva" aria-labelledby="t-reserva">
     <div class="wrap res-grid">
       <div class="txt rev">
         <span class="kicker" data-i="resKicker">Reservas</span>
-        <h2 data-i="resH2">Reserva tu mesa</h2>
-        <p data-i="resP">Elige la fecha, el horario y el ambiente de tu preferencia. Te confirmaremos la disponibilidad.</p>
+        <h2 id="t-reserva" data-i="resH2">Solicita tu mesa</h2>
+        <p data-i="resP">Elige día, horario y cuántas personas vienen. Tu solicitud llega al restaurante por WhatsApp y el equipo te confirma la disponibilidad.</p>
         <ul class="res-lista">
+          <li data-i="res1">Los horarios son los de atención del restaurante. Toda reserva está sujeta a confirmación.</li>
           <li data-i="res2">Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.</li>
           <li data-i="res3">Para grupos de más de 10 personas, te atendemos de forma personalizada.</li>
         </ul>
         <span class="estado-l" id="estado"><i></i><span></span></span>
       </div>
       <div class="res-card rev" id="res-card">
-        <!-- Demo: al venderla, este formulario se conecta con el sistema de reservas que use el restaurante -->
-        <form id="form" novalidate>
+        <!-- No hay un sistema de reservas conectado: la solicitud se arma aquí y la persona la envía por WhatsApp al restaurante.
+             Si el restaurante usa un sistema de reservas, conectarlo en el envío del formulario (más abajo, en el script). -->
+        <form id="form" novalidate aria-describedby="res-aviso">
+          <p class="res-aviso" id="res-aviso" data-i="resAviso">Esto es una solicitud, no una reserva confirmada. El restaurante te responderá para confirmar tu mesa.</p>
           <div class="paso">
-            <span class="lbl" data-i="lPersonas">Personas</span>
-            <div class="contador-p"><button type="button" id="menos" aria-label="−">−</button><output id="personas" aria-live="polite"></output><button type="button" id="mas" aria-label="+">+</button></div>
+            <span class="lbl" id="l-personas" data-i="lPersonas">Personas</span>
+            <div class="contador-p" role="group" aria-labelledby="l-personas"><button type="button" id="menos" aria-label="Una persona menos">−</button><output id="personas" aria-live="polite"></output><button type="button" id="mas" aria-label="Una persona más">+</button></div>
           </div>
           <div class="paso">
             <span class="lbl" id="l-dia" data-i="lDia">Día</span>
-            <div class="chips" id="dias" role="radiogroup" aria-labelledby="l-dia"></div>
+            <div class="chips" id="dias" role="radiogroup" aria-labelledby="l-dia" aria-describedby="aviso-hoy"></div>
+            <p class="aviso-hoy" id="aviso-hoy"></p>
           </div>
           <div class="paso">
-            <span class="lbl" id="l-hora" data-i="lHora">Horario</span>
-            <div id="horas" role="radiogroup" aria-labelledby="l-hora"></div>
-          </div>
-          <div class="paso">
-            <span class="lbl" id="l-zona" data-i="lZona">Ambiente</span>
-            <div class="chips" role="radiogroup" aria-labelledby="l-zona">
-              <input type="radio" name="zona" id="z0" value="0" checked><label for="z0" data-i="z0">Sin preferencia</label>
-              <input type="radio" name="zona" id="z1" value="1"><label for="z1" data-i="z1">Salón</label>
-              <input type="radio" name="zona" id="z2" value="2"><label for="z2" data-i="z2">Terraza</label>
-            </div>
+            <span class="lbl" id="l-hora"><span data-i="lHora">Horario preferido</span> <em class="sujeto" data-i="sujeto">sujeto a confirmación</em></span>
+            <div id="horas" role="radiogroup" aria-labelledby="l-hora" aria-describedby="e-hora"></div>
+            <p class="e-campo" id="e-hora"></p>
           </div>
           <div class="fila2 paso">
-            <label class="campo"><span data-i="lNombre">Nombre</span><input id="nombre" autocomplete="name" placeholder="Ej. Lucía Torres" data-iph="phNombre" maxlength="60"></label>
-            <label class="campo"><span data-i="lCel">Celular</span><input id="cel" type="tel" inputmode="tel" autocomplete="tel" placeholder="9XX XXX XXX" maxlength="15"></label>
-            <label class="campo"><span data-i="lOcasion">Ocasión</span><select id="ocasion"><option value="0" data-i="oc0">Ninguna</option><option value="1" data-i="oc1">Cumpleaños</option><option value="2" data-i="oc2">Aniversario</option><option value="3" data-i="oc3">Reunión de trabajo</option><option value="4" data-i="oc4">Otra</option></select></label>
-            <label class="campo"><span data-i="lCorreo">Correo (opcional)</span><input id="correo" type="email" autocomplete="email" placeholder="tu@correo.com" data-iph="phCorreo"></label>
-            <label class="campo full"><span data-i="lComent">Comentario (opcional)</span><textarea id="comentario" maxlength="200" placeholder="Ej. silla para bebé, traemos torta…" data-iph="phComent"></textarea></label>
+            <label class="campo"><span data-i="lNombre">Nombre</span><input id="nombre" name="nombre" autocomplete="name" placeholder="Ej. Lucía Torres" data-iph="phNombre" maxlength="60" required aria-describedby="e-nombre" enterkeyhint="next"><span class="e-campo" id="e-nombre"></span></label>
+            <label class="campo"><span data-i="lCel">Celular</span><input id="cel" name="cel" type="tel" inputmode="tel" autocomplete="tel" placeholder="9XX XXX XXX" maxlength="16" required aria-describedby="e-cel" enterkeyhint="done"><span class="e-campo" id="e-cel"></span></label>
           </div>
-          <label class="acepto"><input type="checkbox" id="acepto"><span data-i="acepto">Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta reserva.</span></label>
+          <details class="extra paso" id="extra">
+            <summary><span data-i="extraTit">Agregar detalles</span> <small data-i="extraSub">ambiente, ocasión, correo, comentarios · opcional</small></summary>
+            <div class="extra-in">
+              <div class="sub-paso">
+                <span class="lbl" id="l-zona" data-i="lZona">Ambiente preferido</span>
+                <div class="chips" role="radiogroup" aria-labelledby="l-zona">
+                  <input type="radio" name="zona" id="z0" value="0" checked><label for="z0" data-i="z0">Sin preferencia</label>
+                  <input type="radio" name="zona" id="z1" value="1"><label for="z1" data-i="z1">Salón</label>
+                  <input type="radio" name="zona" id="z2" value="2"><label for="z2" data-i="z2">Terraza</label>
+                </div>
+              </div>
+              <div class="fila2">
+                <label class="campo"><span data-i="lOcasion">Ocasión</span><select id="ocasion"><option value="0" data-i="oc0">Ninguna</option><option value="1" data-i="oc1">Cumpleaños</option><option value="2" data-i="oc2">Aniversario</option><option value="3" data-i="oc3">Reunión de trabajo</option><option value="4" data-i="oc4">Otra</option></select></label>
+                <label class="campo"><span data-i="lCorreo">Correo</span><input id="correo" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" data-iph="phCorreo" maxlength="80" aria-describedby="e-correo"><span class="e-campo" id="e-correo"></span></label>
+                <label class="campo full"><span data-i="lComent">Comentarios</span><textarea id="comentario" maxlength="200" placeholder="Ej. silla para bebé, traemos torta…" data-iph="phComent"></textarea></label>
+              </div>
+            </div>
+          </details>
+          <label class="acepto"><input type="checkbox" id="acepto" aria-describedby="e-acepto"><span data-i="acepto">Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta solicitud de reserva.</span></label>
+          <p class="e-campo" id="e-acepto"></p>
           <p class="error" id="error" role="alert"></p>
-          <button class="btn btn-vino" type="submit" data-i="solicitar">Solicitar reserva</button>
           <p class="resumen" id="resumen" aria-live="polite"></p>
+          <button class="btn btn-vino" type="submit" id="enviar"><svg class="wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span data-i="solicitar">Solicitar reserva</span></button>
+          <p class="nota-envio" data-i="notaEnvio">Se abrirá WhatsApp con tu solicitud lista. Solo tienes que enviarla.</p>
         </form>
         <div class="ok" id="ok" role="status" tabindex="-1">
-          <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></div>
           <h3 id="ok-tit"></h3>
           <p id="ok-txt"></p>
-          <button class="btn" type="button" id="otra" data-i="otra">Hacer otra reserva</button>
+          <a class="btn btn-vino" id="ok-wa" target="_blank" rel="noopener" data-i="okWa">Abrir WhatsApp de nuevo</a>
+          <button class="btn" type="button" id="otra" data-i="otra">Editar o hacer otra solicitud</button>
         </div>
       </div>
     </div>
@@ -618,7 +667,7 @@ footer{padding:44px 0 30px;border-top:1px solid var(--linea-o);margin-top:70px}
 
 <script src="carta.js"></script>
 <script>
-const AG = { marca: "TF Studio", wa: "51982508530" };
+const AG = { marca: "TC Studio", wa: "51991549700" };
 const NEGOCIO_WA = "51944467705"; // WhatsApp de reservas que publica el restaurante
 const $ = id => document.getElementById(id);
 const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -647,18 +696,24 @@ const TXT = {
     amb1: "El salón", amb1s: "Ladrillo rococho y madera: cenas en familia y almuerzos de trabajo", amb2: "La terraza", amb2s: "Para almuerzos largos y cenas relajadas", amb3: "La casa", amb4: "Mesas para compartir", amb4s: "Festival de carnes para 3 y Vista Alegre para dos",
     m1: "Celebraciones", m1p: "Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.", m1d: "Servicio de torta: S/ 50", m1a: "Consultar celebración", m2: "Grupos y empresas", m2p: "Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.", m2a: "Coordinar",
     m3: "Trae tu vino", m3p: "Puedes traer tu botella favorita para acompañar tu parrilla.", m3d: "Descorche: S/ 40 por botella de 750 ml. Pregunta por la promoción de corcho libre.", m3a: "Ver condiciones", m4: "Menú kids", m4p: "Los más pequeños también tienen su parrilla: bife, lomo, milanesa o pollo.", m4d: "Desde S/ 35",
-    resKicker: "Reservas", resH2: "Reserva tu mesa", resP: "Elige la fecha, el horario y el ambiente de tu preferencia. Te confirmaremos la disponibilidad.",
-    res1: "Solo mostramos horarios en los que estamos abiertos.", res2: "Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.", res3: "Para grupos de más de 10 personas, te atendemos de forma personalizada.",
-    lPersonas: "Personas", lDia: "Día", lHora: "Horario", lZona: "Ambiente", z0: "Sin preferencia", z1: "Salón", z2: "Terraza", lNombre: "Nombre", lCel: "Celular", lOcasion: "Ocasión",
-    oc0: "Ninguna", oc1: "Cumpleaños", oc2: "Aniversario", oc3: "Reunión de trabajo", oc4: "Otra", lCorreo: "Correo (opcional)", lComent: "Comentario (opcional)",
-    phNombre: "Ej. Lucía Torres", phCorreo: "tu@correo.com", phComent: "Ej. silla para bebé, traemos torta…", acepto: "Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta reserva.", solicitar: "Solicitar reserva", otra: "Hacer otra reserva",
+    resKicker: "Reservas", resH2: "Solicita tu mesa", resP: "Elige día, horario y cuántas personas vienen. Tu solicitud llega al restaurante por WhatsApp y el equipo te confirma la disponibilidad.",
+    res1: "Los horarios son los de atención del restaurante. Toda reserva está sujeta a confirmación.", res2: "Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.", res3: "Para grupos de más de 10 personas, te atendemos de forma personalizada.",
+    resAviso: "Esto es una solicitud, no una reserva confirmada. El restaurante te responderá para confirmar tu mesa.",
+    lPersonas: "Personas", lDia: "Día", lHora: "Horario preferido", sujeto: "sujeto a confirmación", lZona: "Ambiente preferido", z0: "Sin preferencia", z1: "Salón", z2: "Terraza", lNombre: "Nombre", lCel: "Celular", lOcasion: "Ocasión",
+    extraTit: "Agregar detalles", extraSub: "ambiente, ocasión, correo, comentarios · opcional",
+    oc0: "Ninguna", oc1: "Cumpleaños", oc2: "Aniversario", oc3: "Reunión de trabajo", oc4: "Otra", lCorreo: "Correo", lComent: "Comentarios",
+    phNombre: "Ej. Lucía Torres", phCorreo: "tu@correo.com", phComent: "Ej. silla para bebé, traemos torta…", acepto: "Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta solicitud de reserva.", solicitar: "Solicitar reserva",
+    notaEnvio: "Se abrirá WhatsApp con tu solicitud lista. Solo tienes que enviarla.", okWa: "Abrir WhatsApp de nuevo", otra: "Editar o hacer otra solicitud",
     visKicker: "Ubicación", visH2: "Te esperamos en Chacarilla", dDir: "Dirección", ref: "Altura de la cuadra 1 de Caminos del Inca, a espaldas del grifo Primax", dHor: "Horario",
     horario: "Lunes a sábado: 12:00 p. m. – 12:00 a. m.<br>Domingo: 12:00 p. m. – 11:00 p. m.", dRes: "Reservas", googleVer: "4.5 de 5 · 825 opiniones · ver en Google Maps", llegar: "Cómo llegar", waze: "Abrir en Waze",
     abierto: h => "Abierto ahora · hasta las " + h, abrimos: "Hoy abrimos a las 12:00 p. m.", cerrado: "Cerrado ahora · abrimos mañana a las 12:00 p. m.",
-    persona: n => n === 1 ? "1 persona" : n >= 10 ? "10 o más" : n + " personas", hoy: "Hoy", manana: "Mañana", sinHoras: "Ya no quedan horarios para hoy. Elige otro día.", almuerzo: "Almuerzo", cena: "Cena",
-    resumen: (p, f, h) => `Mesa para <b>${p}</b> · <b>${f}</b>${h ? ` · <b>${h}</b>` : ""}`,
-    eHora: "Elige un horario.", eNombre: "Escribe tu nombre.", eCel: "Escribe un celular de 9 dígitos.", eAcepto: "Marca la casilla para poder gestionar tu reserva.",
-    okTit: n => "Gracias, " + n, okTxt: (p, f, h, z, c) => `Recibimos tu solicitud de mesa para ${p} el ${f} a las ${h}${z ? ", en " + z.toLowerCase() : ""}. Te confirmaremos la disponibilidad al ${c}.`,
+    persona: n => n === 1 ? "1 persona" : n >= 10 ? "10 o más" : n + " personas", hoy: "Hoy", manana: "Mañana", almuerzo: "Almuerzo", cena: "Cena",
+    sinHoras: "Por hoy ya no se pueden solicitar reservas desde la web. Elige otro día o escríbenos por WhatsApp.",
+    resumen: (p, f, h) => `Solicitud: mesa para <b>${p}</b> · <b>${f}</b>${h ? ` · <b>${h}</b>` : ""}`,
+    eResumen: "Revisa los campos marcados en rojo.",
+    eHora: "Elige un horario.", eHoraPaso: "Ese horario ya pasó. Elige otro.", eNombre: "Escribe tu nombre.", eCel: "Escribe tu celular (9 dígitos).", eCorreo: "Revisa el correo (ej. nombre@correo.com) o déjalo vacío.", eAcepto: "Marca la casilla para poder enviar tu solicitud.",
+    okTit: n => "Falta un paso, " + n, okTxt: () => "Abrimos WhatsApp con tu solicitud. Envía el mensaje en WhatsApp para que llegue al restaurante: el equipo revisará la disponibilidad y se comunicará contigo para confirmar tu mesa. Hasta entonces, la reserva no está confirmada.",
+    wa: { hola: "Hola Cabaña Vista Alegre, quiero solicitar una reserva:", personas: "Personas", dia: "Día", hora: "Horario preferido", nombre: "Nombre", cel: "Celular", zona: "Ambiente", ocasion: "Ocasión", correo: "Correo", coment: "Comentarios", fin: "Quedo atento(a) a su confirmación. ¡Gracias!" },
     terminos: [["Punto azul", "Sellado por fuera, casi crudo por dentro."], ["Punto rojo", "Centro rojo y tibio."], ["Término medio", "Centro rosado y jugoso. El que recomienda la casa."], ["Tres cuartos", "Apenas rosado al centro."], ["Bien cocido", "Cocido parejo, sin rosado."]],
     tags: {}, locale: "es-PE" },
   en: { introFrase: "Fire has a story", saltar: "Skip", logoSub: "Steakhouse · Chacarilla · Since 2006", navCarta: "Menu", navIns: "House favorites", navHis: "Our story", navAmb: "The place", navUbi: "Location", reservar: "Book",
@@ -675,18 +730,24 @@ const TXT = {
     amb1: "The dining room", amb1s: "Exposed brick and wood: family dinners and business lunches", amb2: "The terrace", amb2s: "For long lunches and relaxed dinners", amb3: "The house", amb4: "Tables to share", amb4s: "Meat festival for 3 and Vista Alegre for two",
     m1: "Celebrations", m1p: "Birthdays, anniversaries and gatherings that deserve a great table. Tell us what you are planning.", m1d: "Cake service: S/ 50", m1a: "Plan a celebration", m2: "Groups and companies", m2p: "For large groups and business meetings, we arrange your table personally.", m2a: "Get in touch",
     m3: "Bring your wine", m3p: "Bring your favorite bottle to go with your steak.", m3d: "Corkage: S/ 40 per 750 ml bottle. Ask about our free-corkage promotion.", m3a: "See conditions", m4: "Kids menu", m4p: "The little ones get their own grill: steak, tenderloin, breaded or grilled chicken.", m4d: "From S/ 35",
-    resKicker: "Bookings", resH2: "Book your table", resP: "Choose the date, time and area you prefer. We'll confirm availability.",
-    res1: "We only show times when we're open.", res2: "Tell us if you're celebrating: we'll set your table for the occasion.", res3: "For groups of more than 10, we'll assist you personally.",
-    lPersonas: "Guests", lDia: "Day", lHora: "Time", lZona: "Area", z0: "No preference", z1: "Dining room", z2: "Terrace", lNombre: "Name", lCel: "Mobile", lOcasion: "Occasion",
-    oc0: "None", oc1: "Birthday", oc2: "Anniversary", oc3: "Business meeting", oc4: "Other", lCorreo: "Email (optional)", lComent: "Comments (optional)",
-    phNombre: "E.g. Lucía Torres", phCorreo: "you@email.com", phComent: "E.g. high chair, we're bringing a cake…", acepto: "I agree that Cabaña Vista Alegre uses my data only to manage this booking.", solicitar: "Request booking", otra: "Make another booking",
+    resKicker: "Bookings", resH2: "Request your table", resP: "Choose the day, time and party size. Your request reaches the restaurant via WhatsApp and the team will confirm availability.",
+    res1: "Times follow the restaurant's opening hours. Every booking is subject to confirmation.", res2: "Tell us if you're celebrating: we'll set your table for the occasion.", res3: "For groups of more than 10, we'll assist you personally.",
+    resAviso: "This is a request, not a confirmed booking. The restaurant will reply to confirm your table.",
+    lPersonas: "Guests", lDia: "Day", lHora: "Preferred time", sujeto: "subject to confirmation", lZona: "Preferred area", z0: "No preference", z1: "Dining room", z2: "Terrace", lNombre: "Name", lCel: "Mobile", lOcasion: "Occasion",
+    extraTit: "Add details", extraSub: "area, occasion, email, comments · optional",
+    oc0: "None", oc1: "Birthday", oc2: "Anniversary", oc3: "Business meeting", oc4: "Other", lCorreo: "Email", lComent: "Comments",
+    phNombre: "E.g. Lucía Torres", phCorreo: "you@email.com", phComent: "E.g. high chair, we're bringing a cake…", acepto: "I agree that Cabaña Vista Alegre uses my data only to manage this booking request.", solicitar: "Request booking",
+    notaEnvio: "WhatsApp will open with your request ready. Just send it.", okWa: "Open WhatsApp again", otra: "Edit or make another request",
     visKicker: "Location", visH2: "See you in Chacarilla", dDir: "Address", ref: "Near block 1 of Caminos del Inca, behind the Primax gas station", dHor: "Hours",
     horario: "Monday to Saturday: 12:00 p.m. – 12:00 a.m.<br>Sunday: 12:00 p.m. – 11:00 p.m.", dRes: "Bookings", googleVer: "4.5 out of 5 · 825 reviews · see on Google Maps", llegar: "Directions", waze: "Open in Waze",
     abierto: h => "Open now · until " + h, abrimos: "We open today at 12:00 p.m.", cerrado: "Closed now · we open tomorrow at 12:00 p.m.",
-    persona: n => n === 1 ? "1 guest" : n >= 10 ? "10 or more" : n + " guests", hoy: "Today", manana: "Tomorrow", sinHoras: "No times left today. Pick another day.", almuerzo: "Lunch", cena: "Dinner",
-    resumen: (p, f, h) => `Table for <b>${p}</b> · <b>${f}</b>${h ? ` · <b>${h}</b>` : ""}`,
-    eHora: "Pick a time.", eNombre: "Enter your name.", eCel: "Enter a 9-digit mobile number.", eAcepto: "Please tick the box so we can manage your booking.",
-    okTit: n => "Thank you, " + n, okTxt: (p, f, h, z, c) => `We received your table request for ${p} on ${f} at ${h}${z ? ", " + z.toLowerCase() : ""}. We'll confirm availability at ${c}.`,
+    persona: n => n === 1 ? "1 guest" : n >= 10 ? "10 or more" : n + " guests", hoy: "Today", manana: "Tomorrow", almuerzo: "Lunch", cena: "Dinner",
+    sinHoras: "Online requests for today are closed. Pick another day or message us on WhatsApp.",
+    resumen: (p, f, h) => `Request: table for <b>${p}</b> · <b>${f}</b>${h ? ` · <b>${h}</b>` : ""}`,
+    eResumen: "Please check the fields marked in red.",
+    eHora: "Pick a time.", eHoraPaso: "That time has passed. Pick another one.", eNombre: "Enter your name.", eCel: "Enter your mobile number (9 digits).", eCorreo: "Check the email (e.g. name@email.com) or leave it empty.", eAcepto: "Please tick the box to send your request.",
+    okTit: n => "One more step, " + n, okTxt: () => "We opened WhatsApp with your request. Send the message in WhatsApp so it reaches the restaurant: the team will check availability and contact you to confirm your table. Until then, the booking is not confirmed.",
+    wa: { hola: "Hello Cabaña Vista Alegre, I'd like to request a booking:", personas: "Guests", dia: "Day", hora: "Preferred time", nombre: "Name", cel: "Mobile", zona: "Area", ocasion: "Occasion", correo: "Email", coment: "Comments", fin: "I look forward to your confirmation. Thank you!" },
     terminos: [["Blue", "Seared outside, almost raw inside."], ["Rare", "Red, warm center."], ["Medium", "Pink and juicy center. The house recommendation."], ["Medium well", "Slightly pink center."], ["Well done", "Cooked through, no pink."]],
     tags: { "Para 2": "For 2", "Para 3": "For 3", "De autor": "Signature" }, locale: "en-US" }
 };
@@ -790,10 +851,12 @@ function pintarCarta() {
       ${nota ? `<p class="nota">${nota}</p>` : `<div style="height:8px"></div>`}
       ${c.terminos ? `<details class="guia"><summary>${t("guia")}</summary><ul>${t("terminos").map((x, i) => `<li><i style="--c:${COLORES[i]}"></i><b>${x[0]}</b><span>${x[1]}</span></li>`).join("")}</ul></details>` : ""}
       <div class="lista">
-      ${c.items.map(p => p.length === 1 ? `<p class="grupo-t">${sub(p[0])}</p>` : (() => {
+      ${(() => { let g = "", gTodo = ""; return c.items.map(p => { if (p.length === 1) { g = sub(p[0]); gTodo = p[0].replace("— ", "").replace(" | ", " "); return `<p class="grupo-t">${g}</p>`; }
         const desc = L === "en" && p[5] ? p[5] : p[2], tag = p[4] ? (L === "en" && t("tags")[p[4]] || p[4]) : "";
-        return `<div class="plato" data-txt="${norm(p[0] + " " + p[2] + " " + (p[5] || "") + " " + c.nombre + " " + (c.en || ""))}"><h4>${p[0]}${p[1] ? `<small>${p[1]}</small>` : ""}${tag ? `<span class="tag">${tag}</span>` : ""}</h4><b>S/ ${p[3]}</b>${desc ? `<p>${desc}</p>` : ""}</div>`;
-      })()).join("")}
+        // al buscar se ocultan los subtítulos: la etiqueta .gr dice de qué sección/grupo es cada plato (ej. bife argentino vs. americano)
+        // data-txt: lo del propio plato (nombre, gramaje, descripción ES/EN y subgrupo) · data-sec: nombre de la sección
+        return `<div class="plato" data-nom="${norm(p[0])}" data-txt="${norm(p[0] + " " + p[1] + " " + p[2] + " " + (p[5] || "") + " " + gTodo)}" data-sec="${norm(c.nombre + " " + (c.en || ""))}"><h4>${p[0]}${p[1] ? `<small>${p[1]}</small>` : ""}${tag ? `<span class="tag">${tag}</span>` : ""}<span class="gr">${tit(c)}${g ? " · " + g : ""}</span></h4><b>S/ ${p[3]}</b>${desc ? `<p>${desc}</p>` : ""}</div>`;
+      }).join(""); })()}
       </div>
     </div>
   </section>`; }).join("");
@@ -836,55 +899,83 @@ function irA(id, destino) {
   history.replaceState(null, "", "#" + id);
 }
 barraTabs.addEventListener("click", e => { const tb = e.target.closest(".tab"); if (!tb) return; e.preventDefault(); irA(tb.getAttribute("href").slice(1)); });
+// lleva a un plato concreto: abre su sección, baja hasta él y lo resalta un momento.
+// Si había una búsqueda escrita, se limpia antes (si no, el plato podría estar oculto).
+function irAPlato(id, nombre) {
+  if ($("buscar").value) { $("buscar").value = ""; buscar(); }
+  const sec = $(id), n = norm(nombre || "");
+  const p = sec && n && [...sec.querySelectorAll(".plato")].find(x => norm(x.querySelector("h4").firstChild.textContent).startsWith(n));
+  irA(id, p);
+  if (p) { p.classList.remove("brilla"); void p.offsetWidth; p.classList.add("brilla"); }
+}
 $("ins-grid").addEventListener("click", e => {
   const a = e.target.closest("[data-ir]"); if (!a) return; e.preventDefault();
-  // busca el plato exacto dentro de la sección y lo resalta un momento
-  const sec = $(a.dataset.ir), n = norm(a.dataset.plato);
-  const p = sec && [...sec.querySelectorAll(".plato")].find(x => norm(x.querySelector("h4").firstChild.textContent).startsWith(n));
-  irA(a.dataset.ir, p);
-  if (p) { p.classList.remove("brilla"); void p.offsetWidth; p.classList.add("brilla"); }
+  irAPlato(a.dataset.ir, a.dataset.plato);
 });
 // buscador
 function buscar() {
   const q = norm($("buscar").value.trim());
+  // cada palabra se busca por separado y en cualquier orden ("bife chorizo" encuentra "Bife de chorizo").
+  // Se busca por niveles y se queda con el primero que encuentre algo:
+  // 1) el nombre del plato ("ensalada" → las ensaladas, no las carnes "con ensalada parrillera"),
+  // 2) el nombre de la sección (ej. "postres", "bar", "salads"), 3) todo el plato (gramaje, descripción ES/EN, subgrupo).
+  // Cada palabra debe coincidir con el inicio de una palabra ("bar" no encuentra "almíbar"; "chorizo" sí encuentra "chorizos").
+  const pal = q.replace(/(\d)([a-z])/g, "$1 $2").split(/[^a-z0-9]+/).filter(Boolean), todas = s => { const t = " " + s.replace(/[^a-z0-9]+/g, " "); return pal.every(w => t.includes(" " + w)); };
+  const platos = [...document.querySelectorAll(".plato")];
+  const nivel = [p => p.dataset.nom, p => p.dataset.sec, p => p.dataset.txt + " " + p.dataset.sec].find(f => platos.some(p => todas(f(p)))) || (() => "");
+  const ve = p => !pal.length || todas(nivel(p));
   let total = 0;
   document.querySelectorAll(".cat").forEach(sec => {
     let n = 0;
-    sec.querySelectorAll(".plato").forEach(p => { const v = !q || p.dataset.txt.includes(q); p.classList.toggle("oculto", !v); if (v) n++; });
+    sec.querySelectorAll(".plato").forEach(p => { const v = ve(p); p.classList.toggle("oculto", !v); if (v) n++; });
     sec.querySelectorAll(".grupo-t,.guia").forEach(x => x.style.display = q ? "none" : "");
     sec.style.display = n ? "" : "none"; total += n;
   });
   $("sin-res").style.display = total ? "none" : "block";
   document.querySelector(".tabs").style.display = q ? "none" : "";
+  $("carta").classList.toggle("buscando", !!q);
 }
 $("buscar").addEventListener("input", buscar);
+// en el celular, "Buscar" en el teclado cierra el teclado para ver los resultados
+$("buscar").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); e.target.blur(); } });
 // enlaces que llevan a un plato concreto de la carta (ej. condiciones del descorche)
 document.addEventListener("click", e => {
   const a = e.target.closest("[data-ir-plato]"); if (!a) return; e.preventDefault();
-  const id = a.getAttribute("href").slice(1), n = norm(a.dataset.irPlato);
-  const p = [...$(id).querySelectorAll(".plato")].find(x => norm(x.querySelector("h4").firstChild.textContent).startsWith(n));
-  irA(id, p); if (p) { p.classList.remove("brilla"); void p.offsetWidth; p.classList.add("brilla"); }
+  irAPlato(a.getAttribute("href").slice(1), a.dataset.irPlato);
 });
 
 /* ===== Reserva ===== */
-// Demo: al venderla se conecta con el sistema de reservas que use el restaurante.
-let personas = 2, hora = null;
+// No hay un sistema de reservas conectado: el formulario arma la solicitud y la persona la envía
+// por WhatsApp al restaurante. Nunca se muestra una reserva como confirmada.
+// Si el restaurante usa un sistema de reservas, conectarlo dentro de enviarSolicitud().
+let personas = 2, hora = null, enviando = false;
 const pad = n => String(n).padStart(2, "0");
 const iso = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
 const pTxt = () => { $("personas").textContent = t("persona")(personas); $("menos").disabled = personas <= 1; $("mas").disabled = personas >= 10; resumen(); };
 $("menos").onclick = () => { personas--; pTxt(); };
 $("mas").onclick = () => { personas++; pTxt(); };
+// horarios que se pueden pedir para un día (en minutos desde medianoche), según HORARIO y la hora de Lima.
+// Hoy solo se ofrecen horarios con al menos 30 minutos de anticipación.
+function horariosDe(v) {
+  const [y, m, dd] = v.split("-").map(Number), d = new Date(y, m - 1, dd);
+  const [a, c] = HORARIO[d.getDay()], ahora = lima();
+  const lim = iso(ahora) === v ? ahora.getHours() * 60 + ahora.getMinutes() + 30 : 0, op = [];
+  for (let x = a * 60 + 30; x <= c * 60 - 90; x += 30) if (x >= lim) op.push(x);
+  return op;
+}
 function pintarDias() {
   const sel = (document.querySelector("input[name=dia]:checked") || {}).value;
   const dias = []; for (let i = 0; i < 14; i++) { const d = lima(); d.setDate(d.getDate() + i); dias.push(d); }
-  $("dias").innerHTML = dias.map((d, i) => `<input type="radio" name="dia" id="d${i}" value="${iso(d)}"${(sel ? iso(d) === sel : i === 0) ? " checked" : ""}><label for="d${i}"><small>${i === 0 ? t("hoy") : i === 1 ? t("manana") : d.toLocaleDateString(t("locale"), { weekday: "short" }).replace(".", "")}</small>${d.getDate()} ${d.toLocaleDateString(t("locale"), { month: "short" }).replace(".", "")}</label>`).join("");
+  // si hoy ya no quedan horarios para pedir, el día "Hoy" se desactiva (no se puede elegir una fecha pasada)
+  const hoyLleno = !horariosDe(iso(dias[0])).length;
+  const elegido = sel && !(hoyLleno && sel === iso(dias[0])) && dias.some(d => iso(d) === sel) ? sel : iso(dias[hoyLleno ? 1 : 0]);
+  $("dias").innerHTML = dias.map((d, i) => { const off = i === 0 && hoyLleno;
+    return `<input type="radio" name="dia" id="d${i}" value="${iso(d)}"${iso(d) === elegido ? " checked" : ""}${off ? " disabled" : ""}><label for="d${i}"${off ? ` class="off" title="${t("sinHoras")}"` : ""}><small>${i === 0 ? t("hoy") : i === 1 ? t("manana") : d.toLocaleDateString(t("locale"), { weekday: "short" }).replace(".", "")}</small>${d.getDate()} ${d.toLocaleDateString(t("locale"), { month: "short" }).replace(".", "")}</label>`; }).join("");
+  $("aviso-hoy").textContent = hoyLleno ? t("sinHoras") : "";
 }
-// solo se muestran los horarios que se pueden elegir, separados en almuerzo y cena
+// los horarios se separan en almuerzo y cena
 function pintarHoras() {
-  const v = document.querySelector("input[name=dia]:checked").value, [y, m, dd] = v.split("-").map(Number), d = new Date(y, m - 1, dd);
-  const [a, c] = HORARIO[d.getDay()], ahora = lima(), esHoy = iso(ahora) === v;
-  const lim = esHoy ? ahora.getHours() * 60 + ahora.getMinutes() + 30 : 0, op = [];
-  for (let x = a * 60 + 30; x <= c * 60 - 90; x += 30) if (x >= lim) op.push(x);
+  const op = horariosDe(document.querySelector("input[name=dia]:checked").value);
   if (!op.length) { $("horas").innerHTML = `<p style="font-size:15px;color:var(--suave)">${t("sinHoras")}</p>`; hora = null; resumen(); return; }
   if (hora !== null && !op.includes(hora)) hora = null;
   const btn = x => `<input type="radio" name="hora" id="h${x}" value="${x}"${x === hora ? " checked" : ""}><label for="h${x}">${hTxt(x).replace(/ ?[ap]\.? ?m\.$/, s => /a/.test(s) ? " am" : " pm")}</label>`;
@@ -892,28 +983,75 @@ function pintarHoras() {
   $("horas").innerHTML = (alm.length ? `<p class="turno">${t("almuerzo")}</p><div class="chips horas">${alm.map(btn).join("")}</div>` : "") + (cen.length ? `<p class="turno">${t("cena")}</p><div class="chips horas">${cen.map(btn).join("")}</div>` : "");
   resumen();
 }
-$("dias").addEventListener("change", pintarHoras);
-$("horas").addEventListener("change", e => { hora = +e.target.value; resumen(); });
+$("dias").addEventListener("change", () => { pintarHoras(); marcarError("horas", ""); });
+$("horas").addEventListener("change", e => { hora = +e.target.value; marcarError("horas", ""); resumen(); });
 const fechaTxt = v => new Date(v + "T12:00").toLocaleDateString(t("locale"), { weekday: "long", day: "numeric", month: "long" });
-// evita el punto doble cuando la hora ya termina en "m." (ej. "8:30 p. m..")
-const punto = s => s.replace(/\.(<\/b>)?\./g, ".$1");
 function resumen() {
   const dv = document.querySelector("input[name=dia]:checked"); if (!dv) return;
   $("resumen").innerHTML = t("resumen")(t("persona")(personas), fechaTxt(dv.value), hora !== null ? hTxt(hora) : "");
 }
+// errores junto a cada campo (texto + borde rojo + aria-invalid)
+const ERR = { horas: "e-hora", nombre: "e-nombre", cel: "e-cel", correo: "e-correo", acepto: "e-acepto" };
+function marcarError(id, msg) {
+  $(ERR[id]).textContent = msg || "";
+  if (msg) $(id).setAttribute("aria-invalid", "true"); else $(id).removeAttribute("aria-invalid");
+}
+["nombre", "cel", "correo", "acepto"].forEach(id => $(id).addEventListener(id === "acepto" ? "change" : "input", () => { if ($(id).getAttribute("aria-invalid")) marcarError(id, ""); }));
+// el celular solo acepta números, espacios, + y guiones
+$("cel").addEventListener("input", e => { const v = e.target.value.replace(/[^\d+\s-]/g, ""); if (v !== e.target.value) e.target.value = v; });
+function validar() {
+  const errores = [];
+  // por si la página quedó abierta: vuelve a revisar que el horario elegido no haya pasado
+  if (hora !== null && !horariosDe(document.querySelector("input[name=dia]:checked").value).includes(hora)) { pintarDias(); pintarHoras(); errores.push(["horas", t("eHoraPaso")]); }
+  else if (hora === null) errores.push(["horas", t("eHora")]);
+  if (!$("nombre").value.trim()) errores.push(["nombre", t("eNombre")]);
+  const dig = $("cel").value.replace(/\D/g, "").length;
+  if (dig < 9 || dig > 15) errores.push(["cel", t("eCel")]);
+  const co = $("correo").value.trim();
+  if (co && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(co)) { errores.push(["correo", t("eCorreo")]); $("extra").open = true; }
+  if (!$("acepto").checked) errores.push(["acepto", t("eAcepto")]);
+  Object.keys(ERR).forEach(id => marcarError(id, (errores.find(e => e[0] === id) || [])[1]));
+  return errores;
+}
+function mensajeWA() {
+  const w = t("wa"), z = document.querySelector("input[name=zona]:checked").value, oc = $("ocasion").value;
+  const co = $("correo").value.trim(), cm = $("comentario").value.trim();
+  const l = [w.hola, "",
+    `• ${w.personas}: ${t("persona")(personas)}`,
+    `• ${w.dia}: ${fechaTxt(document.querySelector("input[name=dia]:checked").value)}`,
+    `• ${w.hora}: ${hTxt(hora)}`,
+    `• ${w.nombre}: ${$("nombre").value.trim()}`,
+    `• ${w.cel}: ${$("cel").value.trim()}`];
+  if (z !== "0") l.push(`• ${w.zona}: ${t("z" + z)}`);
+  if (oc !== "0") l.push(`• ${w.ocasion}: ${t("oc" + oc)}`);
+  if (co) l.push(`• ${w.correo}: ${co}`);
+  if (cm) l.push(`• ${w.coment}: ${cm}`);
+  l.push("", w.fin);
+  return l.join("\n");
+}
 $("form").addEventListener("submit", e => {
   e.preventDefault();
-  const err = $("error"); err.textContent = "";
-  if (hora === null) { err.textContent = t("eHora"); ($("horas").querySelector("input") || $("horas")).focus(); return; }
-  if (!$("nombre").value.trim()) { err.textContent = t("eNombre"); $("nombre").focus(); return; }
-  if ($("cel").value.replace(/\D/g, "").length < 9) { err.textContent = t("eCel"); $("cel").focus(); return; }
-  if (!$("acepto").checked) { err.textContent = t("eAcepto"); $("acepto").focus(); return; }
-  const z = document.querySelector("input[name=zona]:checked").value;
+  if (enviando) return; // evita dobles envíos por doble toque
+  const err = $("error"), errores = validar();
+  err.textContent = errores.length > 1 ? t("eResumen") : "";
+  if (errores.length) {
+    const id = errores[0][0], el = id === "horas" ? ($("horas").querySelector("input") || $("horas")) : $(id);
+    el.focus({ preventScroll: true }); (id === "horas" ? $("horas") : el).scrollIntoView({ block: "center", behavior: quieto ? "auto" : "smooth" });
+    return;
+  }
+  enviando = true; $("enviar").disabled = true;
+  const url = "https://wa.me/" + NEGOCIO_WA + "?text=" + encodeURIComponent(mensajeWA());
+  // se abre WhatsApp en otra pestaña; si el navegador lo bloquea, se abre en esta misma
+  const win = window.open(url, "_blank");
+  if (win) win.opener = null; else location.href = url;
   $("ok-tit").textContent = t("okTit")($("nombre").value.trim().split(" ")[0]);
-  $("ok-txt").textContent = punto(t("okTxt")(t("persona")(personas), fechaTxt(document.querySelector("input[name=dia]:checked").value), hTxt(hora), z === "0" ? "" : t("z" + z), $("cel").value.trim()));
+  $("ok-txt").textContent = t("okTxt")();
+  $("ok-wa").href = url;
   $("res-card").classList.add("enviada"); $("ok").focus();
+  setTimeout(() => { enviando = false; $("enviar").disabled = false; }, 2500);
 });
-$("otra").onclick = () => { $("res-card").classList.remove("enviada"); $("form").reset(); personas = 2; hora = null; pintarDias(); pTxt(); pintarHoras(); };
+// vuelve al formulario con los datos tal cual, para corregir algo o pedir otra mesa
+$("otra").onclick = () => { $("res-card").classList.remove("enviada"); pintarDias(); pintarHoras(); $("res-card").scrollIntoView({ block: "start", behavior: quieto ? "auto" : "smooth" }); };
 
 /* ===== Cambiar idioma ===== */
 function aplicarIdioma() {
