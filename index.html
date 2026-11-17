@@ -677,7 +677,7 @@ const AG = { marca: "TC Studio", wa: "51982508530" };
 const NEGOCIO_WA = "51944467705"; // WhatsApp de reservas que publica el restaurante
 const $ = id => document.getElementById(id);
 const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
-$("credit").innerHTML = 'Página hecha por <a href="https://wa.me/' + AG.wa + '" target="_blank" rel="noopener">' + AG.marca + '</a>';
+$("credit").innerHTML = 'Página hecha por <a href="https://tcstudioweb.com/" target="_blank" rel="noopener">' + AG.marca + '</a> · <a href="https://wa.me/' + AG.wa + '" target="_blank" rel="noopener">WhatsApp</a>';
 document.querySelectorAll("[data-wa]").forEach(a => a.href = "https://wa.me/" + NEGOCIO_WA + "?text=" + encodeURIComponent(a.dataset.wa));
 
 // hora de Lima, aunque la persona esté en otro país
