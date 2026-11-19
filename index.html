@@ -55,6 +55,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:120px}
 body{font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:16px;background:var(--noche);color:var(--crema);line-height:1.6;overflow-x:hidden}
+/* fondo de toda la página: café casi negro arriba y caramelo abajo, como la carta impresa (se queda fijo al bajar) */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#170c07 0%,#25160b 28%,#3d2711 58%,#6b4a24 100%);pointer-events:none}
 img{display:block;max-width:100%}
 a{color:inherit}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -141,8 +143,8 @@ header.solido .marca img{width:46px}
 .prueba a:hover span{text-decoration:underline;text-underline-offset:3px}
 
 /* ===== secciones claras ===== */
-.claro{background:var(--papel);color:var(--tinta)}
-.claro .kicker{color:var(--vino)}
+.claro{--tinta:#F3ECE2;--papel:#1d120b;--suave:rgba(243,236,226,.72);--linea:rgba(243,236,226,.14);--vino:#D5B886;--hueso:#2B1A13;background:transparent;color:var(--tinta)}
+.claro .kicker{color:var(--oro2)}
 .cab{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;margin-bottom:44px}
 .cab h2{font-size:clamp(44px,5.6vw,80px);margin-top:12px}
 .cab p{max-width:430px;font-size:17px;color:var(--suave)}
@@ -165,7 +167,7 @@ header.solido .marca img{width:46px}
 @keyframes brilla{0%,45%{background:rgba(184,149,95,.24);box-shadow:0 0 0 10px rgba(184,149,95,.24)}100%{background:transparent;box-shadow:0 0 0 10px rgba(184,149,95,0)}}
 
 /* ===== historia ===== */
-.historia{background:linear-gradient(180deg,#170c07 0%,#25160b 22%,#3d2711 45%,#62401a 70%,#86613a 100%);padding:120px 0}
+.historia{padding:120px 0}
 .historia .his-txt p+p{margin-top:14px}
 .historia .cita cite{opacity:.85}
 .his-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
@@ -187,13 +189,13 @@ header.solido .marca img{width:46px}
 /* ===== carta ===== */
 .carta{padding:110px 0 100px}
 .buscar{position:relative;width:min(360px,100%)}
-.buscar input{width:100%;border:1px solid var(--linea);background:#fff;border-radius:2px;padding:14px 18px 14px 46px;font-size:16px}
+.buscar input{width:100%;border:1px solid var(--linea);background:rgba(243,236,226,.06);color:var(--tinta);border-radius:2px;padding:14px 18px 14px 46px;font-size:16px}
 .buscar svg{position:absolute;left:16px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--suave)}
-.tabs{position:sticky;top:64px;z-index:20;background:rgba(250,247,242,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.tabs{position:sticky;top:64px;z-index:20;background:rgba(23,12,7,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
 .tabs-in{position:relative}
 .tabs-in::before,.tabs-in::after{content:"";position:absolute;top:0;bottom:0;width:56px;pointer-events:none;z-index:1;opacity:0;transition:opacity .25s}
-.tabs-in::before{left:0;background:linear-gradient(90deg,var(--papel),rgba(250,247,242,0))}
-.tabs-in::after{right:0;background:linear-gradient(270deg,var(--papel),rgba(250,247,242,0))}
+.tabs-in::before{left:0;background:linear-gradient(90deg,#170c07,rgba(23,12,7,0))}
+.tabs-in::after{right:0;background:linear-gradient(270deg,#170c07,rgba(23,12,7,0))}
 .tabs-in.izq::before,.tabs-in.der::after{opacity:1}
 #tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0}
 #tabs::-webkit-scrollbar{display:none}
@@ -216,7 +218,7 @@ header.solido .marca img{width:46px}
 .cat.sinfoto .lista>*{break-inside:avoid}
 .cat h3.tit{font-size:clamp(36px,3.6vw,52px)}
 .cat .nota{font-size:15.5px;color:var(--suave);margin:8px 0 10px;max-width:560px}
-.guia{margin:6px 0 14px;border:1px solid var(--linea);background:#fff}
+.guia{margin:6px 0 14px;border:1px solid var(--linea);background:rgba(243,236,226,.04)}
 .guia summary{list-style:none;cursor:pointer;padding:12px 16px;font-size:14px;font-weight:600;display:flex;justify-content:space-between}
 .guia summary::-webkit-details-marker{display:none}
 .guia summary::after{content:"+";font-size:18px;line-height:1;color:var(--vino)}
@@ -234,13 +236,11 @@ header.solido .marca img{width:46px}
 .plato p{grid-column:1;font-size:15px;color:var(--suave)}
 .plato b{grid-row:1;grid-column:2;font-size:17px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
 .plato.oculto{display:none}
-.plato.confoto{grid-template-columns:76px 1fr auto;column-gap:18px;align-items:start}
-.plato .ph{grid-row:1/span 2;grid-column:1;width:76px;height:76px;padding:0;border:0;background:var(--hueso);overflow:hidden;border-radius:2px;cursor:zoom-in}
-.plato .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
-@media (hover:hover){.plato .ph:hover img{transform:scale(1.08)}}
-.plato.confoto h4{grid-column:2}
-.plato.confoto b{grid-column:3}
-.plato.confoto p{grid-column:2}
+/* plato con foto: se puede tocar; un iconito de cámara avisa que tiene foto */
+.plato.confoto{cursor:pointer;transition:background .25s}
+.plato.confoto h4::after{content:"";width:16px;height:16px;align-self:center;opacity:.55;background:currentColor;-webkit-mask:var(--cam) center/contain no-repeat;mask:var(--cam) center/contain no-repeat;--cam:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7'%3E%3Cpath d='M4 8h3l2-2.5h6L17 8h3v11H4z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E")}
+@media (hover:hover){.plato.confoto:hover{background:rgba(243,236,226,.05)}.plato.confoto:hover h4::after{opacity:1}}
+.plato.confoto:focus-visible{outline-offset:2px}
 /* visor de foto de un plato */
 .visor{border:0;padding:0;background:transparent;max-width:min(92vw,820px);max-height:92vh;margin:auto;color:var(--crema);overflow:hidden}
 .visor::backdrop{background:rgba(12,7,5,.86);backdrop-filter:blur(4px)}
@@ -271,7 +271,7 @@ header.solido .marca img{width:46px}
 .momentos .dato{display:block;margin-top:10px;font-size:13.5px;color:var(--oro2);opacity:.9}
 
 /* ===== reserva ===== */
-.reserva{background:var(--madera);padding:120px 0;border-top:1px solid var(--linea-o)}
+.reserva{padding:120px 0;border-top:1px solid var(--linea-o)}
 .res-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
 .res-grid>*{min-width:0}
 .res-grid h2{font-size:clamp(44px,5.4vw,76px);margin:14px 0 18px}
@@ -328,6 +328,13 @@ header.solido .marca img{width:46px}
 .extra-in{padding:4px 16px 18px;display:grid;gap:18px}
 .sub-paso .lbl{display:block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);margin-bottom:10px}
 .res-card .btn{width:100%}
+.res-wix h3{font-size:clamp(32px,4vw,42px);line-height:1.05}
+.res-wix>p{color:var(--suave);margin:12px 0 22px;font-size:16.5px}
+.wix-pasos{list-style:none;counter-reset:p;display:grid;gap:12px;margin:0 0 28px;padding:0}
+.wix-pasos li{counter-increment:p;display:flex;align-items:center;gap:14px;font-size:16px}
+.wix-pasos li::before{content:counter(p);flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--oro);color:var(--vino);display:grid;place-items:center;font-size:14px}
+.wix-tel{font-size:14.5px;color:var(--suave);text-align:center;margin-top:14px}
+.wix-tel a{color:var(--tinta)}
 .res-card .btn[disabled]{opacity:.6;cursor:wait}
 .wa-ic{width:18px;height:18px;flex:none}
 .nota-envio{font-size:13.5px;color:var(--suave);text-align:center;margin-top:10px}
@@ -395,7 +402,7 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
   .portada .wrap{padding:120px 0 40px}
   .portada::after{background:linear-gradient(0deg,rgba(12,7,5,.95) 0%,rgba(12,7,5,.6) 50%,rgba(12,7,5,.2) 100%)}
   .his-grid,.res-grid,.vis-grid{grid-template-columns:1fr;gap:40px}
-  .his-foto{aspect-ratio:16/11}
+  .his-foto{aspect-ratio:16/11;position:relative;top:auto} /* en celular la foto no se queda pegada: el texto le pasaba por encima */
   .cat{grid-template-columns:1fr;gap:24px;padding-top:48px}
   .cat-foto{position:relative;top:0;aspect-ratio:16/9}
   .cat.sinfoto .lista{columns:1}
@@ -414,8 +421,6 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
   footer .base{padding-right:0}
 }
 @media (max-width:560px){
-  .plato.confoto{grid-template-columns:64px 1fr auto;column-gap:14px}
-  .plato .ph{width:64px;height:64px}
   .wrap{width:min(1200px,100% - 32px)}
   .marca small{display:none}
   .portada h1{font-size:56px}
@@ -576,70 +581,27 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
     <div class="wrap res-grid">
       <div class="txt rev">
         <span class="kicker" data-i="resKicker">Reservas</span>
-        <h2 id="t-reserva" data-i="resH2">Solicita tu mesa</h2>
-        <p data-i="resP">Elige día, horario y cuántas personas vienen. Tu solicitud llega al restaurante por WhatsApp y el equipo te confirma la disponibilidad.</p>
+        <h2 id="t-reserva" data-i="resH2">Reserva tu mesa</h2>
+        <p data-i="resP">Reserva en línea en pocos pasos: eliges día, horario y cuántas personas vienen, y te llega la confirmación a tu correo.</p>
         <ul class="res-lista">
-          <li data-i="res1">Los horarios son los de atención del restaurante. Toda reserva está sujeta a confirmación.</li>
+          <li data-i="res1">Los horarios disponibles son los de atención del restaurante.</li>
           <li data-i="res2">Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.</li>
           <li data-i="res3">Para grupos de más de 10 personas, te atendemos de forma personalizada.</li>
         </ul>
         <span class="estado-l" id="estado"><i></i><span></span></span>
       </div>
-      <div class="res-card rev" id="res-card">
-        <!-- No hay un sistema de reservas conectado: la solicitud se arma aquí y la persona la envía por WhatsApp al restaurante.
-             Si el restaurante usa un sistema de reservas, conectarlo en el envío del formulario (más abajo, en el script). -->
-        <form id="form" novalidate aria-describedby="res-aviso">
-          <p class="res-aviso" id="res-aviso" data-i="resAviso">Esto es una solicitud, no una reserva confirmada. El restaurante te responderá para confirmar tu mesa.</p>
-          <div class="paso">
-            <span class="lbl" id="l-personas" data-i="lPersonas">Personas</span>
-            <div class="contador-p" role="group" aria-labelledby="l-personas"><button type="button" id="menos" aria-label="Una persona menos">−</button><output id="personas" aria-live="polite"></output><button type="button" id="mas" aria-label="Una persona más">+</button></div>
-          </div>
-          <div class="paso">
-            <span class="lbl" id="l-dia" data-i="lDia">Día</span>
-            <div class="chips" id="dias" role="radiogroup" aria-labelledby="l-dia" aria-describedby="aviso-hoy"></div>
-            <p class="aviso-hoy" id="aviso-hoy"></p>
-          </div>
-          <div class="paso">
-            <span class="lbl" id="l-hora"><span data-i="lHora">Horario preferido</span> <em class="sujeto" data-i="sujeto">sujeto a confirmación</em></span>
-            <div id="horas" role="radiogroup" aria-labelledby="l-hora" aria-describedby="e-hora"></div>
-            <p class="e-campo" id="e-hora"></p>
-          </div>
-          <div class="fila2 paso">
-            <label class="campo"><span data-i="lNombre">Nombre</span><input id="nombre" name="nombre" autocomplete="name" placeholder="Ej. Lucía Torres" data-iph="phNombre" maxlength="60" required aria-describedby="e-nombre" enterkeyhint="next"><span class="e-campo" id="e-nombre"></span></label>
-            <label class="campo"><span data-i="lCel">Celular</span><input id="cel" name="cel" type="tel" inputmode="tel" autocomplete="tel" placeholder="9XX XXX XXX" maxlength="16" required aria-describedby="e-cel" enterkeyhint="done"><span class="e-campo" id="e-cel"></span></label>
-          </div>
-          <details class="extra paso" id="extra">
-            <summary><span data-i="extraTit">Agregar detalles</span> <small data-i="extraSub">ambiente, ocasión, correo, comentarios · opcional</small></summary>
-            <div class="extra-in">
-              <div class="sub-paso">
-                <span class="lbl" id="l-zona" data-i="lZona">Ambiente preferido</span>
-                <div class="chips" role="radiogroup" aria-labelledby="l-zona">
-                  <input type="radio" name="zona" id="z0" value="0" checked><label for="z0" data-i="z0">Sin preferencia</label>
-                  <input type="radio" name="zona" id="z1" value="1"><label for="z1" data-i="z1">Salón</label>
-                  <input type="radio" name="zona" id="z2" value="2"><label for="z2" data-i="z2">Terraza</label>
-                </div>
-              </div>
-              <div class="fila2">
-                <label class="campo"><span data-i="lOcasion">Ocasión</span><select id="ocasion"><option value="0" data-i="oc0">Ninguna</option><option value="1" data-i="oc1">Cumpleaños</option><option value="2" data-i="oc2">Aniversario</option><option value="3" data-i="oc3">Reunión de trabajo</option><option value="4" data-i="oc4">Otra</option></select></label>
-                <label class="campo"><span data-i="lCorreo">Correo</span><input id="correo" type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" data-iph="phCorreo" maxlength="80" aria-describedby="e-correo"><span class="e-campo" id="e-correo"></span></label>
-                <label class="campo full"><span data-i="lComent">Comentarios</span><textarea id="comentario" maxlength="200" placeholder="Ej. silla para bebé, traemos torta…" data-iph="phComent"></textarea></label>
-              </div>
-            </div>
-          </details>
-          <label class="acepto"><input type="checkbox" id="acepto" aria-describedby="e-acepto"><span data-i="acepto">Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta solicitud de reserva.</span></label>
-          <p class="e-campo" id="e-acepto"></p>
-          <p class="error" id="error" role="alert"></p>
-          <p class="resumen" id="resumen" aria-live="polite"></p>
-          <button class="btn btn-vino" type="submit" id="enviar"><svg class="wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span data-i="solicitar">Solicitar reserva</span></button>
-          <p class="nota-envio" data-i="notaEnvio">Se abrirá WhatsApp con tu solicitud lista. Solo tienes que enviarla.</p>
-        </form>
-        <div class="ok" id="ok" role="status" tabindex="-1">
-          <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></div>
-          <h3 id="ok-tit"></h3>
-          <p id="ok-txt"></p>
-          <a class="btn btn-vino" id="ok-wa" target="_blank" rel="noopener" data-i="okWa">Abrir WhatsApp de nuevo</a>
-          <button class="btn" type="button" id="otra" data-i="otra">Editar o hacer otra solicitud</button>
-        </div>
+      <div class="res-card res-wix rev" id="res-card">
+        <!-- Las reservas se hacen en las Reservas de mesa de Wix del restaurante.
+             En la web final (dentro de su Wix) el widget de reservas va en este lugar. -->
+        <h3 data-i="wixTit">Reserva en línea</h3>
+        <p data-i="wixTxt">Elige día, horario y cuántas personas vienen en nuestro sistema de reservas.</p>
+        <ol class="wix-pasos">
+          <li data-i="wix1">Elige el día y la hora</li>
+          <li data-i="wix2">Indica cuántas personas vienen</li>
+          <li data-i="wix3">Recibe la confirmación en tu correo</li>
+        </ol>
+        <a class="btn btn-vino" id="btn-wix" target="_blank" rel="noopener" data-i="wixBtn">Reservar mesa</a>
+        <p class="wix-tel"><span data-i="wixTel">¿Más de 10 personas? Llámanos al</span> <a href="tel:+51944467705">944 467 705</a></p>
       </div>
     </div>
   </section>
@@ -694,7 +656,7 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
 <script src="carta.js"></script>
 <script>
 const AG = { marca: "TC Studio", wa: "51991549700" };
-const NEGOCIO_WA = "51944467705"; // WhatsApp de reservas que publica el restaurante
+const NEGOCIO_WA = "51944467705"; // WhatsApp que publica el restaurante (botón flotante de consultas)
 const $ = id => document.getElementById(id);
 const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
 $("credit").innerHTML = 'Página hecha por <a href="https://tcstudioweb.com/" target="_blank" rel="noopener">' + AG.marca + '</a> · <a href="https://wa.me/' + AG.wa + '" target="_blank" rel="noopener">WhatsApp</a>';
@@ -722,24 +684,12 @@ const TXT = {
     amb1: "El salón", amb1s: "Ladrillo rococho y madera: cenas en familia y almuerzos de trabajo", amb2: "La terraza", amb2s: "Para almuerzos largos y cenas relajadas", amb3: "La cava", amb3s: "Rodeado de vinos y barricas", amb4: "Salón privado", amb4s: "Segundo piso, para reuniones y grupos", amb5: "Terraza del segundo piso", amb5s: "Mesas largas para celebrar",
     m1: "Celebraciones", m1p: "Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.", m1d: "Servicio de torta: S/ 50", m1a: "Consultar celebración", m2: "Grupos y empresas", m2p: "Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.", m2a: "Coordinar",
     m3: "Trae tu vino", m3p: "Puedes traer tu botella favorita para acompañar tu parrilla.", m3d: "Descorche: S/ 40 por botella de 750 ml. Corcho libre en vinos de 750 ml presentados al ingresar.", m3a: "Ver condiciones", m4: "Menú kids", m4p: "Lomo fino o milanesa de pollo, con papas o spaghetti, bebida y bola de helado.", m4d: "Desde S/ 75",
-    resKicker: "Reservas", resH2: "Solicita tu mesa", resP: "Elige día, horario y cuántas personas vienen. Tu solicitud llega al restaurante por WhatsApp y el equipo te confirma la disponibilidad.",
-    res1: "Los horarios son los de atención del restaurante. Toda reserva está sujeta a confirmación.", res2: "Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.", res3: "Para grupos de más de 10 personas, te atendemos de forma personalizada.",
-    resAviso: "Esto es una solicitud, no una reserva confirmada. El restaurante te responderá para confirmar tu mesa.",
-    lPersonas: "Personas", lDia: "Día", lHora: "Horario preferido", sujeto: "sujeto a confirmación", lZona: "Ambiente preferido", z0: "Sin preferencia", z1: "Salón", z2: "Terraza", lNombre: "Nombre", lCel: "Celular", lOcasion: "Ocasión",
-    extraTit: "Agregar detalles", extraSub: "ambiente, ocasión, correo, comentarios · opcional",
-    oc0: "Ninguna", oc1: "Cumpleaños", oc2: "Aniversario", oc3: "Reunión de trabajo", oc4: "Otra", lCorreo: "Correo", lComent: "Comentarios",
-    phNombre: "Ej. Lucía Torres", phCorreo: "tu@correo.com", phComent: "Ej. silla para bebé, traemos torta…", acepto: 'Acepto que Cabaña Vista Alegre use mis datos solo para gestionar esta solicitud de reserva, según su <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.', solicitar: "Solicitar reserva",
-    notaEnvio: "Se abrirá WhatsApp con tu solicitud lista. Solo tienes que enviarla.", okWa: "Abrir WhatsApp de nuevo", otra: "Editar o hacer otra solicitud",
+    resKicker: "Reservas", resH2: "Reserva tu mesa", resP: "Reserva en línea en pocos pasos: eliges día, horario y cuántas personas vienen, y te llega la confirmación a tu correo.",
+    res1: "Los horarios disponibles son los de atención del restaurante.", res2: "Cuéntanos si celebras algo: preparamos tu mesa para la ocasión.", res3: "Para grupos de más de 10 personas, te atendemos de forma personalizada.",
+    wixTit: "Reserva en línea", wixTxt: "Elige día, horario y cuántas personas vienen en nuestro sistema de reservas.", wix1: "Elige el día y la hora", wix2: "Indica cuántas personas vienen", wix3: "Recibe la confirmación en tu correo", wixBtn: "Reservar mesa", wixTel: "¿Más de 10 personas? Llámanos al",
     visKicker: "Ubicación", visH2: "Te esperamos en Chacarilla", dDir: "Dirección", ref: "Altura de la cuadra 1 de Caminos del Inca, a espaldas del grifo Primax", dHor: "Horario",
     horario: "Lunes a sábado: 12:00 p. m. – 12:00 a. m.<br>Domingo: 12:00 p. m. – 11:00 p. m.", dRes: "Reservas", googleVer: "4.5 de 5 · 825 opiniones · ver en Google Maps", llegar: "Cómo llegar", waze: "Abrir en Waze",
     abierto: h => "Abierto ahora · hasta las " + h, abrimos: "Hoy abrimos a las 12:00 p. m.", cerrado: "Cerrado ahora · abrimos mañana a las 12:00 p. m.",
-    persona: n => n === 1 ? "1 persona" : n >= 10 ? "10 o más" : n + " personas", hoy: "Hoy", manana: "Mañana", almuerzo: "Almuerzo", cena: "Cena",
-    sinHoras: "Por hoy ya no se pueden solicitar reservas desde la web. Elige otro día o escríbenos por WhatsApp.",
-    resumen: (p, f, h) => `Solicitud: mesa para <b>${p}</b> · <b>${f}</b>${h ? ` · <b>${h}</b>` : ""}`,
-    eResumen: "Revisa los campos marcados en rojo.",
-    eHora: "Elige un horario.", eHoraPaso: "Ese horario ya pasó. Elige otro.", eNombre: "Escribe tu nombre.", eCel: "Escribe tu celular (9 dígitos).", eCorreo: "Revisa el correo (ej. nombre@correo.com) o déjalo vacío.", eAcepto: "Marca la casilla para poder enviar tu solicitud.",
-    okTit: n => "Falta un paso, " + n, okTxt: () => "Abrimos WhatsApp con tu solicitud. Envía el mensaje en WhatsApp para que llegue al restaurante: el equipo revisará la disponibilidad y se comunicará contigo para confirmar tu mesa. Hasta entonces, la reserva no está confirmada.",
-    wa: { hola: "Hola Cabaña Vista Alegre, quiero solicitar una reserva:", personas: "Personas", dia: "Día", hora: "Horario preferido", nombre: "Nombre", cel: "Celular", zona: "Ambiente", ocasion: "Ocasión", correo: "Correo", coment: "Comentarios", fin: "Quedo atento(a) a su confirmación. ¡Gracias!" },
     terminos: [["Punto azul", "Sellado por fuera, casi crudo por dentro."], ["Punto rojo", "Centro rojo y tibio."], ["Término medio", "Centro rosado y jugoso. El que recomienda la casa."], ["Tres cuartos", "Apenas rosado al centro."], ["Bien cocido", "Cocido parejo, sin rosado."]],
     tags: {}, locale: "es-PE" },
   en: { introFrase: "Fire has a story", saltar: "Skip", logoSub: "Steakhouse · Chacarilla · Since 2006", navCarta: "Menu", navIns: "House favorites", navHis: "Our story", navAmb: "The place", navUbi: "Location", reservar: "Book",
@@ -756,24 +706,12 @@ const TXT = {
     amb1: "The dining room", amb1s: "Exposed brick and wood: family dinners and business lunches", amb2: "The terrace", amb2s: "For long lunches and relaxed dinners", amb3: "The wine cellar", amb3s: "Surrounded by wine and barrels", amb4: "Private room", amb4s: "Second floor, for meetings and groups", amb5: "Second-floor terrace", amb5s: "Long tables to celebrate",
     m1: "Celebrations", m1p: "Birthdays, anniversaries and gatherings that deserve a great table. Tell us what you are planning.", m1d: "Cake service: S/ 50", m1a: "Plan a celebration", m2: "Groups and companies", m2p: "For large groups and business meetings, we arrange your table personally.", m2a: "Get in touch",
     m3: "Bring your wine", m3p: "Bring your favorite bottle to go with your steak.", m3d: "Corkage: S/ 40 per 750 ml bottle. Free corkage for 750 ml wines declared on arrival.", m3a: "See conditions", m4: "Kids menu", m4p: "Beef tenderloin or breaded chicken, with fries or spaghetti, a drink and a scoop of ice cream.", m4d: "From S/ 75",
-    resKicker: "Bookings", resH2: "Request your table", resP: "Choose the day, time and party size. Your request reaches the restaurant via WhatsApp and the team will confirm availability.",
-    res1: "Times follow the restaurant's opening hours. Every booking is subject to confirmation.", res2: "Tell us if you're celebrating: we'll set your table for the occasion.", res3: "For groups of more than 10, we'll assist you personally.",
-    resAviso: "This is a request, not a confirmed booking. The restaurant will reply to confirm your table.",
-    lPersonas: "Guests", lDia: "Day", lHora: "Preferred time", sujeto: "subject to confirmation", lZona: "Preferred area", z0: "No preference", z1: "Dining room", z2: "Terrace", lNombre: "Name", lCel: "Mobile", lOcasion: "Occasion",
-    extraTit: "Add details", extraSub: "area, occasion, email, comments · optional",
-    oc0: "None", oc1: "Birthday", oc2: "Anniversary", oc3: "Business meeting", oc4: "Other", lCorreo: "Email", lComent: "Comments",
-    phNombre: "E.g. Lucía Torres", phCorreo: "you@email.com", phComent: "E.g. high chair, we're bringing a cake…", acepto: 'I agree that Cabaña Vista Alegre uses my data only to manage this booking request, under its <a href="privacidad.html" target="_blank" rel="noopener">privacy policy</a> (in Spanish).', solicitar: "Request booking",
-    notaEnvio: "WhatsApp will open with your request ready. Just send it.", okWa: "Open WhatsApp again", otra: "Edit or make another request",
+    resKicker: "Bookings", resH2: "Book your table", resP: "Book online in a few steps: choose the day, time and party size, and get the confirmation by email.",
+    res1: "Available times follow the restaurant's opening hours.", res2: "Tell us if you're celebrating: we'll set your table for the occasion.", res3: "For groups of more than 10, we'll assist you personally.",
+    wixTit: "Book online", wixTxt: "Choose the day, time and party size in our booking system.", wix1: "Choose the day and time", wix2: "Tell us how many are coming", wix3: "Get the confirmation by email", wixBtn: "Book a table", wixTel: "More than 10 guests? Call us at",
     visKicker: "Location", visH2: "See you in Chacarilla", dDir: "Address", ref: "Near block 1 of Caminos del Inca, behind the Primax gas station", dHor: "Hours",
     horario: "Monday to Saturday: 12:00 p.m. – 12:00 a.m.<br>Sunday: 12:00 p.m. – 11:00 p.m.", dRes: "Bookings", googleVer: "4.5 out of 5 · 825 reviews · see on Google Maps", llegar: "Directions", waze: "Open in Waze",
     abierto: h => "Open now · until " + h, abrimos: "We open today at 12:00 p.m.", cerrado: "Closed now · we open tomorrow at 12:00 p.m.",
-    persona: n => n === 1 ? "1 guest" : n >= 10 ? "10 or more" : n + " guests", hoy: "Today", manana: "Tomorrow", almuerzo: "Lunch", cena: "Dinner",
-    sinHoras: "Online requests for today are closed. Pick another day or message us on WhatsApp.",
-    resumen: (p, f, h) => `Request: table for <b>${p}</b> · <b>${f}</b>${h ? ` · <b>${h}</b>` : ""}`,
-    eResumen: "Please check the fields marked in red.",
-    eHora: "Pick a time.", eHoraPaso: "That time has passed. Pick another one.", eNombre: "Enter your name.", eCel: "Enter your mobile number (9 digits).", eCorreo: "Check the email (e.g. name@email.com) or leave it empty.", eAcepto: "Please tick the box to send your request.",
-    okTit: n => "One more step, " + n, okTxt: () => "We opened WhatsApp with your request. Send the message in WhatsApp so it reaches the restaurant: the team will check availability and contact you to confirm your table. Until then, the booking is not confirmed.",
-    wa: { hola: "Hello Cabaña Vista Alegre, I'd like to request a booking:", personas: "Guests", dia: "Day", hora: "Preferred time", nombre: "Name", cel: "Mobile", zona: "Area", ocasion: "Occasion", correo: "Email", coment: "Comments", fin: "I look forward to your confirmation. Thank you!" },
     terminos: [["Blue", "Seared outside, almost raw inside."], ["Rare", "Red, warm center."], ["Medium", "Pink and juicy center. The house recommendation."], ["Medium well", "Slightly pink center."], ["Well done", "Cooked through, no pink."]],
     tags: { "Para 2": "For 2", "Para 3 o 4": "For 3 or 4", "De autor": "Signature" }, locale: "en-US" }
 };
@@ -863,15 +801,15 @@ function pintarInsignias() {
 const CARTA = window.CARTA || [], FOTOS = window.FOTOS || {};
 // visor: al tocar la foto de un plato se abre en grande con su nombre y precio
 const visor = $("visor");
-$("secciones").addEventListener("click", e => {
-  const b = e.target.closest(".ph"); if (!b) return;
-  const pl = b.closest(".plato");
-  visor.querySelector("img").src = b.dataset.foto;
+function abrirPlato(pl) {
+  visor.querySelector("img").src = pl.dataset.foto;
   visor.querySelector("img").alt = pl.querySelector("h4").firstChild.textContent;
   visor.querySelector("span").innerHTML = pl.querySelector("h4").firstChild.textContent + (pl.querySelector("h4 small") ? ` <small style="font-size:.6em;opacity:.7">${pl.querySelector("h4 small").textContent}</small>` : "");
   visor.querySelector("b").textContent = pl.querySelector(":scope>b").textContent;
   visor.showModal();
-});
+}
+$("secciones").addEventListener("click", e => { const pl = e.target.closest(".plato.confoto"); if (pl) abrirPlato(pl); });
+$("secciones").addEventListener("keydown", e => { const pl = e.target.closest(".plato.confoto"); if (pl && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); abrirPlato(pl); } });
 visor.addEventListener("click", e => { if (e.target === visor || e.target.closest(".cerrar")) visor.close(); });
 const COLORES = ["#6E1A25", "#9A2E38", "#C2625A", "#A57A60", "#6E5242"];
 const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -895,8 +833,7 @@ function pintarCarta() {
         // data-txt: lo del propio plato (nombre, gramaje, descripción ES/EN y subgrupo) · data-sec: nombre de la sección
         // foto del plato (window.FOTOS en carta.js): primero "sección|nombre|gramaje", si no "sección|nombre"
         const fo = FOTOS[c.id + "|" + p[0] + "|" + p[1]] || FOTOS[c.id + "|" + p[0]];
-        const ph = fo ? `<button class="ph" type="button" data-foto="fotos/${fo}.jpg" aria-label="${t("verFoto")}: ${p[0]}"><img src="fotos/${fo}.jpg" alt="" loading="lazy" decoding="async"></button>` : "";
-        return `<div class="plato${fo ? " confoto" : ""}" data-nom="${norm(p[0])}" data-txt="${norm(p[0] + " " + p[1] + " " + p[2] + " " + (p[5] || "") + " " + gTodo)}" data-sec="${norm(c.nombre + " " + (c.en || ""))}">${ph}<h4>${p[0]}${p[1] ? `<small>${p[1]}</small>` : ""}${tag ? `<span class="tag">${tag}</span>` : ""}<span class="gr">${tit(c)}${g ? " · " + g : ""}</span></h4><b>S/ ${p[3]}</b>${desc ? `<p>${desc}</p>` : ""}</div>`;
+                return `<div class="plato${fo ? " confoto" : ""}"${fo ? ` data-foto="fotos/${fo}.jpg" role="button" tabindex="0" aria-label="${t("verFoto")}: ${p[0]}"` : ""} data-nom="${norm(p[0])}" data-txt="${norm(p[0] + " " + p[1] + " " + p[2] + " " + (p[5] || "") + " " + gTodo)}" data-sec="${norm(c.nombre + " " + (c.en || ""))}"><h4>${p[0]}${p[1] ? `<small>${p[1]}</small>` : ""}${tag ? `<span class="tag">${tag}</span>` : ""}<span class="gr">${tit(c)}${g ? " · " + g : ""}</span></h4><b>S/ ${p[3]}</b>${desc ? `<p>${desc}</p>` : ""}</div>`;
       }).join(""); })()}
       </div>
     </div>
@@ -986,113 +923,10 @@ document.addEventListener("click", e => {
 });
 
 /* ===== Reserva ===== */
-// No hay un sistema de reservas conectado: el formulario arma la solicitud y la persona la envía
-// por WhatsApp al restaurante. Nunca se muestra una reserva como confirmada.
-// Si el restaurante usa un sistema de reservas, conectarlo dentro de enviarSolicitud().
-let personas = 2, hora = null, enviando = false;
-const pad = n => String(n).padStart(2, "0");
-const iso = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
-const pTxt = () => { $("personas").textContent = t("persona")(personas); $("menos").disabled = personas <= 1; $("mas").disabled = personas >= 10; resumen(); };
-$("menos").onclick = () => { personas--; pTxt(); };
-$("mas").onclick = () => { personas++; pTxt(); };
-// horarios que se pueden pedir para un día (en minutos desde medianoche), según HORARIO y la hora de Lima.
-// Hoy solo se ofrecen horarios con al menos 30 minutos de anticipación.
-function horariosDe(v) {
-  const [y, m, dd] = v.split("-").map(Number), d = new Date(y, m - 1, dd);
-  const [a, c] = HORARIO[d.getDay()], ahora = lima();
-  const lim = iso(ahora) === v ? ahora.getHours() * 60 + ahora.getMinutes() + 30 : 0, op = [];
-  for (let x = a * 60 + 30; x <= c * 60 - 90; x += 30) if (x >= lim) op.push(x);
-  return op;
-}
-function pintarDias() {
-  const sel = (document.querySelector("input[name=dia]:checked") || {}).value;
-  const dias = []; for (let i = 0; i < 14; i++) { const d = lima(); d.setDate(d.getDate() + i); dias.push(d); }
-  // si hoy ya no quedan horarios para pedir, el día "Hoy" se desactiva (no se puede elegir una fecha pasada)
-  const hoyLleno = !horariosDe(iso(dias[0])).length;
-  const elegido = sel && !(hoyLleno && sel === iso(dias[0])) && dias.some(d => iso(d) === sel) ? sel : iso(dias[hoyLleno ? 1 : 0]);
-  $("dias").innerHTML = dias.map((d, i) => { const off = i === 0 && hoyLleno;
-    return `<input type="radio" name="dia" id="d${i}" value="${iso(d)}"${iso(d) === elegido ? " checked" : ""}${off ? " disabled" : ""}><label for="d${i}"${off ? ` class="off" title="${t("sinHoras")}"` : ""}><small>${i === 0 ? t("hoy") : i === 1 ? t("manana") : d.toLocaleDateString(t("locale"), { weekday: "short" }).replace(".", "")}</small>${d.getDate()} ${d.toLocaleDateString(t("locale"), { month: "short" }).replace(".", "")}</label>`; }).join("");
-  $("aviso-hoy").textContent = hoyLleno ? t("sinHoras") : "";
-}
-// los horarios se separan en almuerzo y cena
-function pintarHoras() {
-  const op = horariosDe(document.querySelector("input[name=dia]:checked").value);
-  if (!op.length) { $("horas").innerHTML = `<p style="font-size:15px;color:var(--suave)">${t("sinHoras")}</p>`; hora = null; resumen(); return; }
-  if (hora !== null && !op.includes(hora)) hora = null;
-  const btn = x => `<input type="radio" name="hora" id="h${x}" value="${x}"${x === hora ? " checked" : ""}><label for="h${x}">${hTxt(x).replace(/ ?[ap]\.? ?m\.$/, s => /a/.test(s) ? " am" : " pm")}</label>`;
-  const alm = op.filter(x => x < 17 * 60), cen = op.filter(x => x >= 18 * 60);
-  $("horas").innerHTML = (alm.length ? `<p class="turno">${t("almuerzo")}</p><div class="chips horas">${alm.map(btn).join("")}</div>` : "") + (cen.length ? `<p class="turno">${t("cena")}</p><div class="chips horas">${cen.map(btn).join("")}</div>` : "");
-  resumen();
-}
-$("dias").addEventListener("change", () => { pintarHoras(); marcarError("horas", ""); });
-$("horas").addEventListener("change", e => { hora = +e.target.value; marcarError("horas", ""); resumen(); });
-const fechaTxt = v => new Date(v + "T12:00").toLocaleDateString(t("locale"), { weekday: "long", day: "numeric", month: "long" });
-function resumen() {
-  const dv = document.querySelector("input[name=dia]:checked"); if (!dv) return;
-  $("resumen").innerHTML = t("resumen")(t("persona")(personas), fechaTxt(dv.value), hora !== null ? hTxt(hora) : "");
-}
-// errores junto a cada campo (texto + borde rojo + aria-invalid)
-const ERR = { horas: "e-hora", nombre: "e-nombre", cel: "e-cel", correo: "e-correo", acepto: "e-acepto" };
-function marcarError(id, msg) {
-  $(ERR[id]).textContent = msg || "";
-  if (msg) $(id).setAttribute("aria-invalid", "true"); else $(id).removeAttribute("aria-invalid");
-}
-["nombre", "cel", "correo", "acepto"].forEach(id => $(id).addEventListener(id === "acepto" ? "change" : "input", () => { if ($(id).getAttribute("aria-invalid")) marcarError(id, ""); }));
-// el celular solo acepta números, espacios, + y guiones
-$("cel").addEventListener("input", e => { const v = e.target.value.replace(/[^\d+\s-]/g, ""); if (v !== e.target.value) e.target.value = v; });
-function validar() {
-  const errores = [];
-  // por si la página quedó abierta: vuelve a revisar que el horario elegido no haya pasado
-  if (hora !== null && !horariosDe(document.querySelector("input[name=dia]:checked").value).includes(hora)) { pintarDias(); pintarHoras(); errores.push(["horas", t("eHoraPaso")]); }
-  else if (hora === null) errores.push(["horas", t("eHora")]);
-  if (!$("nombre").value.trim()) errores.push(["nombre", t("eNombre")]);
-  const dig = $("cel").value.replace(/\D/g, "").length;
-  if (dig < 9 || dig > 15) errores.push(["cel", t("eCel")]);
-  const co = $("correo").value.trim();
-  if (co && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(co)) { errores.push(["correo", t("eCorreo")]); $("extra").open = true; }
-  if (!$("acepto").checked) errores.push(["acepto", t("eAcepto")]);
-  Object.keys(ERR).forEach(id => marcarError(id, (errores.find(e => e[0] === id) || [])[1]));
-  return errores;
-}
-function mensajeWA() {
-  const w = t("wa"), z = document.querySelector("input[name=zona]:checked").value, oc = $("ocasion").value;
-  const co = $("correo").value.trim(), cm = $("comentario").value.trim();
-  const l = [w.hola, "",
-    `• ${w.personas}: ${t("persona")(personas)}`,
-    `• ${w.dia}: ${fechaTxt(document.querySelector("input[name=dia]:checked").value)}`,
-    `• ${w.hora}: ${hTxt(hora)}`,
-    `• ${w.nombre}: ${$("nombre").value.trim()}`,
-    `• ${w.cel}: ${$("cel").value.trim()}`];
-  if (z !== "0") l.push(`• ${w.zona}: ${t("z" + z)}`);
-  if (oc !== "0") l.push(`• ${w.ocasion}: ${t("oc" + oc)}`);
-  if (co) l.push(`• ${w.correo}: ${co}`);
-  if (cm) l.push(`• ${w.coment}: ${cm}`);
-  l.push("", w.fin);
-  return l.join("\n");
-}
-$("form").addEventListener("submit", e => {
-  e.preventDefault();
-  if (enviando) return; // evita dobles envíos por doble toque
-  const err = $("error"), errores = validar();
-  err.textContent = errores.length > 1 ? t("eResumen") : "";
-  if (errores.length) {
-    const id = errores[0][0], el = id === "horas" ? ($("horas").querySelector("input") || $("horas")) : $(id);
-    el.focus({ preventScroll: true }); (id === "horas" ? $("horas") : el).scrollIntoView({ block: "center", behavior: quieto ? "auto" : "smooth" });
-    return;
-  }
-  enviando = true; $("enviar").disabled = true;
-  const url = "https://wa.me/" + NEGOCIO_WA + "?text=" + encodeURIComponent(mensajeWA());
-  // se abre WhatsApp en otra pestaña; si el navegador lo bloquea, se abre en esta misma
-  const win = window.open(url, "_blank");
-  if (win) win.opener = null; else location.href = url;
-  $("ok-tit").textContent = t("okTit")($("nombre").value.trim().split(" ")[0]);
-  $("ok-txt").textContent = t("okTxt")();
-  $("ok-wa").href = url;
-  $("res-card").classList.add("enviada"); $("ok").focus();
-  setTimeout(() => { enviando = false; $("enviar").disabled = false; }, 2500);
-});
-// vuelve al formulario con los datos tal cual, para corregir algo o pedir otra mesa
-$("otra").onclick = () => { $("res-card").classList.remove("enviada"); pintarDias(); pintarHoras(); $("res-card").scrollIntoView({ block: "start", behavior: quieto ? "auto" : "smooth" }); };
+// Las reservas se hacen en las Reservas de mesa de Wix del restaurante (no por WhatsApp).
+// En la web final (dentro de su Wix) el widget de reservas va en esta sección.
+const WIX_RESERVAS = "https://www.restaurante-vistaalegre.com/reservas"; // confirmar el enlace exacto de su página "Reservas" en Wix
+$("btn-wix").href = WIX_RESERVAS;
 
 /* ===== Cambiar idioma ===== */
 function aplicarIdioma() {
@@ -1101,8 +935,7 @@ function aplicarIdioma() {
   document.querySelectorAll("[data-iph]").forEach(el => { el.placeholder = TXT[L][el.dataset.iph]; });
   $("idioma").textContent = L === "es" ? "EN" : "ES";
   $("idioma").setAttribute("aria-label", L === "es" ? "English version" : "Versión en español");
-  pintarEstado(); pintarInsignias(); pintarCarta(); pintarDias(); pTxt(); pintarHoras();
-  if ($("res-card").classList.contains("enviada")) $("otra").click();
+  pintarEstado(); pintarInsignias(); pintarCarta();
 }
 $("idioma").onclick = () => { L = L === "es" ? "en" : "es"; try { localStorage.setItem("cva-idioma", L); } catch (e) {} aplicarIdioma(); };
 aplicarIdioma();
