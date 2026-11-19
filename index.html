@@ -264,10 +264,19 @@ header.solido .marca img{width:46px}
 .amb-grid figure::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,7,5,.8),rgba(12,7,5,0) 55%)}
 .amb-grid figcaption{position:absolute;z-index:1;left:20px;bottom:18px;right:20px;font-size:15px}
 .amb-grid figcaption b{display:block;font-family:var(--serif);font-size:30px;font-weight:400}
-.momentos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border-top:1px solid var(--linea-o)}
-.momentos div{padding:28px 24px 0 0}
-.momentos div+div{padding-left:24px;border-left:1px solid var(--linea-o)}
-.momentos h3{font-size:28px}
+/* recorrido en video (vertical): video a la izquierda; a la derecha el texto y debajo los 4 momentos en 2×2 */
+.recorrido{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:56px;align-items:center;margin-top:72px}
+.recorrido figure{margin:0;position:relative;background:#000;box-shadow:0 40px 70px -40px rgba(0,0,0,.8)}
+.recorrido video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover}
+.rec-txt h3{font-size:clamp(32px,3.4vw,46px);line-height:1.04;margin-top:12px}
+.rec-txt p{max-width:520px;font-size:16.5px;color:rgba(243,236,226,.75);margin-top:12px}
+.recorrido .sonido{position:absolute;right:12px;bottom:12px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(12,7,5,.6);color:#F3ECE2;display:grid;place-items:center;cursor:pointer}
+.recorrido .sonido svg{width:18px;height:18px}
+.momentos{display:grid;grid-template-columns:1fr 1fr;margin-top:32px;border-top:1px solid var(--linea-o)}
+.momentos div{padding:22px 28px 22px 0}
+.momentos div:nth-child(even){padding:22px 0 22px 28px;border-left:1px solid var(--linea-o)}
+.momentos div:nth-child(n+3){border-top:1px solid var(--linea-o)}
+.momentos h3{font-size:24px}
 .momentos p{font-size:15px;opacity:.78;margin-top:8px}
 .momentos a{display:inline-flex;margin-top:14px}
 .momentos .dato{display:block;margin-top:10px;font-size:13.5px;color:var(--oro2);opacity:.9}
@@ -417,8 +426,13 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
   .amb-grid{grid-template-columns:1fr 1fr;grid-template-rows:240px 240px 240px}
   .amb-grid figure:first-child{grid-row:auto;grid-column:span 2}
   .amb-grid figure.ancho{grid-column:span 2}
-  .momentos{grid-template-columns:1fr 1fr}
-  .momentos div,.momentos div+div{padding:24px 16px 24px 0;border-left:0;border-bottom:1px solid var(--linea-o)}
+  .recorrido{grid-template-columns:1fr;gap:24px;margin-top:48px}
+  .rec-der{display:contents}
+  .rec-txt{order:1}
+  .recorrido figure{order:2;width:100%;max-width:360px;margin:0 auto}
+  .momentos{order:3;margin-top:8px}
+  .momentos div{padding:20px 14px 20px 0}
+  .momentos div:nth-child(even){padding:20px 0 20px 14px}
   .float-wa{display:none}
   .barra-movil{display:grid;grid-template-columns:1fr auto auto;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(18,10,8,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--linea-o);transform:translateY(110%);transition:transform .4s var(--ease)}
   .barra-movil.on{transform:none}
@@ -438,6 +452,8 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
   .amb-grid{grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:240px}
   .amb-grid figure:first-child,.amb-grid figure.ancho{grid-column:auto}
   .momentos{grid-template-columns:1fr}
+  .momentos div,.momentos div:nth-child(even){padding:20px 0;border-left:0}
+  .momentos div+div{border-top:1px solid var(--linea-o)}
   .res-card{padding:24px 18px}
   .fila2{grid-template-columns:1fr}
   .guia li{grid-template-columns:14px 1fr}
@@ -556,11 +572,23 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
         <figure><img src="fotos/local-salon-privado.jpg" alt="Salón privado del segundo piso con mesas de madera" loading="lazy" decoding="async"><figcaption><b data-i="amb4">Salón privado</b><span data-i="amb4s">Segundo piso, para reuniones y grupos</span></figcaption></figure>
         <figure><img src="fotos/local-terraza-2.jpg" alt="Mesa larga servida en la terraza del segundo piso" loading="lazy" decoding="async"><figcaption><b data-i="amb5">Terraza del segundo piso</b><span data-i="amb5s">Mesas largas para celebrar</span></figcaption></figure>
       </div>
-      <div class="momentos rev">
-        <div><h3 data-i="m1">Celebraciones</h3><p data-i="m1p">Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.</p><small class="dato" data-i="m1d">Servicio de torta: S/ 50</small><a class="enlace" style="color:var(--oro2)" data-wa="Hola Cabaña Vista Alegre, quiero consultar por una celebración." target="_blank" rel="noopener"><em style="font-style:normal" data-i="m1a">Consultar celebración</em> <span>→</span></a></div>
-        <div><h3 data-i="m2">Grupos y empresas</h3><p data-i="m2p">Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.</p><a class="enlace" style="color:var(--oro2)" data-wa="Hola Cabaña Vista Alegre, quiero coordinar una mesa para un grupo." target="_blank" rel="noopener"><em style="font-style:normal" data-i="m2a">Coordinar</em> <span>→</span></a></div>
-        <div><h3 data-i="m3">Trae tu vino</h3><p data-i="m3p">Puedes traer tu botella favorita para acompañar tu parrilla.</p><small class="dato" data-i="m3d">Descorche: S/ 40 por botella de 750 ml. Corcho libre en vinos de 750 ml presentados al ingresar.</small><a class="enlace" style="color:var(--oro2)" href="#c-bar" data-ir-plato="Descorche de vino"><em style="font-style:normal" data-i="m3a">Ver condiciones</em> <span>→</span></a></div>
-        <div><h3 data-i="m4">Menú kids</h3><p data-i="m4p">Lomo fino o milanesa de pollo, con papas o spaghetti, bebida y bola de helado.</p><small class="dato" data-i="m4d">Desde S/ 75</small></div>
+      <!-- Recorrido en video por el local (enviado por el restaurante, 30 s, sin audio) -->
+      <div class="recorrido rev">
+        <figure><video id="recorrido" src="recorrido.mp4" poster="recorrido-poster.jpg" muted loop playsinline preload="none" aria-label="Recorrido en video por el salón, la cava, el salón privado y la terraza"></video>
+          <button class="sonido" type="button" id="rec-pausa" aria-label="Pausar el video"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button></figure>
+        <div class="rec-der">
+          <div class="rec-txt">
+            <span class="kicker" data-i="recKicker">Recorrido</span>
+            <h3 data-i="recH3">Conoce la casa antes de venir</h3>
+            <p data-i="recP">Del salón a la cava, el salón privado y la terraza: un paseo de 30 segundos por Cabaña Vista Alegre.</p>
+          </div>
+          <div class="momentos">
+            <div><h3 data-i="m1">Celebraciones</h3><p data-i="m1p">Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.</p><small class="dato" data-i="m1d">Servicio de torta: S/ 50</small><a class="enlace" style="color:var(--oro2)" data-wa="Hola Cabaña Vista Alegre, quiero consultar por una celebración." target="_blank" rel="noopener"><em style="font-style:normal" data-i="m1a">Consultar celebración</em> <span>→</span></a></div>
+            <div><h3 data-i="m2">Grupos y empresas</h3><p data-i="m2p">Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.</p><a class="enlace" style="color:var(--oro2)" data-wa="Hola Cabaña Vista Alegre, quiero coordinar una mesa para un grupo." target="_blank" rel="noopener"><em style="font-style:normal" data-i="m2a">Coordinar</em> <span>→</span></a></div>
+            <div><h3 data-i="m3">Trae tu vino</h3><p data-i="m3p">Puedes traer tu botella favorita para acompañar tu parrilla.</p><small class="dato" data-i="m3d">Descorche: S/ 40 por botella de 750 ml. Corcho libre en vinos de 750 ml presentados al ingresar.</small><a class="enlace" style="color:var(--oro2)" href="#c-bar" data-ir-plato="Descorche de vino"><em style="font-style:normal" data-i="m3a">Ver condiciones</em> <span>→</span></a></div>
+            <div><h3 data-i="m4">Menú kids</h3><p data-i="m4p">Lomo fino o milanesa de pollo, con papas o spaghetti, bebida y bola de helado.</p><small class="dato" data-i="m4d">Desde S/ 75</small></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -689,6 +717,7 @@ const TXT = {
     sinRes: "No encontramos ese plato. Prueba con otra palabra.", pie1: "Carta vigente. Precios en soles, incluyen impuestos. Imágenes referenciales.", pie2: "Carta de vinos argentinos, chilenos e italianos disponible en el restaurante.",
     guia: "Guía de términos de cocción", verFoto: "Ver foto",
     ambKicker: "Ambientes", ambH2: "Para cada ocasión", ambP: "Madera, ladrillo y luz cálida. De noche, la fachada y la terraza se encienden juntas.",
+    recKicker: "Recorrido", recH3: "Conoce la casa antes de venir", recP: "Del salón a la cava, el salón privado y la terraza: un paseo de 30 segundos por Cabaña Vista Alegre.",
     amb1: "El salón", amb1s: "Ladrillo rococho y madera: cenas en familia y almuerzos de trabajo", amb2: "La terraza", amb2s: "Para almuerzos largos y cenas relajadas", amb3: "La cava", amb3s: "Rodeado de vinos y barricas", amb4: "Salón privado", amb4s: "Segundo piso, para reuniones y grupos", amb5: "Terraza del segundo piso", amb5s: "Mesas largas para celebrar",
     m1: "Celebraciones", m1p: "Cumpleaños, aniversarios y reuniones que merecen una buena mesa. Cuéntanos qué estás planeando.", m1d: "Servicio de torta: S/ 50", m1a: "Consultar celebración", m2: "Grupos y empresas", m2p: "Para grupos grandes y reuniones de trabajo, coordinamos tu mesa de forma personalizada.", m2a: "Coordinar",
     m3: "Trae tu vino", m3p: "Puedes traer tu botella favorita para acompañar tu parrilla.", m3d: "Descorche: S/ 40 por botella de 750 ml. Corcho libre en vinos de 750 ml presentados al ingresar.", m3a: "Ver condiciones", m4: "Menú kids", m4p: "Lomo fino o milanesa de pollo, con papas o spaghetti, bebida y bola de helado.", m4d: "Desde S/ 75",
@@ -711,6 +740,7 @@ const TXT = {
     sinRes: "We couldn't find that dish. Try another word.", pie1: "Current menu. Prices in soles, taxes included. Pictures are for reference.", pie2: "Argentine, Chilean and Italian wine list available at the restaurant.",
     guia: "Doneness guide", verFoto: "See photo",
     ambKicker: "The place", ambH2: "For every occasion", ambP: "Wood, brick and warm light. At night, the façade and the terrace light up together.",
+    recKicker: "Tour", recH3: "See the place before you come", recP: "From the dining room to the wine cellar, the private room and the terrace: a 30-second walk through Cabaña Vista Alegre.",
     amb1: "The dining room", amb1s: "Exposed brick and wood: family dinners and business lunches", amb2: "The terrace", amb2s: "For long lunches and relaxed dinners", amb3: "The wine cellar", amb3s: "Surrounded by wine and barrels", amb4: "Private room", amb4s: "Second floor, for meetings and groups", amb5: "Second-floor terrace", amb5s: "Long tables to celebrate",
     m1: "Celebrations", m1p: "Birthdays, anniversaries and gatherings that deserve a great table. Tell us what you are planning.", m1d: "Cake service: S/ 50", m1a: "Plan a celebration", m2: "Groups and companies", m2p: "For large groups and business meetings, we arrange your table personally.", m2a: "Get in touch",
     m3: "Bring your wine", m3p: "Bring your favorite bottle to go with your steak.", m3d: "Corkage: S/ 40 per 750 ml bottle. Free corkage for 750 ml wines declared on arrival.", m3a: "See conditions", m4: "Kids menu", m4p: "Beef tenderloin or breaded chicken, with fries or spaghetti, a drink and a scoop of ice cream.", m4d: "From S/ 75",
@@ -935,6 +965,18 @@ document.addEventListener("click", e => {
 // En la web final (dentro de su Wix) el widget de reservas va en esta sección.
 const WIX_RESERVAS = "https://www.restaurante-vistaalegre.com/reservas"; // confirmar el enlace exacto de su página "Reservas" en Wix
 $("btn-wix").href = WIX_RESERVAS;
+
+/* ===== Recorrido en video ===== */
+// se reproduce solo (sin sonido) cuando está a la vista y se pausa al salir; con "reducir movimiento" no arranca solo
+(() => {
+  const v = $("recorrido"), b = $("rec-pausa");
+  const ICO = { pausa: '<path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z"/>', play: '<path fill="currentColor" d="M8 5v14l11-7z"/>' };
+  let manual = quieto; // si la persona pausó (o prefiere menos movimiento), no se reanuda solo
+  const pintar = () => { const p = v.paused; b.querySelector("svg").innerHTML = p ? ICO.play : ICO.pausa; b.setAttribute("aria-label", p ? "Reproducir el video" : "Pausar el video"); };
+  v.addEventListener("play", pintar); v.addEventListener("pause", pintar); pintar();
+  b.onclick = () => { if (v.paused) { manual = false; v.play().catch(() => {}); } else { manual = true; v.pause(); } };
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { if (!manual) v.play().catch(() => {}); } else v.pause(); }), { threshold: .35 }).observe(v);
+})();
 
 /* ===== Cambiar idioma ===== */
 function aplicarIdioma() {
