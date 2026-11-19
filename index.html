@@ -151,7 +151,7 @@ header.solido .marca img{width:46px}
 .oscuro .cab p{color:rgba(243,236,226,.75)}
 
 /* ===== insignias ===== */
-.insignias{padding:110px 0}
+.insignias{padding:110px 0 40px} /* abajo poco: la carta sigue sobre el mismo fondo café */
 .ins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .ins{text-decoration:none;display:flex;flex-direction:column}
 .ins figure{aspect-ratio:4/5;overflow:hidden;background:var(--hueso)}
@@ -187,7 +187,7 @@ header.solido .marca img{width:46px}
 .cita cite{display:block;margin-top:10px;font-style:normal;font-size:13px;letter-spacing:.06em;opacity:.7}
 
 /* ===== carta ===== */
-.carta{padding:110px 0 100px}
+.carta{padding:70px 0 100px}
 .buscar{position:relative;width:min(360px,100%)}
 .buscar input{width:100%;border:1px solid var(--linea);background:rgba(243,236,226,.06);color:var(--tinta);border-radius:2px;padding:14px 18px 14px 46px;font-size:16px}
 .buscar svg{position:absolute;left:16px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--suave)}
@@ -211,8 +211,10 @@ header.solido .marca img{width:46px}
 .cat{display:grid;grid-template-columns:.75fr 1.25fr;gap:64px;padding:60px 0 24px;border-bottom:1px solid var(--linea)}
 .cat:last-of-type{border-bottom:0}
 .cat>*{min-width:0}
-.cat-foto{position:sticky;top:140px;align-self:start;aspect-ratio:4/5;overflow:hidden;background:var(--hueso)}
-.cat-foto img{width:100%;height:100%;object-fit:cover}
+.cat-foto{position:sticky;top:140px;align-self:start;margin:0}
+.cat-foto img{display:block;width:100%;aspect-ratio:4/5;max-height:calc(100vh - 200px);object-fit:cover;background:var(--hueso)} /* tope de alto: que el nombre de abajo siempre se vea */
+/* nombre del plato de la foto, en letra chica */
+.cat-foto figcaption{margin-top:10px;font-size:12.5px;letter-spacing:.04em;color:var(--suave)}
 .cat.sinfoto{grid-template-columns:1fr}
 .cat.sinfoto .lista{columns:2;column-gap:64px}
 .cat.sinfoto .lista>*{break-inside:avoid}
@@ -399,12 +401,18 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
   .marca small{font-size:10px}
   .nav .btn{display:none}
   .tabs{top:60px}
+  /* en celular, menos aire entre secciones (todo va sobre el mismo fondo café) */
+  .insignias{padding:72px 0 16px}
+  .carta{padding:40px 0 64px}
+  .historia,.ambientes,.reserva{padding:72px 0}
+  .visita{padding-top:72px}
   .portada .wrap{padding:120px 0 40px}
   .portada::after{background:linear-gradient(0deg,rgba(12,7,5,.95) 0%,rgba(12,7,5,.6) 50%,rgba(12,7,5,.2) 100%)}
   .his-grid,.res-grid,.vis-grid{grid-template-columns:1fr;gap:40px}
   .his-foto{aspect-ratio:16/11;position:relative;top:auto} /* en celular la foto no se queda pegada: el texto le pasaba por encima */
   .cat{grid-template-columns:1fr;gap:24px;padding-top:48px}
-  .cat-foto{position:relative;top:0;aspect-ratio:16/9}
+  .cat-foto{position:relative;top:0}
+  .cat-foto img{aspect-ratio:16/9;max-height:none}
   .cat.sinfoto .lista{columns:1}
   .amb-grid{grid-template-columns:1fr 1fr;grid-template-rows:240px 240px 240px}
   .amb-grid figure:first-child{grid-row:auto;grid-column:span 2}
@@ -821,7 +829,7 @@ function pintarCarta() {
     const nota = L === "en" ? c.notaEn : c.nota;
     return `
   <section class="cat${c.foto ? "" : " sinfoto"}" id="c-${c.id}" aria-labelledby="h-${c.id}">
-    ${c.foto ? `<figure class="cat-foto"><img src="${c.foto}" alt="${c.pie}" loading="lazy" decoding="async"></figure>` : ""}
+    ${c.foto ? `<figure class="cat-foto"><img src="${c.foto}" alt="${c.pie}" loading="lazy" decoding="async"><figcaption>${c.pie}</figcaption></figure>` : ""}
     <div>
       <h3 class="tit" id="h-${c.id}">${tit(c)}</h3>
       ${nota ? `<p class="nota">${nota}</p>` : `<div style="height:8px"></div>`}
