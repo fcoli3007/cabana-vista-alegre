@@ -14,8 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#120A08">
 <link rel="icon" href="logo.png">
-<link rel="preload" as="image" href="fotos/local-fachada.jpg">
-<link rel="preload" as="image" href="fotos/local-salon.jpg">
+<link rel="preload" as="image" href="intro-poster.jpg">
 <link rel="preload" as="image" href="mesa.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,10 +85,12 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacin
 .intro{position:fixed;inset:0;z-index:100;background:#0c0705;overflow:hidden;transition:opacity .7s ease,visibility .7s}
 .intro.fuera{opacity:0;visibility:hidden}
 .intro.rapida{transition:none}
-.intro .capa{position:absolute;inset:0;will-change:transform,opacity}
-.intro .capa img{width:100%;height:100%;object-fit:cover}
-#i-fachada img{object-position:62% 55%}
-#i-salon,#i-mesa{opacity:0}
+/* intro en video (reel del restaurante, pedido de Fermín 2026-11-23). En celular llena la pantalla;
+   en pantallas anchas el video vertical va al centro y detrás una copia desenfocada llena los lados */
+.intro-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0c0705}
+.intro-fondo{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(32px) brightness(.4) saturate(1.2);transform:scale(1.15)}
+@media (min-aspect-ratio:4/5){.intro-video{object-fit:contain;background:transparent}.intro-fondo{display:block}}
+.intro-oscuro{position:absolute;inset:0;z-index:1;background:#0c0705;opacity:0;pointer-events:none}
 .intro::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(12,7,5,0) 40%,rgba(12,7,5,.65) 100%);pointer-events:none}
 .intro-logo{position:absolute;z-index:2;left:50%;top:50%;width:min(190px,44vw);transform:translate(-50%,-50%) scale(.9);opacity:0;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
 .intro-frase{position:absolute;z-index:2;left:0;right:0;bottom:15vh;text-align:center;font-family:var(--serif);font-size:clamp(24px,3.2vw,40px);font-style:italic;opacity:0;text-shadow:0 2px 20px rgba(0,0,0,.7);padding:0 20px}
@@ -482,9 +483,9 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
 
 <!-- Intro automática: de la calle a la mesa en 3 segundos -->
 <div class="intro" id="intro" aria-hidden="true">
-  <div class="capa" id="i-fachada"><img src="fotos/local-fachada.jpg" alt=""></div>
-  <div class="capa" id="i-salon"><img src="fotos/local-salon.jpg" alt=""></div>
-  <div class="capa" id="i-mesa"><img src="mesa.jpg" alt=""></div>
+  <video class="intro-fondo" id="i-fondo" muted playsinline preload="none" poster="intro-poster.jpg" tabindex="-1"></video>
+  <video class="intro-video" id="i-video" src="intro.mp4" muted playsinline preload="auto" poster="intro-poster.jpg" tabindex="-1"></video>
+  <div class="intro-oscuro" id="i-oscuro"></div>
   <img class="intro-logo" id="i-logo" src="logo.png" alt="">
   <div class="intro-frase" data-i="introFrase">El fuego tiene historia</div>
   <div class="intro-barra"><i id="i-barra"></i></div>
@@ -767,46 +768,48 @@ let L = "es";
 try { if (localStorage.getItem("cva-idioma") === "en") L = "en"; } catch (e) {}
 const t = k => TXT[L][k];
 
-/* ===== Intro automática: fachada → puerta → salón → mesa → logo (3 s) ===== */
+/* ===== Intro automática: video del restaurante (reel de Cabaña, ~12 s) y al final el logo ===== */
 (() => {
-  const intro = $("intro"), cF = $("i-fachada"), cS = $("i-salon"), cM = $("i-mesa"), logo = $("i-logo"), frase = intro.querySelector(".intro-frase"), barra = $("i-barra");
+  const intro = $("intro"), vid = $("i-video"), fondo = $("i-fondo"), oscuro = $("i-oscuro"), logo = $("i-logo"), frase = intro.querySelector(".intro-frase"), barra = $("i-barra");
   let visto = false; try { visto = sessionStorage.getItem("cva-intro") === "1"; } catch (e) {}
-  const cerrar = () => { if (intro.classList.contains("fuera")) return; intro.classList.add("fuera"); document.documentElement.style.overflow = ""; try { sessionStorage.setItem("cva-intro", "1"); } catch (e) {} setTimeout(() => intro.remove(), 800); };
-  if (visto || quieto) { intro.remove(); return; }
+  const cerrar = () => { if (intro.classList.contains("fuera")) return; intro.classList.add("fuera"); document.documentElement.style.overflow = ""; try { sessionStorage.setItem("cva-intro", "1"); } catch (e) {} setTimeout(() => { vid.pause(); fondo.pause(); intro.remove(); }, 800); };
+  // con ?intro en la dirección se ve siempre (para probarla o mostrarla al cliente)
+  const forzar = /[?&]intro\b/.test(location.search);
+  if ((visto || quieto) && !forzar) { intro.remove(); return; }
   document.documentElement.style.overflow = "hidden";
   $("saltar").onclick = cerrar;
   addEventListener("keydown", e => { if (e.key === "Escape") cerrar(); });
   ["wheel", "touchmove", "pointerdown"].forEach(ev => addEventListener(ev, cerrar, { once: true, passive: true }));
-  const W = 1536, H = 1024, cw = innerWidth, ch = innerHeight, s = Math.max(cw / W, ch / H);
-  cF.style.transformOrigin = (((cw - W * s) * .62 + W * s * .62) / cw * 100).toFixed(1) + "% " + (((ch - H * s) * .55 + H * s * .63) / ch * 100).toFixed(1) + "%";
   const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const tramo = (x, a, b) => cl((x - a) / (b - a));
   const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-  const DUR = 3000; // duración total de la intro en milisegundos
-  let t0 = null;
-  const paso = now => {
+  // en pantallas anchas, una copia desenfocada del video llena los lados
+  const ancho = matchMedia("(min-aspect-ratio:4/5)").matches;
+  if (ancho) { fondo.src = vid.currentSrc || vid.src; fondo.preload = "auto"; }
+  // cada cuadro: barra de avance y, en los últimos 2 s, se oscurece y aparecen el logo y la frase
+  const paso = () => {
     if (!intro.isConnected || intro.classList.contains("fuera")) return;
-    if (t0 === null) t0 = now;
-    const x = now - t0;
-    cF.style.transform = `scale(${1.02 + ease(tramo(x, 150, 1100)) * 2.4})`;
-    cF.style.opacity = 1 - tramo(x, 850, 1100);
-    cS.style.opacity = tramo(x, 850, 1100) * (1 - tramo(x, 1750, 2000));
-    cS.style.transform = `scale(${1.15 - .1 * tramo(x, 850, 1500) + ease(tramo(x, 1500, 2000)) * .9})`;
-    cM.style.opacity = tramo(x, 1750, 2000);
-    cM.style.transform = `scale(${1.12 - .12 * ease(tramo(x, 1750, DUR))})`;
-    const l = ease(tramo(x, 2050, 2400));
+    const D = vid.duration || 12, x = vid.currentTime;
+    if (ancho && Math.abs(fondo.currentTime - x) > .25) fondo.currentTime = x;
+    oscuro.style.opacity = .6 * tramo(x, D - 2.2, D - 1.2);
+    const l = ease(tramo(x, D - 1.9, D - 1.3));
     logo.style.opacity = l; logo.style.transform = `translate(-50%,-50%) scale(${.9 + .1 * l})`;
-    frase.style.opacity = tramo(x, 2200, 2550); frase.style.transform = `translateY(${(1 - tramo(x, 2200, 2600)) * 14}px)`;
-    barra.style.transform = `scaleX(${tramo(x, 0, DUR)})`;
-    if (x >= DUR) cerrar(); else requestAnimationFrame(paso);
+    frase.style.opacity = tramo(x, D - 1.7, D - 1.1); frase.style.transform = `translateY(${(1 - tramo(x, D - 1.7, D - 1)) * 14}px)`;
+    barra.style.transform = `scaleX(${tramo(x, 0, D)})`;
+    requestAnimationFrame(paso);
   };
-  // arranca solo cuando las 3 fotos cargaron; con mala señal (más de 1.2 s) se salta y entra directo
-  const imgs = [...intro.querySelectorAll(".capa img")];
-  const listas = imgs.map(im => im.complete && im.naturalWidth ? Promise.resolve() : new Promise(r => { im.onload = r; im.onerror = r; }))
-    .map((p, i) => p.then(() => imgs[i].decode ? imgs[i].decode().catch(() => {}) : null));
+  vid.addEventListener("ended", () => setTimeout(cerrar, 900)); // el logo queda un momento sobre el último cuadro
+  // arranca cuando el video puede reproducirse; con mala señal (más de 2.5 s) o si el
+  // celular no deja reproducir (modo ahorro de batería) se salta y entra directo a la web
   let empezo = false;
-  Promise.all(listas).then(() => { if (empezo || intro.classList.contains("fuera")) return; empezo = true; requestAnimationFrame(paso); setTimeout(cerrar, DUR + 1500); });
-  setTimeout(() => { if (!empezo) { empezo = true; intro.classList.add("rapida"); cerrar(); } }, 1200);
+  const saltarYa = () => { if (!empezo) { empezo = true; intro.classList.add("rapida"); cerrar(); } };
+  const arrancar = () => {
+    if (empezo || intro.classList.contains("fuera")) return;
+    vid.play().then(() => { empezo = true; if (ancho) fondo.play().catch(() => {}); requestAnimationFrame(paso); setTimeout(cerrar, ((vid.duration || 12) + 2) * 1000); }).catch(saltarYa);
+  };
+  if (vid.readyState >= 3) arrancar(); else vid.addEventListener("canplay", arrancar, { once: true });
+  vid.addEventListener("error", saltarYa);
+  setTimeout(saltarYa, 2500);
 })();
 
 /* ===== Header, menú móvil y barra fija ===== */
