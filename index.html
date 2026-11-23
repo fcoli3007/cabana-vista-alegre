@@ -1003,6 +1003,11 @@ aplicarIdioma();
 /* ===== aparición ===== */
 const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: .12 });
 document.querySelectorAll(".rev").forEach(el => io.observe(el));
+// al ir a la Historia (botón "20 Años de historia" o menú) el texto aparece de inmediato,
+// sin esperar a que el visitante toque la pantalla (pedido de Fermín, 2026-11-22)
+const verHistoria = () => document.querySelectorAll("#historia .rev").forEach(el => { el.classList.add("in"); io.unobserve(el); });
+document.querySelectorAll('a[href="#historia"]').forEach(a => a.addEventListener("click", verHistoria));
+if (location.hash === "#historia") verHistoria();
 </script>
 <!-- Estadísticas de la demo para el panel de TC Studio (sin cookies). Quitar al publicar la web final del cliente. -->
 <script src="https://tcstudioweb.com/s.js" defer></script>
