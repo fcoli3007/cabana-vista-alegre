@@ -90,6 +90,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacin
 .intro-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0c0705}
 .intro-fondo{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(32px) brightness(.4) saturate(1.2);transform:scale(1.15)}
 @media (min-aspect-ratio:4/5){.intro-video{object-fit:contain;background:transparent}.intro-fondo{display:block}}
+/* cierre de la intro: el bife de chorizo argentino a pantalla completa (pedido de Fermín 2026-11-25) */
+.intro-plato{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 55%;opacity:0;transform:scale(1.12);will-change:opacity,transform}
 .intro-oscuro{position:absolute;inset:0;z-index:1;background:#0c0705;opacity:0;pointer-events:none}
 .intro::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(12,7,5,0) 40%,rgba(12,7,5,.65) 100%);pointer-events:none}
 .intro-logo{position:absolute;z-index:2;left:50%;top:50%;width:min(190px,44vw);transform:translate(-50%,-50%) scale(.9);opacity:0;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
@@ -485,6 +487,7 @@ footer .base{padding-right:74px} /* que el botón flotante de WhatsApp no tape e
 <div class="intro" id="intro" aria-hidden="true">
   <video class="intro-fondo" id="i-fondo" muted playsinline preload="none" poster="intro-poster.jpg" tabindex="-1"></video>
   <video class="intro-video" id="i-video" src="intro.mp4" muted playsinline preload="auto" poster="intro-poster.jpg" tabindex="-1"></video>
+  <img class="intro-plato" id="i-plato" src="intro-bife.jpg" alt="" decoding="async">
   <div class="intro-oscuro" id="i-oscuro"></div>
   <img class="intro-logo" id="i-logo" src="logo.png" alt="">
   <div class="intro-frase" data-i="introFrase">El fuego tiene historia</div>
@@ -770,7 +773,7 @@ const t = k => TXT[L][k];
 
 /* ===== Intro automática: video del restaurante (reel de Cabaña recortado a ~6 s) y al final el logo ===== */
 (() => {
-  const intro = $("intro"), vid = $("i-video"), fondo = $("i-fondo"), oscuro = $("i-oscuro"), logo = $("i-logo"), frase = intro.querySelector(".intro-frase"), barra = $("i-barra");
+  const intro = $("intro"), vid = $("i-video"), fondo = $("i-fondo"), oscuro = $("i-oscuro"), plato = $("i-plato"), logo = $("i-logo"), frase = intro.querySelector(".intro-frase"), barra = $("i-barra");
   // solo se salta si la persona ya está navegando dentro de la página (vuelve de Privacidad, Términos, etc.
   // o usa "atrás"); al abrir el link o recargar, sale siempre
   let visto = false;
@@ -799,10 +802,14 @@ const t = k => TXT[L][k];
     if (!intro.isConnected || intro.classList.contains("fuera")) return;
     const [x, D] = reloj();
     if (ancho && !vid.paused && Math.abs(fondo.currentTime - x) > .25) fondo.currentTime = x;
-    oscuro.style.opacity = .6 * tramo(x, D - 2.2, D - 1.2);
-    const l = ease(tramo(x, D - 1.9, D - 1.3));
+    // en los últimos 3 s entra el bife a pantalla completa, acercándose despacio; se ve solo ~1 s
+    // y recién ahí se oscurece un poco y aparecen el logo y la frase encima
+    plato.style.opacity = ease(tramo(x, D - 3, D - 2.4));
+    plato.style.transform = `scale(${1.12 - .12 * tramo(x, D - 3, D)})`;
+    oscuro.style.opacity = .5 * tramo(x, D - 1.3, D - .6);
+    const l = ease(tramo(x, D - 1.1, D - .5));
     logo.style.opacity = l; logo.style.transform = `translate(-50%,-50%) scale(${.9 + .1 * l})`;
-    frase.style.opacity = tramo(x, D - 1.7, D - 1.1); frase.style.transform = `translateY(${(1 - tramo(x, D - 1.7, D - 1)) * 14}px)`;
+    frase.style.opacity = tramo(x, D - .9, D - .3); frase.style.transform = `translateY(${(1 - tramo(x, D - .9, D - .2)) * 14}px)`;
     barra.style.transform = `scaleX(${tramo(x, 0, D)})`;
     requestAnimationFrame(paso);
   };
@@ -810,11 +817,11 @@ const t = k => TXT[L][k];
   let empezo = false;
   // plan B: si el video no carga a tiempo (mala señal), el celular no deja reproducirlo (modo ahorro
   // de batería) o la persona pidió menos movimiento, la intro igual sale: foto del restaurante,
-  // se oscurece y aparecen el logo y la frase (3,2 s)
+  // entra el bife, se oscurece y aparecen el logo y la frase (3,6 s)
   const conFoto = () => {
     if (empezo || intro.classList.contains("fuera")) return;
     empezo = true; vid.pause();
-    const t0 = performance.now(), D = 3.2;
+    const t0 = performance.now(), D = 3.6;
     reloj = () => [(performance.now() - t0) / 1000, D];
     requestAnimationFrame(paso);
     setTimeout(cerrar, (D + .9) * 1000);
